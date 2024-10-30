@@ -1,0 +1,21 @@
+<h1>Registration</h1>
+<div>
+    <form [formGroup]="registrationForm" (submit)="processRegistration()">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" />
+        <br />
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" />
+        <br />
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" />
+        <br />
+        <p>Gender</p>
+        <label for="male">male</label>
+        <input type="radio" id="male" value="male" formControlName="sex" />
+        <label for="female">female</label>
+        <input type="radio" id="female" value="female" formControlName="sex" />
+        <br />
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
