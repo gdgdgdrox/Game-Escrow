@@ -1,0 +1,37 @@
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { User } from '../../model/user';
+import { RegistrationService } from '../../service/registration.service';
+
+@Component({
+  selector: 'app-registration',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './registration.component.html',
+  styleUrl: './registration.component.css'
+})
+export class RegistrationComponent {
+  registrationForm!: FormGroup;
+
+  constructor(
+    private registrationService: RegistrationService
+  ){
+    // initialize form
+    this.registrationForm = new FormGroup({
+      username: new FormControl<string>('',[Validators.required, Validators.minLength(5), Validators.maxLength(15)]),
+      email: new FormControl<string>('',[Validators.required,Validators.email]),
+      password: new FormControl<string>('',[Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+      sex: new FormControl<string>('male',[Validators.required])
+    })
+  }
+
+  processRegistration(): void{
+    console.log('form submitted');
+    console.log(this.registrationForm.value);
+    const user = this.registrationForm.value as User;
+    console.log(user);
+
+  }
+
+
+}
