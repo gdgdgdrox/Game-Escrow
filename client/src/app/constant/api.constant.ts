@@ -1,4 +1,4 @@
 export const  API_URL = {
-    REGISTRATION : 'http://localhost:8000/api/register',
+    REGISTRATION : 'http://localhost:8080/api/register',
    
 }

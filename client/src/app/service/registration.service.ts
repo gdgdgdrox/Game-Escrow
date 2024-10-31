@@ -13,6 +13,7 @@ export class RegistrationService {
 
   createUser(user: User): Observable<HttpResponse<string>>{
     console.log('registration service making api call..');
-    return this.http.post<string>(API_URL.REGISTRATION, {user}, {observe: 'response', responseType: 'text' as 'json'});
+    console.log(API_URL.REGISTRATION);
+    return this.http.post<string>(API_URL.REGISTRATION, user, {observe: 'response', responseType: 'text' as 'json'});
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../model/user';
 import { RegistrationService } from '../../service/registration.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -29,7 +30,16 @@ export class RegistrationComponent {
     console.log('form submitted');
     console.log(this.registrationForm.value);
     const user = this.registrationForm.value as User;
-    console.log(user);
+    this.registrationService.createUser(user).subscribe({
+      next: (response: HttpResponse<string>) => {
+        console.log('response from registration endpoint received');
+        console.log(response.status);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('error with registration');
+        console.log(error.message);
+      }
+    });
 
   }
 

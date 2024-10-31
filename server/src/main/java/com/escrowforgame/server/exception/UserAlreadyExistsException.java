@@ -1,4 +1,4 @@
-package com.escrowforgame.exception;
+package com.escrowforgame.server.exception;
 
 
 public class UserAlreadyExistsException extends Exception {

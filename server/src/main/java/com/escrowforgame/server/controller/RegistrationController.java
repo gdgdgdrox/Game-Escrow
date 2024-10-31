@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.escrowforgame.exception.UserAlreadyExistsException;
 import com.escrowforgame.server.entity.User;
+import com.escrowforgame.server.exception.UserAlreadyExistsException;
 import com.escrowforgame.server.service.RegistrationService;
 
 @RestController
@@ -19,7 +19,7 @@ public class RegistrationController {
     @Autowired
     private RegistrationService userService;
 
-    @PostMapping("/register")
+    @PostMapping(path="/register")
     public ResponseEntity<String> createUser(@RequestBody User user){
         System.out.println("In create user controller");
         System.out.println("Received user: " + user.toString());
