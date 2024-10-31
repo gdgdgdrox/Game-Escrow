@@ -1,5 +1,10 @@
 package com.escrowforgame.server.entity;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,7 +14,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class User {
+public class User implements UserDetails{
     @Id
     private String username;
 
@@ -22,4 +27,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name="sex", nullable=false)
     private Sex sex;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+
+    }
 }
