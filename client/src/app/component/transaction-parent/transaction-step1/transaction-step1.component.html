@@ -1,0 +1,60 @@
+<h3>Step 1</h3>
+<div>
+  <form [formGroup]="form" (ngSubmit)="processNewTransaction()">
+    <div>
+      <p>I am</p>
+      <mat-button-toggle-group
+        appearance="standard"
+        exclusive
+        formControlName="transactionType"
+      >
+        <mat-button-toggle value="buy">Buying</mat-button-toggle>
+        <mat-button-toggle value="sell">Selling</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <!-- Game Selection -->
+    <mat-form-field appearance="fill">
+      <mat-label>Select Game</mat-label>
+      <mat-select formControlName="gameID">
+        @for (game of games; track game.id){
+        <mat-option [value]="game.id">
+          {{ game.name }}
+        </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Asset selection -->
+    @if(selectedGame){
+      <mat-form-field appearance="fill">
+      <mat-label for="gameAsset">Game Asset Type:</mat-label>
+      <mat-select name="gameAsset" id="gameAsset" formControlName="assetType">
+        <mat-option value=""  disabled >See</mat-option>
+        @for(gameAsset of selectedGame.assets; track gameAsset){
+        <mat-option [value]="gameAsset.type">{{ gameAsset.type }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    }
+    <br>
+    @if(selectedAsset){
+      <mat-label for="gameAssetUnit">{{selectedAsset.unit}}</mat-label>
+      @if (selectedAsset.unit === 'quantity'){
+        <input type="text" id="gameAssetUnit" formControlName='quantity'>
+      }
+      @else if (selectedAsset.unit === 'name'){
+        <input type="text" id="gameAssetUnit" formControlName='name'>
+      }
+      <br>
+      <mat-label for="price">for </mat-label>
+      <input type="number" id="price" formControlName="price">
+      <br>
+      <mat-label for="counterparty">with </mat-label>
+      <input type="text" id="counterparty" formControlName="counterparty">
+    }
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="isProcessing">Submit</button>
+</form>
+</div>
+
+  <button type="button" [routerLink]="['/home']">home</button>

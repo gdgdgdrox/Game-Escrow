@@ -36,9 +36,11 @@ public class JwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         System.out.println("Start jwt filter");
         String authorizationHeader = request.getHeader("Authorization");
-        System.out.println(authorizationHeader);
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer")) {
+            System.out.println("no authorization header / header does not start with bearer");
             filterChain.doFilter(request, response);
+            return;
+            
         }
 
         String jwt = authorizationHeader.substring(7);
@@ -59,11 +61,15 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
             }
         } catch (ExpiredJwtException eje) {
+            System.out.println("token expired");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json");
             response.getWriter().write("{\"error\": \"" + "token already expired" + "\"}");
             response.flushBuffer();
-        } 
+        } catch (Exception e){
+            System.out.println("exception");
+            e.printStackTrace();
+        }
 
         filterChain.doFilter(request, response);
 

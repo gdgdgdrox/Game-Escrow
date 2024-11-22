@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { User } from '../../model/user';
 import { RegistrationService } from '../../service/registration.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -15,7 +16,8 @@ export class RegistrationComponent {
   registrationForm!: FormGroup;
 
   constructor(
-    private registrationService: RegistrationService
+    private registrationService: RegistrationService,
+    private router: Router
   ){
     // initialize form
     this.registrationForm = new FormGroup({
@@ -34,6 +36,7 @@ export class RegistrationComponent {
       next: (response: HttpResponse<string>) => {
         console.log('response from registration endpoint received');
         console.log(response.status);
+        this.router.navigate(['/login']);
       },
       error: (error: HttpErrorResponse) => {
         console.log('error with registration');
