@@ -6,9 +6,10 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 @Data
 @DynamoDbBean
 public class TransactionGameDTO {
-    private Integer id;
+    private Integer gameID;
+    private String gameName;
     private String assetType;
-    private String name; // Optional field
-    private String quantity; // Optional field
+    private String assetName; // Optional field
+    private String assetQuantity; // Optional field
 
 }

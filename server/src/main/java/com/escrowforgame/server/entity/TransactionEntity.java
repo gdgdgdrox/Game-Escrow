@@ -43,4 +43,15 @@ public class TransactionEntity {
         this.setGame(transactionDTO.getGame());
 
     }
+
+    public TransactionDTO mapEntityToDTO() {
+        TransactionDTO transactionDTO = new TransactionDTO();
+        transactionDTO.setTransactionID(this.transactionID);
+        transactionDTO.setBuyer(this.getBuyer());
+        transactionDTO.setSeller(this.getSeller());
+        transactionDTO.setCounterparty(this.getCounterparty());
+        transactionDTO.setPrice(this.getPrice());
+        transactionDTO.setGame(this.getGame());
+        return transactionDTO;
+    }
 }

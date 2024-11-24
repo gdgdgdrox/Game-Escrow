@@ -19,10 +19,10 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private int gameID;
 
     @Column(name="name", nullable=false)
-    private String name;
+    private String gameName;
 
     @OneToMany(mappedBy="game",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GameAsset> gameAssets;

@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class GameAssetDTO {
 
-    private String type;
-    private String unit;
+    private String assetType;
+    private String assetUnit;
 }

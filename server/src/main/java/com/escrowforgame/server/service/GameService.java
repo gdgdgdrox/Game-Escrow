@@ -20,12 +20,12 @@ public class GameService {
         List<GameDTO> gameDTOs = new ArrayList<>();
         gameRepository.findAll().forEach(game -> {
             GameDTO gameDTO = GameDTO.builder()
-                    .id(game.getId())
-                    .name(game.getName())
-                    .assets(game.getGameAssets().stream().map(gameAsset -> {
+                    .gameID(game.getGameID())
+                    .gameName(game.getGameName())
+                    .gameAssets(game.getGameAssets().stream().map(gameAsset -> {
                         return GameAssetDTO.builder()
-                                .type(gameAsset.getAssetType())
-                                .unit(gameAsset.getAssetUnit())
+                                .assetType(gameAsset.getAssetType())
+                                .assetUnit(gameAsset.getAssetUnit())
                                 .build();
                     }).collect(Collectors.toList())).build();
             gameDTOs.add(gameDTO);

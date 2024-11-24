@@ -9,7 +9,7 @@ import lombok.Data;
 @Builder
 public class GameDTO {
 
-    private Integer id;
-    private String name;
-    private List<GameAssetDTO> assets;
+    private Integer gameID;
+    private String gameName;
+    private List<GameAssetDTO> gameAssets;
 }

@@ -1,4 +1,4 @@
-package com.escrowforgame.server.controller;
+package com.escrowforgame.server.controller.TransactionStep;
 
 import java.util.UUID;
 
@@ -24,19 +24,15 @@ public class TransactionStep1Controller {
     private TransactionService transactionService;
     
     @PostMapping(value="/createTransaction")
-    public ResponseEntity<String> createTransaction(@RequestBody TransactionDTO transactionDTO){
+    public ResponseEntity<TransactionEntity> createTransaction(@RequestBody TransactionDTO transactionDTO){
         System.out.println("In create transaction controller");
-        System.out.println(transactionDTO.toString());
-        TransactionEntity transactionEntity = new TransactionEntity();
-        transactionEntity.mapDTOtoEntity(transactionDTO);
-        System.out.println(transactionEntity.toString());
         try{
-            transactionService.createTransaction(transactionDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
+            TransactionEntity createdTransaction = transactionService.createTransaction(transactionDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
         }
         catch (DynamoDbException d){
             System.err.println(d.getStackTrace());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create transaction.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
     
