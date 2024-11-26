@@ -1,4 +1,31 @@
 <h1>home page</h1>
+<mat-toolbar color="primary">
+    <!-- Home Icon -->
+    <button mat-icon-button routerLink="/home" aria-label="Home">
+      <mat-icon>home</mat-icon>
+    </button>
+  
+    <!-- Spacer to push items to the right -->
+    <span class="spacer"></span>
+  
+    <!-- Person Icon with Dropdown Menu -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User Options">
+      <mat-icon>person</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <!-- Dropdown Menu -->
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/account">
+      <mat-icon>account_circle</mat-icon>
+      <span>Account</span>
+    </button>
+    <button mat-menu-item routerLink="/orders">
+      <mat-icon>shopping_cart</mat-icon>
+      <span [routerLink]="['/orders']">Orders</span>
+    </button>
+  </mat-menu>
+  
 <a [routerLink]="['/login']">login</a>
 <br>
 <a [routerLink]="['/transaction-parent']">trade</a>

@@ -1,18 +1,30 @@
 <h1>transaction parent</h1>
 <mat-horizontal-stepper linear #stepper>
-    <mat-step label="Step 1">
-        <app-transaction-step1></app-transaction-step1>
-    </mat-step>
-    <mat-step label="Step 2">
-        <app-transaction-step2></app-transaction-step2>
-    </mat-step>
-    <mat-step label="Step 3">
-        <app-transaction-step3></app-transaction-step3>
-    </mat-step>
-    <mat-step label="Step 4">
-        <app-transaction-step4></app-transaction-step4>
-    </mat-step>
-    <mat-step label="Step 5">
-        <app-transaction-step5></app-transaction-step5>
-    </mat-step>
+  <mat-step label="Step 1">
+    <app-transaction-step1
+      [stepper]="stepper"
+      (onCreateTransaction)="handleCreatedTransaction($event)"
+    ></app-transaction-step1>
+  </mat-step>
+  <mat-step label="Step 2">
+    @if(transaction){ @if(userID === transaction.counterparty){
+    <app-transaction-step2-counterparty
+      [transaction]="transaction"
+    ></app-transaction-step2-counterparty>
+
+    } @else{
+    <app-transaction-step2-pending
+      [transaction]="transaction"
+    ></app-transaction-step2-pending>
+    } }
+  </mat-step>
+  <mat-step label="Step 3">
+    <app-transaction-step3></app-transaction-step3>
+  </mat-step>
+  <mat-step label="Step 4">
+    <app-transaction-step4></app-transaction-step4>
+  </mat-step>
+  <mat-step label="Step 5">
+    <app-transaction-step5></app-transaction-step5>
+  </mat-step>
 </mat-horizontal-stepper>

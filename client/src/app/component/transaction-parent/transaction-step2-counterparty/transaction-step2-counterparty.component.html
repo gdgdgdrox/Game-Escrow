@@ -1,0 +1,15 @@
+<p>transaction-step2-counterparty works!</p>
+<div>
+    <p>Buyer: {{transaction.buyer}}</p>
+    <p>Seller: {{transaction.seller}}</p>
+    <p>Game: {{transaction.game.gameName}}</p>
+    <p>Game Asset: {{transaction.game.assetType}}</p>
+    @if(transaction.game.assetName){
+        <p>Asset Name: {{transaction.game.assetName}}</p>
+    }
+    @else if(transaction.game.assetQuantity){
+        <p>Asset Quantity: {{transaction.game.assetQuantity}}</p>        
+    }
+    <p>Price: {{transaction.price}}</p>
+    <button type="button" (click)="acceptTrade()">ACCEPT</button>
+</div>

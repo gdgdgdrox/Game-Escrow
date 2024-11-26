@@ -36,10 +36,10 @@ export class AuthService {
     localStorage.removeItem('jwt');
   }
 
-  getLoggedInUser(): string | null{
+  getLoggedInUser(): string{
     const jwt = localStorage.getItem('jwt');
     if (!jwt){
-      return null;
+      return '';
     }
     const decodedJwt = jwtDecode(jwt);
     return decodedJwt.sub!;

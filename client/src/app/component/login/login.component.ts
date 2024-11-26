@@ -21,7 +21,7 @@ export class LoginComponent {
     this.authService.login(form.value.username, form.value.password).subscribe({
       next: (response: HttpResponse<string>) => {
         this.loginOutcomeMessage = 'success!';
-        setTimeout(() => this.router.navigate(['/home']), 3000);
+        setTimeout(() => this.router.navigate(['/home']), 1000);
       },
       error: (error: HttpErrorResponse) => {
         this.loginOutcomeMessage = 'Login failed';

@@ -5,6 +5,9 @@ export const  API_URL = {
     LOGIN: `${baseURL}/login`,
     GET_ALL_GAMES: `${baseURL}/games`,
     CREATE_TRANSACTION: `${baseURL}/createTransaction`,
+    GET_ALL_TRANSACTION_BY_USER: `${baseURL}/transactions`,
+    GET_TRANSACTION_BY_TRANSACTION_ID: `${baseURL}/transaction`,
+    TRANSACTION_STEP2_ACCEPT_TRADE: `${baseURL}/transaction/step2`
 
    
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Game } from '../../../model/game';
+import { GameResponseDTO } from '../../../dto/game-response.dto';
 import { TransactionStep1Service } from '../../../service/transaction/transaction-step1.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -8,15 +8,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Router, RouterModule } from '@angular/router';
-import { GameAsset } from '../../../model/game.asset';
+import { GameAssetResponseDTO } from '../../../dto/game-asset-response.dto';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../service/auth.service';
-import { Transaction } from '../../../model/transaction';
+import { TransactionRequestDTO } from '../../../dto/transaction-request.dto';
+import { MatStepper } from '@angular/material/stepper';
+import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 
 @Component({
   selector: 'app-transaction-step1',
@@ -34,12 +37,17 @@ import { Transaction } from '../../../model/transaction';
 })
 export class TransactionStep1Component implements OnInit {
   form!: FormGroup;
-  games: Game[] = [];
-  gameAssets: GameAsset[] = [];
-  selectedGame!: Game;
-  selectedAsset!: GameAsset;
+  games: GameResponseDTO[] = [];
+  gameAssets: GameAssetResponseDTO[] = [];
+  selectedGame!: GameResponseDTO;
+  selectedAsset!: GameAssetResponseDTO;
   message!: string;
   isProcessing = false;
+  @Input() isStep1Completed = false;
+
+  @Input() stepper!: MatStepper;
+
+  @Output() onCreateTransaction = new EventEmitter<TransactionResponseDTO>();
 
   constructor(
     private transactionStep1Service: TransactionStep1Service,
@@ -50,8 +58,8 @@ export class TransactionStep1Component implements OnInit {
       transactionType: new FormControl<string>('buy'),
       gameID: new FormControl<number>(0),
       assetType: new FormControl<string>(''),
-      name: new FormControl<string>(''),
-      quantity: new FormControl<string>(''),
+      assetName: new FormControl<string>(''),
+      assetQuantity: new FormControl<string>(''),
       price: new FormControl<number>(0),
       counterparty: new FormControl<string>(''),
     });
@@ -60,8 +68,9 @@ export class TransactionStep1Component implements OnInit {
   ngOnInit(): void {
     console.log('on init');
     this.transactionStep1Service.getAllGames().subscribe({
-      next: (games: Game[]) => {
+      next: (games: GameResponseDTO[]) => {
         this.games = games;
+        // console.log(this.games);
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
@@ -74,65 +83,85 @@ export class TransactionStep1Component implements OnInit {
     this.form.get('assetType')?.valueChanges.subscribe((assetType) => {
       this.updateSelectedAsset(assetType);
     });
+
+
   }
 
   updateSelectedGame(gameID: number) {
-    this.selectedGame = this.games.find((game) => game.id == gameID)!;
+    this.selectedGame = this.games.find((game) => game.gameID == gameID)!;
+    console.log('selected game', this.selectedGame);
     this.form.get('assetType')?.reset('');
   }
 
   updateSelectedAsset(assetType: string) {
-    this.selectedAsset = this.selectedGame.assets.find(
-      (asset) => asset.type === assetType
+    this.selectedAsset = this.selectedGame.gameAssets.find(
+      (asset) => asset.assetType === assetType
     )!;
+    console.log('selected asset', this.selectedAsset);
+
   }
 
   processNewTransaction() {
     this.isProcessing = true;
     console.log(this.form.value);
     const loggedInUser = this.authService.getLoggedInUser();
-    if (!loggedInUser){
-      this.message = 'timed out. please login again.'
+    if (!loggedInUser) {
+      this.message = 'timed out. please login again.';
       this.router.navigate(['/login']);
-    }
-    else{
-      const formControls = this.form.controls;
-      const newTransaction: Transaction = {
-        buyer: formControls['transactionType'].value === 'buy' ? loggedInUser : formControls['counterparty'].value,
-        seller: formControls['transactionType'].value === 'sell' ? loggedInUser : formControls['counterparty'].value,
-          counterparty: formControls['counterparty'].value ,
-          game: {
-            id: formControls['gameID'].value,
-            assetType: formControls['assetType'].value,
-            name: formControls['name'].value != '' ? formControls['name'].value : undefined,
-            quantity: formControls['quantity'].value != '' ? formControls['quantity'].value : undefined
-          },
-          price: formControls['price'].value
-        };
-        if (!newTransaction.game.name) {
-          delete newTransaction.game.name;
-      }
-      
-      // Similarly, delete 'quantity' if it is empty or undefined
-      if (!newTransaction.game.quantity) {
-          delete newTransaction.game.quantity;
-      }
-      
-      console.log(newTransaction);
+    } else {
+      const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser);
+      console.log(transactionRequestDTO);
       console.log('sending POST req to server..');
-      this.transactionStep1Service.createNewTransaction(newTransaction).subscribe({
-        next: response => {
-          console.log(response);
-        },
-        error: error => {
-          console.log(error);
-        }
-      })
-      }
-    
-   
-
-    
+      this.transactionStep1Service
+        .createNewTransaction(transactionRequestDTO)
+        .subscribe({
+          next: (response: TransactionResponseDTO) => {
+            console.log(response);
+            this.onCreateTransaction.emit(response);
+            this.stepper.next();
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+    }
   }
 
+  createTransactionRequestDTO(formControls:any, loggedInUser:string): TransactionRequestDTO{
+    const newTransaction: TransactionRequestDTO = {
+      buyer:
+        formControls['transactionType'].value === 'buy'
+          ? loggedInUser
+          : formControls['counterparty'].value,
+      seller:
+        formControls['transactionType'].value === 'sell'
+          ? loggedInUser
+          : formControls['counterparty'].value,
+      counterparty: formControls['counterparty'].value,
+      game: {
+        gameID: formControls['gameID'].value,
+        gameName: this.selectedGame.gameName,
+        assetType: formControls['assetType'].value,
+        assetName:
+          formControls['assetName'].value != ''
+            ? formControls['assetName'].value
+            : undefined,
+        assetQuantity:
+          formControls['assetQuantity'].value != ''
+            ? formControls['assetQuantity'].value
+            : undefined,
+      },
+      price: formControls['price'].value,
+    };
+    if (!newTransaction.game.assetName) {
+      delete newTransaction.game.assetName;
+    }
+
+    // Similarly, delete 'quantity' if it is empty or undefined
+    if (!newTransaction.game.assetQuantity) {
+      delete newTransaction.game.assetQuantity;
+    }
+
+    return newTransaction;
+  }
 }
