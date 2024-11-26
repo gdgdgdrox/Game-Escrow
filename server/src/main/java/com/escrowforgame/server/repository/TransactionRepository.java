@@ -85,4 +85,8 @@ public class TransactionRepository {
         return transactions;
     }
 
+    public TransactionEntity updateTransaction(TransactionEntity transactionEntity){
+        return getTransactionTable().updateItem(transactionEntity);
+    }
+
 }

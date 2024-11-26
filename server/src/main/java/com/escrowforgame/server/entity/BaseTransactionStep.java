@@ -41,4 +41,9 @@ public abstract class BaseTransactionStep {
 	public String getStatus() {
 		return status;
 	}
+
+	public void markTransactionStepAsCompleted(){
+		this.setCompletedDate();
+		this.setStatus("completed");
+	}
 }

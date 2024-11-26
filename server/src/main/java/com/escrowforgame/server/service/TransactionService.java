@@ -29,4 +29,10 @@ public class TransactionService {
     public TransactionEntity getTransactionByTransactionID(String transactionID){
         return this.transactionRepository.getTransactionByTransactionID(transactionID);
     }
+
+    public TransactionEntity updateTransaction(TransactionEntity transactionEntity){
+        return transactionRepository.updateTransaction(transactionEntity);
+    }
+
+
 }

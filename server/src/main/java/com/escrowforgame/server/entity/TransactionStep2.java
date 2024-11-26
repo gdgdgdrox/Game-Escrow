@@ -14,6 +14,10 @@ public class TransactionStep2 extends BaseTransactionStep{
     }
     @Override
 	public String toString() {
-		return "TransactionStep1 [createdDate=" + getCreatedDate() + ", completedDate=" + getCompletedDate() + ", status=" + getStatus()+ "].";
+		return "TransactionStep2 [createdDate=" + getCreatedDate() + ", completedDate=" + getCompletedDate() + ", status=" + getStatus()+ "].";
 	}
+
+    public static void markStep2AsCompleted(){
+        
+    }
 }
