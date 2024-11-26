@@ -14,7 +14,9 @@
 
     } @else{
     <app-transaction-step2-pending
+      [stepper]="stepper"
       [transaction]="transaction"
+      (onTradeAcceptedNotification)="handleTradeAcceptedNotification($event)"
     ></app-transaction-step2-pending>
     } }
   </mat-step>

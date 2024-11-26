@@ -32,6 +32,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './transaction-parent.component.css',
 })
 export class TransactionParentComponent implements AfterViewInit {
+
   transaction!: TransactionResponseDTO;
   userID!: string;
   @ViewChild('stepper') stepper!: MatStepper;
@@ -61,10 +62,15 @@ export class TransactionParentComponent implements AfterViewInit {
 
   }
 
-  handleCreatedTransaction($event: any) {
-    console.log($event);
-    this.transaction = { ...this.transaction, ...$event };
+  handleCreatedTransaction(transaction: TransactionResponseDTO) {
+    console.log(transaction);
+    this.transaction = transaction;
     this.userID = this.authService.getLoggedInUser();
   }
+
+  handleTradeAcceptedNotification(transaction: TransactionResponseDTO) {
+    console.log(transaction);
+    this.transaction = transaction;
+    }
 
 }
