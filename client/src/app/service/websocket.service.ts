@@ -12,12 +12,13 @@ export class WebsocketService {
 
   private stompClient!: Client;
 
-  connect(transactionID: string, onMessageReceived: (message: any) => void): void {
+  connect(): void {
     if (this.stompClient && this.stompClient.connected) {
       console.log('Already connected to WebSocket');
       return;
     }
-    const jwt = localStorage.getItem('jwt'); 
+
+    const jwt = localStorage.getItem('jwt');
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS(`http://localhost:8080/websocket?token=${jwt}`), // SockJS connection
       debug: (msg: string) => console.log(msg),
@@ -26,16 +27,6 @@ export class WebsocketService {
 
     this.stompClient.onConnect = () => {
       console.log('Connected to WebSocket');
-
-      // Subscribe to the transaction-specific topic
-      const topic = `/topic/transaction/${transactionID}`;
-      this.stompClient.subscribe(topic, (message: IMessage) => {
-        console.log('message received');
-        console.log(message);
-        const body = JSON.parse(message.body);
-        console.log(body);
-        onMessageReceived(body as TransactionResponseDTO);
-      });
     };
 
     this.stompClient.onStompError = (frame) => {
@@ -43,7 +34,23 @@ export class WebsocketService {
       console.error('Details: ' + frame.body);
     };
 
-    this.stompClient.activate(); // Activate the connection
+    this.stompClient.activate();
+  }
+
+  subscribeToTopic(transactionID: string, onMessageReceived: (message: any) => void){
+    if (!this.stompClient || !this.stompClient.connected) {
+      console.error('WebSocket not connected. Cannot subscribe to topic.');
+      return;
+    }
+
+    const topic = `/topic/transaction/${transactionID}`;
+    this.stompClient.subscribe(topic, (message: IMessage) => {
+      console.log('message received');
+      console.log(message);
+      const body = JSON.parse(message.body);
+      console.log(body);
+      onMessageReceived(body as TransactionResponseDTO);
+    });
   }
 
   disconnect(): void {

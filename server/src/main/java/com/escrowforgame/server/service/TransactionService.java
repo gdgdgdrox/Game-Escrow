@@ -18,7 +18,12 @@ public class TransactionService {
     public TransactionEntity createTransaction(TransactionDTO transactionDTO){
         TransactionEntity transactionEntity = transactionDTO.mapDTOtoEntity();
         System.out.println("Created entity: " + transactionEntity.toString());
-        transactionRepository.createTransaction(transactionEntity);
+        try{
+            transactionRepository.createTransaction(transactionEntity);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         return transactionEntity;
     }
 

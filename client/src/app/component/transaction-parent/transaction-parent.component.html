@@ -7,9 +7,12 @@
     ></app-transaction-step1>
   </mat-step>
   <mat-step label="Step 2">
-    @if(transaction){ @if(userID === transaction.counterparty){
+    @if(transaction && transaction.currentStep===2){ @if(userID ===
+    transaction.counterparty){
     <app-transaction-step2-counterparty
+      [stepper]="stepper"
       [transaction]="transaction"
+      (onTradeAccepted)="handleTradeAccepted($event)"
     ></app-transaction-step2-counterparty>
 
     } @else{
@@ -21,12 +24,24 @@
     } }
   </mat-step>
   <mat-step label="Step 3">
-    <app-transaction-step3></app-transaction-step3>
+    @if(transaction && transaction.currentStep ===3){ @if(userID ===
+    transaction.buyer){
+    <app-transaction-step3-buyer
+      [transaction]="transaction"
+    ></app-transaction-step3-buyer>
+    } @else {
+    <app-transaction-step3-seller [transaction]="transaction">
+    </app-transaction-step3-seller>
+    } }
   </mat-step>
   <mat-step label="Step 4">
+    @if(transaction && transaction.currentStep === 4){
     <app-transaction-step4></app-transaction-step4>
+    }
   </mat-step>
   <mat-step label="Step 5">
+    @if(transaction && transaction.currentStep === 4){
     <app-transaction-step5></app-transaction-step5>
+    }
   </mat-step>
 </mat-horizontal-stepper>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-transaction-step4',
@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './transaction-step4.component.html',
   styleUrl: './transaction-step4.component.css'
 })
-export class TransactionStep4Component {
+export class TransactionStep4Component implements OnInit{
+
+  ngOnInit(): void {
+    console.log('init');
+  }
 
 }

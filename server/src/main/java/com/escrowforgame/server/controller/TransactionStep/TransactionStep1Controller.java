@@ -26,6 +26,7 @@ public class TransactionStep1Controller {
     @PostMapping(value="/createTransaction")
     public ResponseEntity<TransactionEntity> createTransaction(@RequestBody TransactionDTO transactionDTO){
         System.out.println("In create transaction controller");
+        System.out.println(transactionDTO.toString());
         try{
             TransactionEntity createdTransaction = transactionService.createTransaction(transactionDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
