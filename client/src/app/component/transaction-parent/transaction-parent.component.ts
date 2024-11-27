@@ -12,6 +12,8 @@ import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
 import { TransactionService } from '../../service/transaction/transaction.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TransactionStep3SellerComponent } from './transaction-step3-seller/transaction-step3-seller.component';
+import { TransactionStep4BuyerComponent } from './transaction-step4-buyer/transaction-step4-buyer.component';
+import { TransactionStep4SellerComponent } from './transaction-step4-seller/transaction-step4-seller.component';
 
 @Component({
   selector: 'app-transaction-parent',
@@ -24,7 +26,8 @@ import { TransactionStep3SellerComponent } from './transaction-step3-seller/tran
     TransactionStep2PendingComponent,
     TransactionStep3BuyerComponent,
     TransactionStep3SellerComponent,
-    TransactionStep4Component,
+    TransactionStep4BuyerComponent,
+    TransactionStep4SellerComponent,
     TransactionStep5Component,
   ],
   templateUrl: './transaction-parent.component.html',
@@ -40,6 +43,10 @@ export class TransactionParentComponent implements AfterViewInit {
     private transactionService: TransactionService,
     private route: ActivatedRoute
   ) {}
+
+  ngOnInit(): void{
+    console.log(this.transaction);
+  }
 
   ngAfterViewInit(): void {
     console.log('in after view init');
@@ -76,6 +83,16 @@ export class TransactionParentComponent implements AfterViewInit {
   }
 
   handleTradeAccepted(transaction: TransactionResponseDTO) {
+    console.log(transaction);
+    this.transaction = transaction;
+  }
+
+  handleMoneyTransferred(transaction: TransactionResponseDTO){
+    console.log(transaction);
+    this.transaction = transaction;
+  }
+
+  handleMoneyTransferredNotification(transaction: TransactionResponseDTO){
     console.log(transaction);
     this.transaction = transaction;
   }

@@ -28,15 +28,27 @@
     transaction.buyer){
     <app-transaction-step3-buyer
       [transaction]="transaction"
+      [stepper]="stepper"
+      (onMoneyTransferred)="handleMoneyTransferred($event)"
     ></app-transaction-step3-buyer>
     } @else {
-    <app-transaction-step3-seller [transaction]="transaction">
+    <app-transaction-step3-seller 
+    [transaction]="transaction"
+    [stepper]="stepper"
+    (onMoneyTransferredNotification)="handleMoneyTransferredNotification($event)"
+
+    >
     </app-transaction-step3-seller>
     } }
   </mat-step>
   <mat-step label="Step 4">
     @if(transaction && transaction.currentStep === 4){
-    <app-transaction-step4></app-transaction-step4>
+      @if(userID === transaction.buyer){
+        <app-transaction-step4-buyer></app-transaction-step4-buyer>
+      }
+      @else {
+        <app-transaction-step4-seller></app-transaction-step4-seller>
+      }
     }
   </mat-step>
   <mat-step label="Step 5">

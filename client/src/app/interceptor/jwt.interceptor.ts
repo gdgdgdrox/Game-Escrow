@@ -5,17 +5,28 @@ const endpointsThatRequireAuthentication = [
   API_URL.GET_ALL_TRANSACTION_BY_USER,
   API_URL.GET_TRANSACTION_BY_TRANSACTION_ID,
   API_URL.CREATE_TRANSACTION,
-  API_URL.TRANSACTION_STEP2_ACCEPT_TRADE,
   'http://localhost:8080/websocket'
 ];
 
+const dynamicEndpointPrefixes = [
+  API_URL.TRANSACTION_STEP2_ACCEPT_TRADE,
+  API_URL.TRANSACTION_STEP3_MONEY_TRANSFERRED
+];
+
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
-  if (endpointsThatRequireAuthentication.includes(req.url) || req.url.startsWith(API_URL.TRANSACTION_STEP2_ACCEPT_TRADE)){
-    const jwt = localStorage.getItem('jwt');
+  console.log(req.url);
+  const jwt = localStorage.getItem('jwt');
+  if (endpointsThatRequireAuthentication.includes(req.url)){
     req = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${jwt}`)
     })
     console.log('added jwt to request header');
   }
+  else if (dynamicEndpointPrefixes.some((prefix) => req.url.startsWith(prefix))) {
+    req = req.clone({
+      headers: req.headers.set('Authorization', `Bearer ${jwt}`),
+    });
+    console.log('Added JWT to request header for dynamic URL');
+  }  
   return next(req);
 };

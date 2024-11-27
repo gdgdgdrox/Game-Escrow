@@ -1,1 +1,6 @@
-<p>Please transfer {{transaction.price}} via PayNow</p>
+<p>Please transfer {{transaction.price}} via PayNow QR Code</p>
+<button (click)="getQR()">Get QR</button>
+@if (qrPic){
+    <img [src]="qrPic" alt="qr picture">
+    <button type="button" (click)="onTransfer()">I have transferred</button>
+}
