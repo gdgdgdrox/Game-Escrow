@@ -46,7 +46,9 @@ export class TransactionParentComponent implements OnInit{
     { index: 1, label: 'Step 1', completed: false },
     { index: 2, label: 'Step 2', completed: false },
     { index: 3, label: 'Step 3', completed: false },
+    { index: 4, label: 'Step 4', completed: false }
   ];
+  loading: boolean = true; // Loading state
 
   constructor(
     private authService: AuthService,
@@ -61,9 +63,12 @@ export class TransactionParentComponent implements OnInit{
     console.log('transaction-parent init');
     const transactionID = this.route.snapshot.paramMap.get('transactionID');
     if (this.transactionStateService.transaction){
-      console.log('getting transaction object from transaction-state-service');
+      console.log('retrieving transaction object from shared service');
       this.transaction = this.transactionStateService.transaction;
+      console.log(this.transaction);
+      this.userID = this.authService.getLoggedInUser();
       this.currentStep = this.transaction.currentStep;
+      this.loading = false;
     }
     else if (transactionID && !this.transaction){
       console.log(`getting transaction ${transactionID}`);
@@ -75,15 +80,18 @@ export class TransactionParentComponent implements OnInit{
             console.log(transaction);
             this.transaction = transaction;    
             this.currentStep = this.transaction.currentStep;
+            this.loading = false; // Data is ready
           },
           error: (error: HttpErrorResponse) => {
             console.error(error);
+            this.loading = false; // Data is ready
           },
         });
       }
       else{
         if (!transactionID) console.log('no transaction ID');
         else if (this.transaction) console.log('transaction object already exist',this.transaction.transactionID);
+        this.loading = false; // Data is ready
       }
    }
 
@@ -95,24 +103,24 @@ export class TransactionParentComponent implements OnInit{
   //   this.userID = this.authService.getLoggedInUser();
   // }
 
-  handleTradeAcceptedNotification(transaction: TransactionResponseDTO) {
-    this.transaction = transaction;
-    this.currentStep = 3;
-  }
+  // handleTradeAcceptedNotification(transaction: TransactionResponseDTO) {
+  //   this.transaction = transaction;
+  //   this.currentStep = 3;
+  // }
 
-  handleTradeAccepted(transaction: TransactionResponseDTO) {
-    this.transaction = transaction;
-    console.log('txn current step',this.transaction.currentStep);
-    this.currentStep = 3;
-  }
+  // handleTradeAccepted(transaction: TransactionResponseDTO) {
+  //   this.transaction = transaction;
+  //   console.log('txn current step',this.transaction.currentStep);
+  //   this.currentStep = 3;
+  // }
 
-  handleMoneyTransferred(transaction: TransactionResponseDTO) {
-    this.transaction = transaction;
-  }
+  // handleMoneyTransferred(transaction: TransactionResponseDTO) {
+  //   this.transaction = transaction;
+  // }
 
-  handleMoneyTransferredNotification(transaction: TransactionResponseDTO) {
-    this.transaction = transaction;
-  }
+  // handleMoneyTransferredNotification(transaction: TransactionResponseDTO) {
+  //   this.transaction = transaction;
+  // }
 
   // logStepperChange(event: StepperSelectionEvent) {
   //   console.log(`Stepper changed to index: ${event.selectedIndex}`);

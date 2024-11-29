@@ -1,21 +1,33 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 import { WebsocketService } from '../../../service/websocket.service';
 import { MatStepper } from '@angular/material/stepper';
+import { TransactionStateService } from '../../../service/transaction-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-step3-seller',
   standalone: true,
   imports: [],
   templateUrl: './transaction-step3-seller.component.html',
-  styleUrl: './transaction-step3-seller.component.css'
+  styleUrl: './transaction-step3-seller.component.css',
 })
-export class TransactionStep3SellerComponent implements OnInit, OnDestroy{
+export class TransactionStep3SellerComponent implements OnInit, OnDestroy {
   @Input() transaction!: TransactionResponseDTO;
-  @Output() onMoneyTransferredNotification = new EventEmitter<TransactionResponseDTO>();
   message = '';
 
-  constructor(private websocketService: WebsocketService){}
+  constructor(
+    private websocketService: WebsocketService,
+    private transactionStateService: TransactionStateService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     console.log('step 3 seller init');
@@ -25,7 +37,7 @@ export class TransactionStep3SellerComponent implements OnInit, OnDestroy{
         this.transaction.transactionID,
         (transaction) => this.onMessageReceived(transaction)
       );
-    },3000)
+    }, 3000);
   }
 
   ngOnDestroy(): void {
@@ -33,14 +45,21 @@ export class TransactionStep3SellerComponent implements OnInit, OnDestroy{
   }
 
   onMessageReceived(transaction: TransactionResponseDTO): void {
-    console.log('received latest transaction entity');
-    console.log(transaction);
+    console.log('received notification that buyer has transferred money');
+    console.log(
+      `step 3 status: ${transaction.transactionSteps.transactionStep3.status}`
+    );
     if (transaction.transactionSteps.transactionStep3.status === 'completed') {
-      this.message = `${transaction.buyer} has transferred the money to us!`
+      this.message = `${transaction.buyer} has transferred the money to us!`;
       setTimeout(() => {
-        this.onMoneyTransferredNotification.emit(transaction);
+        this.transactionStateService.transaction = transaction;
+        console.log('shared service state updated. navigating to parent');
+        this.router.navigate([
+          '/transaction-parent',
+          `step${transaction.currentStep}`,
+          transaction.transactionID,
+        ]);
       }, 3000);
     }
   }
-
 }

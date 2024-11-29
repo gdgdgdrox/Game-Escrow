@@ -10,6 +10,12 @@ export const routes: Routes = [
     {path: 'register', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},
     {path: 'transaction-parent', component: TransactionParentComponent},
+    {path: 'transaction-parent/step2', component: TransactionParentComponent},
+    {path: 'transaction-parent/step2/:transactionID', component: TransactionParentComponent},
+    {path: 'transaction-parent/step3', component: TransactionParentComponent},
+    {path: 'transaction-parent/step3/:transactionID', component: TransactionParentComponent},
+    {path: 'transaction-parent/step4', component: TransactionParentComponent},
+    {path: 'transaction-parent/step4/:transactionID', component: TransactionParentComponent},
     {path: 'transaction-parent/:transactionID', component: TransactionParentComponent},
     {path: 'home', component: HomeComponent},
     {path: 'orders', component: OrdersComponent}

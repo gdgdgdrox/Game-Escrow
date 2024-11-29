@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TransactionService } from '../../service/transaction/transaction.service';
 import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TransactionStateService } from '../../service/transaction-state.service';
 
 @Component({
   selector: 'app-orders',
@@ -18,7 +19,8 @@ export class OrdersComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private transactionStateService: TransactionStateService
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +40,13 @@ export class OrdersComponent implements OnInit {
   }
 
   getTransactionDetails(transactionID: string) {
-    console.log(`getting transaction for ${transactionID}`);
-    this.router.navigate(['/transaction-parent',transactionID])
+    const transaction = this.transactions.find(transaction => transaction.transactionID === transactionID);
+    console.log(`user is trying to load ${transaction?.transactionID}`);
+    if (transaction){
+      this.transactionStateService.transaction = transaction;
+      console.log('shared service state updated. navigating to parent');
+      this.router.navigate(['/transaction-parent',`step${transaction.currentStep}`,transactionID])
+    }
   //   this.transactionService
   //     .getTransactionByTransactionID(transactionID);
       

@@ -1,12 +1,20 @@
+@if(loading){
+<p>loading..</p>
+} @else {
+
 <div class="custom-stepper">
   <!-- Step Indicators -->
-   <p>{{currentStep}}</p>
+  <p>{{ currentStep }}</p>
   <div class="step-indicators">
     @for(step of steps; track step.label){
     <div
       [class.active]="currentStep === step.index"
       [class.completed]="step.index < currentStep"
-      [class.disabled]="transaction ? step.index > transaction.currentStep : step.index > currentStep"
+      [class.disabled]="
+        transaction
+          ? step.index > transaction.currentStep
+          : step.index > currentStep
+      "
       (click)="goToStep(step.index)"
     >
       <span>{{ step.label }}</span>
@@ -17,57 +25,59 @@
   <!-- Step Content -->
   <div class="step-content">
     <ng-container>
-      @if(currentStep === 1){
-        @if(transaction && transaction.transactionSteps.transactionStep1.status === 'completed'){
-          <app-transaction-step1-completed
-          [transaction]="transaction">
-
-          </app-transaction-step1-completed>
-        }
-        @else {
-          <app-transaction-step1
-          ></app-transaction-step1>
-        }
-      }
+      @if(currentStep === 1){ @if(transaction &&
+      transaction.transactionSteps.transactionStep1.status === 'completed'){
+      <app-transaction-step1-completed [transaction]="transaction">
+      </app-transaction-step1-completed>
+      } @else {
+      <app-transaction-step1></app-transaction-step1>
+      } }
     </ng-container>
     <ng-container>
       @if(currentStep === 2){ @if(userID === transaction.counterparty){
       <app-transaction-step2-counterparty
         [transaction]="transaction"
-        (onTradeAccepted)="handleTradeAccepted($event)"
       ></app-transaction-step2-counterparty>
       } @else {
-      <app-transaction-step2-pending
-        [transaction]="transaction"
-        (onTradeAcceptedNotification)="handleTradeAcceptedNotification($event)"
-      >
+      <app-transaction-step2-pending [transaction]="transaction">
       </app-transaction-step2-pending>
       } }
     </ng-container>
     <ng-container>
-      @if(currentStep === 3){
+      @if(currentStep === 3){ @if (userID === transaction.buyer){
+      <app-transaction-step3-buyer 
+      [transaction]="transaction">
+        >
+      </app-transaction-step3-buyer>
+      } @else {
+      <app-transaction-step3-seller
+        [transaction]="transaction"
+      ></app-transaction-step3-seller>
+      } }
+    </ng-container>
+    <ng-container>
+      @if(currentStep === 4){ 
         @if (userID === transaction.buyer){
-          <app-transaction-step3-buyer
-          [transaction]="transaction"
-          (onMoneyTransferred)="handleMoneyTransferred($event)">
-          </app-transaction-step3-buyer>
-        }
-        @else {
-          <app-transaction-step3-seller
-          [transaction]="transaction"
-          ></app-transaction-step3-seller>
-        }
-      }
+      <app-transaction-step4-buyer 
+      [transaction]="transaction">
+        >
+      </app-transaction-step4-buyer>
+      } @else {
+      <app-transaction-step4-seller
+        [transaction]="transaction"
+      ></app-transaction-step4-seller>
+      } }
     </ng-container>
   </div>
 
   <!-- Navigation Buttons -->
   <!-- <div class="step-navigation">
-    <button (click)="previousStep()" [disabled]="currentStep === 0">
-      Previous
-    </button>
-    <button (click)="nextStep()" [disabled]="currentStep === steps.length">
-      Next
-    </button>
-  </div> -->
+      <button (click)="previousStep()" [disabled]="currentStep === 0">
+        Previous
+      </button>
+      <button (click)="nextStep()" [disabled]="currentStep === steps.length">
+        Next
+      </button>
+    </div> -->
 </div>
+}

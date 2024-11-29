@@ -45,9 +45,6 @@ export class TransactionStep1Component implements OnInit {
   message!: string;
   isProcessing = false;
 
-
-  @Output() onCreateTransaction = new EventEmitter<TransactionResponseDTO>();
-
   constructor(
     private transactionStep1Service: TransactionStep1Service,
     private authService: AuthService,
@@ -110,9 +107,8 @@ export class TransactionStep1Component implements OnInit {
           .createNewTransaction(transactionRequestDTO)
           .subscribe({
             next: (transaction: TransactionResponseDTO) => {
-              // this.onCreateTransaction.emit(transaction);
               this.transactionStateService.transaction = transaction;
-              this.router.navigate(['/transaction-parent',transaction.transactionID]);
+              this.router.navigate(['/transaction-parent/step2',transaction.transactionID]);
             },
             error: (error) => {
               console.log(error);
