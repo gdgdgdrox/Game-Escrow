@@ -5,7 +5,7 @@
     <div
       [class.active]="currentStep === step.index"
       [class.completed]="step.index < currentStep"
-      [class.disabled]="step.index > currentStep"
+      [class.disabled]="transaction ? step.index > transaction.currentStep : step.index > currentStep"
       (click)="goToStep(step.index)"
     >
       <span>{{ step.label }}</span>
