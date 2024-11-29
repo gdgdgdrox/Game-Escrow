@@ -1,5 +1,6 @@
 <div class="custom-stepper">
   <!-- Step Indicators -->
+   <p>{{currentStep}}</p>
   <div class="step-indicators">
     @for(step of steps; track step.label){
     <div
@@ -25,7 +26,6 @@
         }
         @else {
           <app-transaction-step1
-            (onCreateTransaction)="handleCreatedTransaction($event)"
           ></app-transaction-step1>
         }
       }
@@ -44,11 +44,21 @@
       </app-transaction-step2-pending>
       } }
     </ng-container>
-    <!-- <ng-container>
+    <ng-container>
       @if(currentStep === 3){
-        <app-step3 (onPrevious)="previousStep()"></app-step3>
+        @if (userID === transaction.buyer){
+          <app-transaction-step3-buyer
+          [transaction]="transaction"
+          (onMoneyTransferred)="handleMoneyTransferred($event)">
+          </app-transaction-step3-buyer>
+        }
+        @else {
+          <app-transaction-step3-seller
+          [transaction]="transaction"
+          ></app-transaction-step3-seller>
+        }
       }
-    </ng-container> -->
+    </ng-container>
   </div>
 
   <!-- Navigation Buttons -->

@@ -17,6 +17,7 @@ import { TransactionStep4SellerComponent } from './transaction-step4-seller/tran
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { TransactionStep1CompletedComponent } from './transaction-step1-completed/transaction-step1-completed.component';
 import { TransactionSteps } from '../../dto/transaction-step';
+import { TransactionStateService } from '../../service/transaction-state.service';
 
 @Component({
   selector: 'app-transaction-parent',
@@ -37,7 +38,7 @@ import { TransactionSteps } from '../../dto/transaction-step';
   templateUrl: './transaction-parent.component.html',
   styleUrl: './transaction-parent.component.css',
 })
-export class TransactionParentComponent implements AfterViewInit {
+export class TransactionParentComponent implements OnInit{
   transaction!: TransactionResponseDTO;
   userID!: string;
   currentStep = 1;
@@ -51,14 +52,21 @@ export class TransactionParentComponent implements AfterViewInit {
     private authService: AuthService,
     private transactionService: TransactionService,
     private route: ActivatedRoute,
-    private cdr :ChangeDetectorRef
+    private transactionStateService: TransactionStateService
+
 
   ) {}
 
   ngOnInit(): void { 
-    console.log('transaction parent init');
+    console.log('transaction-parent init');
     const transactionID = this.route.snapshot.paramMap.get('transactionID');
-    if (transactionID && !this.transaction) {
+    if (this.transactionStateService.transaction){
+      console.log('getting transaction object from transaction-state-service');
+      this.transaction = this.transactionStateService.transaction;
+      this.currentStep = this.transaction.currentStep;
+    }
+    else if (transactionID && !this.transaction){
+      console.log(`getting transaction ${transactionID}`);
       this.transactionService
         .getTransactionByTransactionID(transactionID)
         .subscribe({
@@ -72,20 +80,20 @@ export class TransactionParentComponent implements AfterViewInit {
             console.error(error);
           },
         });
-    }
+      }
+      else{
+        if (!transactionID) console.log('no transaction ID');
+        else if (this.transaction) console.log('transaction object already exist',this.transaction.transactionID);
+      }
    }
 
-  ngAfterViewInit(): void {
-    console.log('transaction parent afterViewInit');
-   
 
-  }
-
-  handleCreatedTransaction(transaction: TransactionResponseDTO) {
-    this.transaction = transaction;
-    this.userID = this.authService.getLoggedInUser();
-    // this.currentStep = 2;
-  }
+  // handleCreatedTransaction(transaction: TransactionResponseDTO) {
+  //   console.log('handle created transaction',transaction.transactionID);
+  //   this.transaction = transaction;
+  //   console.log(`assigned this.transaction to ${this.transaction.transactionID}`);
+  //   this.userID = this.authService.getLoggedInUser();
+  // }
 
   handleTradeAcceptedNotification(transaction: TransactionResponseDTO) {
     this.transaction = transaction;

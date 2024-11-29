@@ -12,7 +12,6 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class TransactionStep3SellerComponent implements OnInit, OnDestroy{
   @Input() transaction!: TransactionResponseDTO;
-  @Input() stepper!: MatStepper;
   @Output() onMoneyTransferredNotification = new EventEmitter<TransactionResponseDTO>();
   message = '';
 
@@ -40,7 +39,6 @@ export class TransactionStep3SellerComponent implements OnInit, OnDestroy{
       this.message = `${transaction.buyer} has transferred the money to us!`
       setTimeout(() => {
         this.onMoneyTransferredNotification.emit(transaction);
-        this.stepper.next();
       }, 3000);
     }
   }

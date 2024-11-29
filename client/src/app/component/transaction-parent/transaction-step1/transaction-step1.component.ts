@@ -20,6 +20,7 @@ import { AuthService } from '../../../service/auth.service';
 import { TransactionRequestDTO } from '../../../dto/transaction-request.dto';
 import { MatStepper } from '@angular/material/stepper';
 import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
+import { TransactionStateService } from '../../../service/transaction-state.service';
 
 @Component({
   selector: 'app-transaction-step1',
@@ -50,7 +51,8 @@ export class TransactionStep1Component implements OnInit {
   constructor(
     private transactionStep1Service: TransactionStep1Service,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private transactionStateService: TransactionStateService
   ) {
     this.form = new FormGroup({
       transactionType: new FormControl<string>('buy'),
@@ -95,28 +97,29 @@ export class TransactionStep1Component implements OnInit {
     )!;
   }
 
-  processNewTransaction() {
-    this.isProcessing = true;
-    const loggedInUser = this.authService.getLoggedInUser();
-    if (!loggedInUser) {
-      this.message = 'timed out. please login again.';
-      this.router.navigate(['/login']);
-    } else {
-      const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser);
-      this.transactionStep1Service
-        .createNewTransaction(transactionRequestDTO)
-        .subscribe({
-          next: (transaction: TransactionResponseDTO) => {
-            this.onCreateTransaction.emit(transaction);
-            console.log('creating new transaction');
-            this.router.navigate(['/transaction-parent',transaction.transactionID]);
-          },
-          error: (error) => {
-            console.log(error);
-          },
-        });
+    processNewTransaction() {
+      this.isProcessing = true;
+      const loggedInUser = this.authService.getLoggedInUser();
+      if (!loggedInUser) {
+        this.message = 'timed out. please login again.';
+        this.router.navigate(['/login']);
+      } else {
+        const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser);
+        console.log('creating new transaction');
+        this.transactionStep1Service
+          .createNewTransaction(transactionRequestDTO)
+          .subscribe({
+            next: (transaction: TransactionResponseDTO) => {
+              // this.onCreateTransaction.emit(transaction);
+              this.transactionStateService.transaction = transaction;
+              this.router.navigate(['/transaction-parent',transaction.transactionID]);
+            },
+            error: (error) => {
+              console.log(error);
+            },
+          });
+      }
     }
-  }
 
 
   createTransactionRequestDTO(formControls:any, loggedInUser:string): TransactionRequestDTO{
