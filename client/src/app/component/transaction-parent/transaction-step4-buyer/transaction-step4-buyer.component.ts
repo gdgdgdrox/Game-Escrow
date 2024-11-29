@@ -9,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class TransactionStep4BuyerComponent {
 
+  ngOnInit():void{
+    console.log('step 4 buyer init');
+  }
 }

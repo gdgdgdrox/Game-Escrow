@@ -19,6 +19,7 @@ export class TransactionStep3SellerComponent implements OnInit, OnDestroy{
   constructor(private websocketService: WebsocketService){}
 
   ngOnInit(): void {
+    console.log('step 3 seller init');
     this.websocketService.connect(); // Connect to the WebSocket
     setTimeout(() => {
       this.websocketService.subscribeToTopic(

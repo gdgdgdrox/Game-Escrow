@@ -23,6 +23,7 @@ export class TransactionStep2PendingComponent implements OnInit, OnDestroy {
   ) {}
   
   ngOnInit(): void {
+    console.log('step 2 pending init');
     this.websocketService.connect(); // Connect to the WebSocket
     setTimeout(() => {
       this.websocketService.subscribeToTopic(
@@ -37,8 +38,6 @@ export class TransactionStep2PendingComponent implements OnInit, OnDestroy {
   }
 
   onMessageReceived(transaction: TransactionResponseDTO): void {
-    console.log('received latest transaction entity');
-    console.log(transaction);
     if (transaction.transactionSteps.transactionStep2.status === 'completed') {
       this.message = `${transaction.counterparty} has accepted the trade!`
       setTimeout(() => {

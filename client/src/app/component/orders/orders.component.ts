@@ -29,7 +29,6 @@ export class OrdersComponent implements OnInit {
       this.authService.getLoggedInUser()
     ).subscribe(
       {next: (response: TransactionResponseDTO[]) => {
-        console.log(response);
         this.transactions = response;
       },
       error: error => {

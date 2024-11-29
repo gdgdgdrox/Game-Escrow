@@ -1,59 +1,75 @@
-<h1>transaction parent</h1>
-<mat-horizontal-stepper linear #stepper>
-  <mat-step label="Step 1">
-    <app-transaction-step1
-      [stepper]="stepper"
-      (onCreateTransaction)="handleCreatedTransaction($event)"
-    ></app-transaction-step1>
-  </mat-step>
-  <mat-step label="Step 2">
-    @if(transaction && transaction.currentStep===2){ @if(userID ===
-    transaction.counterparty){
-    <app-transaction-step2-counterparty
-      [stepper]="stepper"
-      [transaction]="transaction"
-      (onTradeAccepted)="handleTradeAccepted($event)"
-    ></app-transaction-step2-counterparty>
 
-    } @else{
-    <app-transaction-step2-pending
-      [stepper]="stepper"
-      [transaction]="transaction"
-      (onTradeAcceptedNotification)="handleTradeAcceptedNotification($event)"
-    ></app-transaction-step2-pending>
-    } }
-  </mat-step>
-  <mat-step label="Step 3">
-    @if(transaction && transaction.currentStep ===3){ @if(userID ===
-    transaction.buyer){
-    <app-transaction-step3-buyer
-      [transaction]="transaction"
-      [stepper]="stepper"
-      (onMoneyTransferred)="handleMoneyTransferred($event)"
-    ></app-transaction-step3-buyer>
-    } @else {
-    <app-transaction-step3-seller 
-    [transaction]="transaction"
-    [stepper]="stepper"
-    (onMoneyTransferredNotification)="handleMoneyTransferredNotification($event)"
+  <mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="onStepChange($event)">
+    <mat-step [completed]="isStepCompleted(1)">
+      <ng-template matStepLabel>Step 1</ng-template>
+      <ng-template matStepContent>
+        @if(!transaction){
+          <app-transaction-step1
+            [stepper]="stepper"
+            (onCreateTransaction)="handleCreatedTransaction($event)"
+          ></app-transaction-step1>
+        }
+        @else{
+          <p>{{transaction.transactionID}}</p>
+        }
+      </ng-template>
+    </mat-step>
 
-    >
-    </app-transaction-step3-seller>
-    } }
-  </mat-step>
-  <mat-step label="Step 4">
-    @if(transaction && transaction.currentStep === 4){
-      @if(userID === transaction.buyer){
-        <app-transaction-step4-buyer></app-transaction-step4-buyer>
+    <mat-step [completed]="isStepCompleted(2)">
+      <ng-template matStepLabel>Step 2</ng-template>
+      <ng-template matStepContent>
+        @if(transaction && transaction.currentStep===2){ @if(userID ===
+        transaction.counterparty){
+        <app-transaction-step2-counterparty
+          [stepper]="stepper"
+          [transaction]="transaction"
+          (onTradeAccepted)="handleTradeAccepted($event)"
+        ></app-transaction-step2-counterparty>
+    
+        } @else{
+        <app-transaction-step2-pending
+          [stepper]="stepper"
+          [transaction]="transaction"
+          (onTradeAcceptedNotification)="handleTradeAcceptedNotification($event)"
+        ></app-transaction-step2-pending>
+        } }
+      </ng-template>
+    </mat-step>
+
+    <mat-step [completed]="isStepCompleted(3)">
+      <ng-template matStepLabel>Step 3</ng-template>
+      <ng-template matStepContent>
+        @if(transaction && transaction.currentStep ===3){ 
+          @if(userID === transaction.buyer){
+        <app-transaction-step3-buyer
+          [transaction]="transaction"
+          [stepper]="stepper"
+          (onMoneyTransferred)="handleMoneyTransferred($event)"
+        ></app-transaction-step3-buyer>
+        } @else {
+        <app-transaction-step3-seller 
+        [transaction]="transaction"
+        [stepper]="stepper"
+        (onMoneyTransferredNotification)="handleMoneyTransferredNotification($event)"
+        >
+        </app-transaction-step3-seller>
+        } 
       }
-      @else {
-        <app-transaction-step4-seller></app-transaction-step4-seller>
-      }
-    }
-  </mat-step>
-  <mat-step label="Step 5">
-    @if(transaction && transaction.currentStep === 4){
-    <app-transaction-step5></app-transaction-step5>
-    }
-  </mat-step>
-</mat-horizontal-stepper>
+      </ng-template>
+    </mat-step>
+
+    <mat-step [completed]="isStepCompleted(4)">
+      <ng-template matStepLabel>Step 4</ng-template>
+      <ng-template matStepContent>
+        @if(transaction && transaction.currentStep === 4){
+          @if(userID === transaction.buyer){
+            <app-transaction-step4-buyer></app-transaction-step4-buyer>
+          }
+          @else {
+            <app-transaction-step4-seller></app-transaction-step4-seller>
+          }
+        }
+      </ng-template>
+    </mat-step>
+  </mat-horizontal-stepper>
+

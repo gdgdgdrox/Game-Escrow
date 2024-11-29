@@ -20,13 +20,12 @@ export class TransactionStep2CounterpartyComponent implements OnInit{
   constructor(private transactionStep2Service: TransactionStep2Service, private router: Router) {}
 
   ngOnInit(): void {
-    console.log('init');
+    console.log('step 2 counterparty init');
   }
 
   acceptTrade(){
     this.transactionStep2Service.acceptTrade(this.transaction.transactionID).subscribe({
       next: (response:TransactionResponseDTO) => {
-        console.log('response received');
         this.onTradeAccepted.emit(response);
         this.stepper.next();
       },

@@ -66,11 +66,10 @@ export class TransactionStep1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('on init');
+    console.log('step 1 init');
     this.transactionStep1Service.getAllGames().subscribe({
       next: (games: GameResponseDTO[]) => {
         this.games = games;
-        // console.log(this.games);
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
@@ -89,7 +88,6 @@ export class TransactionStep1Component implements OnInit {
 
   updateSelectedGame(gameID: number) {
     this.selectedGame = this.games.find((game) => game.gameID == gameID)!;
-    console.log('selected game', this.selectedGame);
     this.form.get('assetType')?.reset('');
   }
 
@@ -97,27 +95,23 @@ export class TransactionStep1Component implements OnInit {
     this.selectedAsset = this.selectedGame.gameAssets.find(
       (asset) => asset.assetType === assetType
     )!;
-    console.log('selected asset', this.selectedAsset);
-
   }
 
   processNewTransaction() {
     this.isProcessing = true;
-    console.log(this.form.value);
     const loggedInUser = this.authService.getLoggedInUser();
     if (!loggedInUser) {
       this.message = 'timed out. please login again.';
       this.router.navigate(['/login']);
     } else {
       const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser);
-      console.log(transactionRequestDTO);
-      console.log('sending POST req to server..');
       this.transactionStep1Service
         .createNewTransaction(transactionRequestDTO)
         .subscribe({
-          next: (response: TransactionResponseDTO) => {
-            console.log(response);
-            this.onCreateTransaction.emit(response);
+          next: (transaction: TransactionResponseDTO) => {
+            this.onCreateTransaction.emit(transaction);
+            console.log('creating new transaction');
+            // this.router.navigate(['/transaction-parent',transaction.transactionID]);
             this.stepper.next();
           },
           error: (error) => {

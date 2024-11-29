@@ -14,19 +14,16 @@ const dynamicEndpointPrefixes = [
 ];
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log(req.url);
   const jwt = localStorage.getItem('jwt');
   if (endpointsThatRequireAuthentication.includes(req.url)){
     req = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${jwt}`)
     })
-    console.log('added jwt to request header');
   }
   else if (dynamicEndpointPrefixes.some((prefix) => req.url.startsWith(prefix))) {
     req = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${jwt}`),
     });
-    console.log('Added JWT to request header for dynamic URL');
   }  
   return next(req);
 };

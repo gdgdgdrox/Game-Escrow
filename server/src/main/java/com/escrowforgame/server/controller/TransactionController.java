@@ -26,8 +26,9 @@ public class TransactionController {
     }
 
     @GetMapping("/transaction")
-    public TransactionEntity getTransactionByTransactionID(@RequestParam String transactionID){
+    public TransactionEntity getTransactionByTransactionID(@RequestParam String transactionID) throws InterruptedException{
         System.out.println("Getting transaction " + transactionID);
+        // Thread.sleep(5000);
         return transactionService.getTransactionByTransactionID(transactionID);
     }
 }

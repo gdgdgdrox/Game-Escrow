@@ -20,7 +20,9 @@ export class TransactionStep3BuyerComponent{
 
   constructor(private ocbcApiService: OCBCApiService, private transactionStep3Service: TransactionStep3Service){}
 
-
+  ngOnInit():void{
+    console.log('step 3 buyer init');
+  }
 
   // getQR(): void{
   //   this.ocbcApiService.getQR().subscribe({

@@ -21,7 +21,7 @@ export class WebsocketService {
     const jwt = localStorage.getItem('jwt');
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS(`http://localhost:8080/websocket?token=${jwt}`), // SockJS connection
-      debug: (msg: string) => console.log(msg),
+      // debug: (msg: string) => console.log(msg),
       reconnectDelay: 0,
     });
 
@@ -45,10 +45,8 @@ export class WebsocketService {
 
     const topic = `/topic/transaction/${transactionID}`;
     this.stompClient.subscribe(topic, (message: IMessage) => {
-      console.log('message received');
       console.log(message);
       const body = JSON.parse(message.body);
-      console.log(body);
       onMessageReceived(body as TransactionResponseDTO);
     });
   }

@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './transaction-step4-seller.component.css'
 })
 export class TransactionStep4SellerComponent {
-
+  ngOnInit():void{
+    console.log('step 4 seller init');
+  }
 }
