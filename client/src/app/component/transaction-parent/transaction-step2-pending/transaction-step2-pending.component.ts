@@ -13,7 +13,6 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class TransactionStep2PendingComponent implements OnInit, OnDestroy {
   @Input() transaction!: TransactionResponseDTO;
-  @Input() stepper!: MatStepper;
   @Output() onTradeAcceptedNotification =
     new EventEmitter<TransactionResponseDTO>();
   message = '';
@@ -42,7 +41,6 @@ export class TransactionStep2PendingComponent implements OnInit, OnDestroy {
       this.message = `${transaction.counterparty} has accepted the trade!`
       setTimeout(() => {
         this.onTradeAcceptedNotification.emit(transaction);
-        this.stepper.next();
       }, 3000);
     }
   }

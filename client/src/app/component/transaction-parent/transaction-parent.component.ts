@@ -15,6 +15,8 @@ import { TransactionStep3SellerComponent } from './transaction-step3-seller/tran
 import { TransactionStep4BuyerComponent } from './transaction-step4-buyer/transaction-step4-buyer.component';
 import { TransactionStep4SellerComponent } from './transaction-step4-seller/transaction-step4-seller.component';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { TransactionStep1CompletedComponent } from './transaction-step1-completed/transaction-step1-completed.component';
+import { TransactionSteps } from '../../dto/transaction-step';
 
 @Component({
   selector: 'app-transaction-parent',
@@ -23,6 +25,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
     RouterModule,
     MatStepperModule,
     TransactionStep1Component,
+    TransactionStep1CompletedComponent,
     TransactionStep2CounterpartyComponent,
     TransactionStep2PendingComponent,
     TransactionStep3BuyerComponent,
@@ -37,7 +40,12 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 export class TransactionParentComponent implements AfterViewInit {
   transaction!: TransactionResponseDTO;
   userID!: string;
-  @ViewChild('stepper') stepper!: MatStepper;
+  currentStep = 1;
+  steps = [
+    { index: 1, label: 'Step 1', completed: false },
+    { index: 2, label: 'Step 2', completed: false },
+    { index: 3, label: 'Step 3', completed: false },
+  ];
 
   constructor(
     private authService: AuthService,
@@ -58,6 +66,7 @@ export class TransactionParentComponent implements AfterViewInit {
             this.userID = this.authService.getLoggedInUser();
             console.log(transaction);
             this.transaction = transaction;    
+            this.currentStep = this.transaction.currentStep;
           },
           error: (error: HttpErrorResponse) => {
             console.error(error);
@@ -68,34 +77,25 @@ export class TransactionParentComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log('transaction parent afterViewInit');
-    setTimeout(() =>{
-      if (this.transaction){
-  
-        this.stepper.linear = false;
-        this.stepper.selectedIndex = this.transaction?.currentStep-1;
-        console.log(this.stepper.selectedIndex);
-        this.cdr.detectChanges();
-        setTimeout(() => {
-          this.stepper.linear = true;
-      });
-      }
-    })
-
-
+   
 
   }
 
   handleCreatedTransaction(transaction: TransactionResponseDTO) {
     this.transaction = transaction;
     this.userID = this.authService.getLoggedInUser();
+    this.currentStep = 2;
   }
 
   handleTradeAcceptedNotification(transaction: TransactionResponseDTO) {
     this.transaction = transaction;
+    this.currentStep = 3;
   }
 
   handleTradeAccepted(transaction: TransactionResponseDTO) {
     this.transaction = transaction;
+    console.log('txn current step',this.transaction.currentStep);
+    this.currentStep = 3;
   }
 
   handleMoneyTransferred(transaction: TransactionResponseDTO) {
@@ -106,26 +106,50 @@ export class TransactionParentComponent implements AfterViewInit {
     this.transaction = transaction;
   }
 
-  logStepperChange(event: StepperSelectionEvent) {
-    console.log(`Stepper changed to index: ${event.selectedIndex}`);
-  }
+  // logStepperChange(event: StepperSelectionEvent) {
+  //   console.log(`Stepper changed to index: ${event.selectedIndex}`);
+  // }
 
-  onStepChange(event: any): void {
-    // Prevent navigating to previous steps
-    if (event.selectedIndex < this.transaction.currentStep - 1) {
-      console.log(`trying to navigate to ${event.selectedIndex}`);
-      setTimeout(() => this.stepper!.selectedIndex = this.transaction.currentStep - 1);
+  // nextStep() {
+  //   if (this.currentStep < this.steps.length ) {
+  //     this.markStepComplete(this.currentStep);
+  //     this.currentStep++;
+  //   }
+  // }
+
+  // previousStep() {
+  //   if (this.currentStep > 1) {
+  //     this.currentStep--;
+  //   }
+  // }
+
+  goToStep(index: number) {
+    console.log(`currently on ${this.currentStep}, trying to go to ${index}`);
+    if (index < this.currentStep) {
+      this.currentStep = index;
+    }else if (index > this.currentStep){
+      if (this.transaction){
+        if ((index <= this.transaction.currentStep)){
+          this.currentStep = index;
+      }
+      }
     }
   }
 
-  isStepCompleted(stepNumber:number){
-    if (this.transaction){
-      if (this.transaction.currentStep > stepNumber){
-        return true;
-      }
-      return false;
-    } 
-    return false;
+  markStepComplete(index: number) {
+    this.steps[index].completed = true;
   }
+
+  // isStepNavigatable(stepIndex: number){
+  //   console.log(`stepIndex=${stepIndex} | currentStep=${this.currentStep}`);
+  //   if (stepIndex > this.currentStep){
+  //     const stepKey = `transactionStep${stepIndex}` as keyof TransactionSteps;
+  //     if (this.transaction && (this.transaction.currentStep >= stepIndex)){
+  //       return true;
+  //     }
+  //     return false;
+  //   }
+  //   return false;
+  // }
   
 }

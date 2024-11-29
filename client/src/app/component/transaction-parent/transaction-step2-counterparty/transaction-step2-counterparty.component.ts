@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 })
 export class TransactionStep2CounterpartyComponent implements OnInit{
   @Input() transaction!: TransactionResponseDTO
-  @Input() stepper!: MatStepper;
   @Output() onTradeAccepted = new EventEmitter<TransactionResponseDTO>();
 
   constructor(private transactionStep2Service: TransactionStep2Service, private router: Router) {}
@@ -27,7 +26,6 @@ export class TransactionStep2CounterpartyComponent implements OnInit{
     this.transactionStep2Service.acceptTrade(this.transaction.transactionID).subscribe({
       next: (response:TransactionResponseDTO) => {
         this.onTradeAccepted.emit(response);
-        this.stepper.next();
       },
       error: (error: HttpErrorResponse) => {
         console.error(error);

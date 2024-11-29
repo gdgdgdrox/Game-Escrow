@@ -43,9 +43,7 @@ export class TransactionStep1Component implements OnInit {
   selectedAsset!: GameAssetResponseDTO;
   message!: string;
   isProcessing = false;
-  @Input() isStep1Completed = false;
 
-  @Input() stepper!: MatStepper;
 
   @Output() onCreateTransaction = new EventEmitter<TransactionResponseDTO>();
 
@@ -112,7 +110,6 @@ export class TransactionStep1Component implements OnInit {
             this.onCreateTransaction.emit(transaction);
             console.log('creating new transaction');
             // this.router.navigate(['/transaction-parent',transaction.transactionID]);
-            this.stepper.next();
           },
           error: (error) => {
             console.log(error);
@@ -120,6 +117,7 @@ export class TransactionStep1Component implements OnInit {
         });
     }
   }
+
 
   createTransactionRequestDTO(formControls:any, loggedInUser:string): TransactionRequestDTO{
     const newTransaction: TransactionRequestDTO = {
