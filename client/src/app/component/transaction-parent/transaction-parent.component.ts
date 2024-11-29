@@ -58,7 +58,7 @@ export class TransactionParentComponent implements AfterViewInit {
   ngOnInit(): void { 
     console.log('transaction parent init');
     const transactionID = this.route.snapshot.paramMap.get('transactionID');
-    if (transactionID) {
+    if (transactionID && !this.transaction) {
       this.transactionService
         .getTransactionByTransactionID(transactionID)
         .subscribe({
@@ -84,7 +84,7 @@ export class TransactionParentComponent implements AfterViewInit {
   handleCreatedTransaction(transaction: TransactionResponseDTO) {
     this.transaction = transaction;
     this.userID = this.authService.getLoggedInUser();
-    this.currentStep = 2;
+    // this.currentStep = 2;
   }
 
   handleTradeAcceptedNotification(transaction: TransactionResponseDTO) {

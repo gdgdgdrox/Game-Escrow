@@ -109,7 +109,7 @@ export class TransactionStep1Component implements OnInit {
           next: (transaction: TransactionResponseDTO) => {
             this.onCreateTransaction.emit(transaction);
             console.log('creating new transaction');
-            // this.router.navigate(['/transaction-parent',transaction.transactionID]);
+            this.router.navigate(['/transaction-parent',transaction.transactionID]);
           },
           error: (error) => {
             console.log(error);
