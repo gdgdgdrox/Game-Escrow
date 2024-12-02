@@ -25,34 +25,47 @@
   <!-- Step Content -->
   <div class="step-content">
     <ng-container>
-      @if(currentStep === 1){ @if(transaction &&
-      transaction.transactionSteps.transactionStep1.status === 'completed'){
-      <app-transaction-step1-completed [transaction]="transaction">
-      </app-transaction-step1-completed>
+      @if(currentStep === 1){ 
+        @if(transaction && transaction.transactionSteps.transactionStep1.status === 'completed'){
+        <app-transaction-step1-completed [transaction]="transaction">
+        </app-transaction-step1-completed>
       } @else {
-      <app-transaction-step1></app-transaction-step1>
+        <app-transaction-step1></app-transaction-step1>
       } }
     </ng-container>
     <ng-container>
-      @if(currentStep === 2){ @if(userID === transaction.counterparty){
-      <app-transaction-step2-counterparty
-        [transaction]="transaction"
-      ></app-transaction-step2-counterparty>
-      } @else {
-      <app-transaction-step2-pending [transaction]="transaction">
-      </app-transaction-step2-pending>
+      @if(currentStep === 2){ 
+        @if(transaction.transactionSteps.transactionStep2.status === 'completed'){
+          <app-transaction-step2-completed
+          [transaction]="transaction"
+          ></app-transaction-step2-completed>
+        }
+        @else {
+          @if(userID === transaction.counterparty){
+          <app-transaction-step2-counterparty [transaction]="transaction"
+        ></app-transaction-step2-counterparty>
+        } @else {
+        <app-transaction-step2-pending [transaction]="transaction">
+        </app-transaction-step2-pending>
+        }
       } }
     </ng-container>
     <ng-container>
-      @if(currentStep === 3){ @if (userID === transaction.buyer){
-      <app-transaction-step3-buyer 
-      [transaction]="transaction">
-        >
-      </app-transaction-step3-buyer>
-      } @else {
-      <app-transaction-step3-seller
-        [transaction]="transaction"
-      ></app-transaction-step3-seller>
+      @if(currentStep === 3){ 
+        @if(transaction.transactionSteps.transactionStep3.status === 'completed'){
+          <app-transaction-step3-completed
+          [transaction]="transaction"
+          ></app-transaction-step3-completed>
+        }
+        @else {
+          @if (userID === transaction.buyer){
+          <app-transaction-step3-buyer [transaction]="transaction">>
+        </app-transaction-step3-buyer>
+        } @else {
+        <app-transaction-step3-seller
+          [transaction]="transaction"
+        ></app-transaction-step3-seller>
+        }
       } }
     </ng-container>
     <ng-container>

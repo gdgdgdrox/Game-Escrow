@@ -10,7 +10,13 @@ import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 })
 export class TransactionStep4BuyerComponent implements OnInit {
   @Input() transaction!: TransactionResponseDTO
+
   ngOnInit():void{
     console.log('step4-buyer init');
+  }
+
+  confirmItemReceived(): void{
+    console.log('buyer confirmed item received');
+    
   }
 }
