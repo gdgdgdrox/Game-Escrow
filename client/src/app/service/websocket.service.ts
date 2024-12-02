@@ -51,6 +51,20 @@ export class WebsocketService {
     });
   }
 
+  subscribeToStep4Topic(transactionID: string, onMessageReceived: (message: any) => void){
+    if (!this.stompClient || !this.stompClient.connected) {
+      console.error('WebSocket not connected. Cannot subscribe to topic.');
+      return;
+    }
+
+    const topic = `/topic/transaction/step4/${transactionID}`;
+    this.stompClient.subscribe(topic, (message: IMessage) => {
+      console.log(message);
+      const body = JSON.parse(message.body);
+      onMessageReceived(body as TransactionResponseDTO);
+    });
+  }
+
   disconnect(): void {
     if (this.stompClient) {
       this.stompClient.deactivate();

@@ -17,7 +17,7 @@ import com.escrowforgame.server.service.TransactionService;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/step1")
 public class TransactionStep1Controller {
 
     @Autowired

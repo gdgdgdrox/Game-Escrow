@@ -15,7 +15,7 @@ import com.escrowforgame.server.service.TransactionNotificationService;
 import com.escrowforgame.server.service.TransactionService;
 
 @RestController
-@RequestMapping("/api/transaction/step2/")
+@RequestMapping("/api/transaction/step2")
 public class TransactionStep2Controller {
 
     @Autowired
@@ -38,6 +38,8 @@ public class TransactionStep2Controller {
         else{
             // this check ensures that the person who accepted the trade is indeed the counterparty of that trade.
             // otherwise a user that is not involved in a transaction can deceptively accept a trade if he knows the transactionID
+
+            // TO DO: handle no JWT
             String jwt = authorizationHeader.substring(7);
             String userWhoSentAcceptedTheTrade = jwtService.extractUsername(jwt);
             String counterparty = transactionEntity.getCounterparty();
@@ -50,7 +52,7 @@ public class TransactionStep2Controller {
                     System.out.println("updated transaction entity" + transactionEntity.toString());
                     TransactionEntity latestTransactionEntity = transactionService.updateTransaction(transactionEntity);
                     // inform
-                    transactionNotificationService.notifyTransactionParticipants(transactionID, latestTransactionEntity);
+                    transactionNotificationService.notifyTransactionParticipants(latestTransactionEntity);
                     return ResponseEntity.ok(transactionEntity);
             }
                 

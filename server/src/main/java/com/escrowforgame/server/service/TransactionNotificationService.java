@@ -12,10 +12,19 @@ public class TransactionNotificationService {
      private SimpMessagingTemplate messagingTemplate;
 
 
-    public void notifyTransactionParticipants(String transaction, TransactionEntity transactionEntity) {
+    public void notifyTransactionParticipants(TransactionEntity transactionEntity) {
         messagingTemplate.convertAndSend(
             "/topic/transaction/" + transactionEntity.getTransactionID(),
             transactionEntity
         );
     }
+
+    public void notifySellerThatStep4IsCompleted(TransactionEntity transactionEntity) {
+        messagingTemplate.convertAndSend(
+            "/topic/transaction/step4" + transactionEntity.getTransactionID(),
+            transactionEntity
+        );
+    }
+
+
 }

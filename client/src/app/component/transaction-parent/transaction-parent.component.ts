@@ -3,7 +3,6 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { TransactionStep1Component } from './transaction-step1/transaction-step1.component';
 import { TransactionStep3BuyerComponent } from './transaction-step3-buyer/transaction-step3-buyer.component';
-import { TransactionStep5Component } from './transaction-step5/transaction-step5.component';
 import { AuthService } from '../../service/auth.service';
 import { TransactionStep2CounterpartyComponent } from './transaction-step2-counterparty/transaction-step2-counterparty.component';
 import { TransactionStep2PendingComponent } from './transaction-step2-pending/transaction-step2-pending.component';
@@ -19,6 +18,8 @@ import { TransactionSteps } from '../../dto/transaction-step';
 import { TransactionStateService } from '../../service/transaction-state.service';
 import { TransactionStep2CompletedComponent } from './transaction-step2-completed/transaction-step2-completed.component';
 import { TransactionStep3CompletedComponent } from './transaction-step3-completed/transaction-step3-completed.component';
+import { TransactionStep5BuyerComponent } from './transaction-step5-buyer/transaction-step5-buyer.component';
+import { TransactionStep5SellerComponent } from './transaction-step5-seller/transaction-step5-seller.component';
 
 @Component({
   selector: 'app-transaction-parent',
@@ -36,7 +37,8 @@ import { TransactionStep3CompletedComponent } from './transaction-step3-complete
     TransactionStep3CompletedComponent,
     TransactionStep4BuyerComponent,
     TransactionStep4SellerComponent,
-    TransactionStep5Component,
+    TransactionStep5BuyerComponent,
+    TransactionStep5SellerComponent
   ],
   templateUrl: './transaction-parent.component.html',
   styleUrl: './transaction-parent.component.css',

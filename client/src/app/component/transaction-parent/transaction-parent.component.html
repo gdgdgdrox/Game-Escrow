@@ -81,6 +81,19 @@
       ></app-transaction-step4-seller>
       } }
     </ng-container>
+    <ng-container>
+      @if(currentStep === 5){ 
+        @if (userID === transaction.buyer){
+      <app-transaction-step5-buyer 
+      [transaction]="transaction">
+        >
+      </app-transaction-step5-buyer>
+      } @else {
+      <app-transaction-step5-seller
+        [transaction]="transaction"
+      ></app-transaction-step5-seller>
+      } }
+    </ng-container>
   </div>
 
   <!-- Navigation Buttons -->

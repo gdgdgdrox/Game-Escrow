@@ -38,6 +38,7 @@ public class TransactionStep3Controller {
         if (transactionEntity == null) {
             return ResponseEntity.badRequest().body(null);
         } else {
+            // TO DO: handle no JWT
             String jwt = authorizationHeader.substring(7);
             String userWhoTransferredMoney = jwtService.extractUsername(jwt);
             String buyer = transactionEntity.getBuyer();
@@ -50,8 +51,7 @@ public class TransactionStep3Controller {
                     System.out.println("updated transaction entity" + transactionEntity.toString());
                     TransactionEntity latestTransactionEntity = transactionService.updateTransaction(transactionEntity);
                     // inform
-                    transactionNotificationService.notifyTransactionParticipants(transactionID,
-                            latestTransactionEntity);
+                    transactionNotificationService.notifyTransactionParticipants(latestTransactionEntity);
                     return ResponseEntity.ok(transactionEntity);
                 }
 
