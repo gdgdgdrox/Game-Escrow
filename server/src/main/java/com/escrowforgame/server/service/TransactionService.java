@@ -9,39 +9,35 @@ import com.escrowforgame.server.dto.TransactionDTO;
 import com.escrowforgame.server.entity.TransactionEntity;
 import com.escrowforgame.server.repository.TransactionRepository;
 
+import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
+
 @Service
 public class TransactionService {
- 
+
     @Autowired
     private TransactionRepository transactionRepository;
 
-    public TransactionEntity createTransaction(TransactionDTO transactionDTO){
+    public TransactionEntity createTransaction(TransactionDTO transactionDTO) throws DynamoDbException {
         TransactionEntity transactionEntity = transactionDTO.mapDTOtoEntity();
         System.out.println("Created entity: " + transactionEntity.toString());
-        try{
-            transactionRepository.createTransaction(transactionEntity);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        transactionRepository.createTransaction(transactionEntity);
         return transactionEntity;
     }
 
-    public List<TransactionEntity> getAllTransactionsByUser(String username){
+    public List<TransactionEntity> getAllTransactionsByUser(String username) {
         return this.transactionRepository.getAllTransactionsByUser(username);
     }
 
-    public TransactionEntity getTransactionByTransactionID(String transactionID){
+    public TransactionEntity getTransactionByTransactionID(String transactionID) {
         return this.transactionRepository.getTransactionByTransactionID(transactionID);
     }
 
-    public TransactionEntity updateTransaction(TransactionEntity transactionEntity){
+    public TransactionEntity updateTransaction(TransactionEntity transactionEntity) {
         return transactionRepository.updateTransaction(transactionEntity);
     }
 
     public TransactionEntity getTransactionState(String transactionID) {
         return getTransactionByTransactionID(transactionID);
     }
-
 
 }

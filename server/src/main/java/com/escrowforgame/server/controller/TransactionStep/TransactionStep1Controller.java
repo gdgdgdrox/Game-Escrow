@@ -1,7 +1,5 @@
 package com.escrowforgame.server.controller.TransactionStep;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +23,6 @@ public class TransactionStep1Controller {
     @PostMapping(value="/createTransaction")
     public ResponseEntity<TransactionEntity> createTransaction(@RequestBody TransactionDTO transactionDTO){
         System.out.println("In create transaction controller");
-        System.out.println(transactionDTO.toString());
         try{
             TransactionEntity createdTransaction = transactionService.createTransaction(transactionDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);

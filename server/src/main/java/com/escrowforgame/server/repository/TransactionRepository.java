@@ -18,32 +18,44 @@ import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.enhanced.dynamodb.model.Page;
 import software.amazon.awssdk.enhanced.dynamodb.model.PageIterable;
+import software.amazon.awssdk.enhanced.dynamodb.model.PutItemEnhancedRequest;
+import software.amazon.awssdk.enhanced.dynamodb.model.PutItemEnhancedResponse;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryEnhancedRequest;
 import software.amazon.awssdk.enhanced.dynamodb.model.ScanEnhancedRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 @Repository
 public class TransactionRepository {
-    @Autowired
-    private DynamoDbEnhancedClient dynamoDbEnhancedClient;
 
-    public DynamoDbTable<TransactionEntity> getTransactionTable() {
-        return dynamoDbEnhancedClient.table("Transaction", TableSchema.fromBean(TransactionEntity.class));
+    private final DynamoDbEnhancedClient dynamoDbEnhancedClient;
+    private final DynamoDbTable<TransactionEntity> dynamoDbTransactionTable;
+
+    public TransactionRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient) {
+        this.dynamoDbEnhancedClient = dynamoDbEnhancedClient;
+        this.dynamoDbTransactionTable = this.dynamoDbEnhancedClient.table(
+                "Transaction",
+                TableSchema.fromBean(TransactionEntity.class));
     }
 
-    public void createTransaction(TransactionEntity transactionEntity) {
-        System.out.printf("Inserting %s\n", transactionEntity.getTransactionID());
-        DynamoDbTable<TransactionEntity> transactionTable = getTransactionTable();
-        transactionTable.putItem(transactionEntity);
+    // public DynamoDbTable<TransactionEntity> getTransactionTable() {
+    // return dynamoDbEnhancedClient.table("Transaction",
+    // TableSchema.fromBean(TransactionEntity.class));
+    // }
+
+    public void createTransaction(TransactionEntity transactionEntity) throws DynamoDbException {
+        System.out.printf("Creating new Transaction Entity in DynamoDB with transaction ID=%s\n",
+                transactionEntity.getTransactionID());
+        dynamoDbTransactionTable.putItem(transactionEntity);
     }
 
     public TransactionEntity getTransactionByTransactionID(String transactionID) {
-        return getTransactionTable().getItem(Key.builder().partitionValue(transactionID).build());
+        return this.dynamoDbTransactionTable.getItem(Key.builder().partitionValue(transactionID).build());
     }
 
     public void getTransactionByCounterparty(String counterparty) {
-        DynamoDbIndex<TransactionEntity> counterpartyIndex = getTransactionTable().index("CounterpartyGSI");
+        DynamoDbIndex<TransactionEntity> counterpartyIndex = this.dynamoDbTransactionTable.index("CounterpartyGSI");
 
         QueryConditional queryConditional = QueryConditional.keyEqualTo(
                 Key.builder()
@@ -62,7 +74,6 @@ public class TransactionRepository {
     }
 
     public List<TransactionEntity> getAllTransactionsByUser(String username) {
-        DynamoDbTable<TransactionEntity> transactionTable = getTransactionTable();
         Expression filterExpression = Expression.builder()
                 .expression("#buyer = :buyerValue OR #seller = :sellerValue OR #counterparty = :counterpartyValue")
                 .putExpressionName("#buyer", "buyer")
@@ -79,14 +90,15 @@ public class TransactionRepository {
                 .build();
 
         // Perform the scan and return the results
-        PageIterable<TransactionEntity> pages = transactionTable.scan(scanRequest);
-        // List<TransactionDTO> transactions = pages.items().stream().map(item -> item.mapEntityToDTO()).collect(Collectors.toList());
-        List<TransactionEntity> transactions =  pages.items().stream().toList();
+        PageIterable<TransactionEntity> pages = this.dynamoDbTransactionTable.scan(scanRequest);
+        // List<TransactionDTO> transactions = pages.items().stream().map(item ->
+        // item.mapEntityToDTO()).collect(Collectors.toList());
+        List<TransactionEntity> transactions = pages.items().stream().toList();
         return transactions;
     }
 
-    public TransactionEntity updateTransaction(TransactionEntity transactionEntity){
-        return getTransactionTable().updateItem(transactionEntity);
+    public TransactionEntity updateTransaction(TransactionEntity transactionEntity) {
+        return this.dynamoDbTransactionTable.updateItem(transactionEntity);
     }
 
 }

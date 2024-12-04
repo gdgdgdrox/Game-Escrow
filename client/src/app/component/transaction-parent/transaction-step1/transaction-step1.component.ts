@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
+import { Component, OnInit,  } from '@angular/core';
 import { GameResponseDTO } from '../../../dto/game-response.dto';
 import { TransactionStep1Service } from '../../../service/transaction/transaction-step1.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -10,15 +9,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Router, RouterModule } from '@angular/router';
 import { GameAssetResponseDTO } from '../../../dto/game-asset-response.dto';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../service/auth.service';
 import { TransactionRequestDTO } from '../../../dto/transaction-request.dto';
-import { MatStepper } from '@angular/material/stepper';
 import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 import { TransactionStateService } from '../../../service/transaction-state.service';
 
@@ -42,7 +38,7 @@ export class TransactionStep1Component implements OnInit {
   gameAssets: GameAssetResponseDTO[] = [];
   selectedGame!: GameResponseDTO;
   selectedAsset!: GameAssetResponseDTO;
-  message!: string;
+  createTransactionStatusMessage = '';
   isProcessing = false;
 
   constructor(
@@ -98,7 +94,6 @@ export class TransactionStep1Component implements OnInit {
       this.isProcessing = true;
       const loggedInUser = this.authService.getLoggedInUser();
       if (!loggedInUser) {
-        this.message = 'timed out. please login again.';
         this.router.navigate(['/login']);
       } else {
         const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser);
@@ -107,11 +102,13 @@ export class TransactionStep1Component implements OnInit {
           .createNewTransaction(transactionRequestDTO)
           .subscribe({
             next: (transaction: TransactionResponseDTO) => {
+              this.createTransactionStatusMessage = 'Transaction successfully created!';
               this.transactionStateService.transaction = transaction;
               this.router.navigate(['/transaction-parent/step2',transaction.transactionID]);
             },
             error: (error) => {
               console.log(error);
+              this.createTransactionStatusMessage = 'Failed to create transaction due to unknown server error.'
             },
           });
       }
@@ -144,11 +141,11 @@ export class TransactionStep1Component implements OnInit {
       },
       price: formControls['price'].value,
     };
+    // delete non-relevant fields
     if (!newTransaction.game.assetName) {
       delete newTransaction.game.assetName;
     }
 
-    // Similarly, delete 'quantity' if it is empty or undefined
     if (!newTransaction.game.assetQuantity) {
       delete newTransaction.game.assetQuantity;
     }

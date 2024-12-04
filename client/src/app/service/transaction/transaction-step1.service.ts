@@ -16,13 +16,7 @@ export class TransactionStep1Service {
     return this.http.get<GameResponseDTO[]>(API_URL.GET_ALL_GAMES);
   }
 
-  createNewTransaction(
-    transaction: TransactionRequestDTO
-  ): Observable<TransactionResponseDTO> {
-    console.log(transaction);
-    return this.http.post<TransactionResponseDTO>(
-      API_URL.TRANSACTION_STEP1_CREATE_TRANSACTION,
-      transaction
-    );
+  createNewTransaction(transaction: TransactionRequestDTO): Observable<TransactionResponseDTO> {
+    return this.http.post<TransactionResponseDTO>(API_URL.TRANSACTION_STEP1_CREATE_TRANSACTION,transaction);
   }
 }
