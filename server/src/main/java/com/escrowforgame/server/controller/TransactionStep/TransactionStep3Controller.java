@@ -51,7 +51,7 @@ public class TransactionStep3Controller {
                     System.out.println("updated transaction entity" + transactionEntity.toString());
                     TransactionEntity latestTransactionEntity = transactionService.updateTransaction(transactionEntity);
                     // inform
-                    transactionNotificationService.notifyTransactionParticipants(latestTransactionEntity);
+                    transactionNotificationService.notifySellerThatStep3IsCompleted(latestTransactionEntity);
                     return ResponseEntity.ok(transactionEntity);
                 }
 

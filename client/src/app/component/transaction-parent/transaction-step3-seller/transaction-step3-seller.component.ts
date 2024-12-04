@@ -29,7 +29,7 @@ export class TransactionStep3SellerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('step 3 seller init');
     this.websocketService.connect();
-    const topic = `/topic/transaction/${this.transaction.transactionID}`
+    const topic = `/topic/transaction/step3/${this.transaction.transactionID}`
     this.websocketService.subscribeToTopic(
       topic,
       (transaction) => this.onMessageReceived(transaction)

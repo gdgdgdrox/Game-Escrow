@@ -1,0 +1,13 @@
+Registration
+validate fields
+check if username already taken
+collect phone number
+
+Login
+
+Order
+different tabs for transactions at different stages 
+
+Step 1
+Valdate if counterparty is registered user, otherwise dont create txn
+

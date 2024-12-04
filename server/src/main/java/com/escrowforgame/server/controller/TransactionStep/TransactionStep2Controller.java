@@ -52,7 +52,7 @@ public class TransactionStep2Controller {
                     System.out.println("updated transaction entity" + transactionEntity.toString());
                     TransactionEntity latestTransactionEntity = transactionService.updateTransaction(transactionEntity);
                     // inform
-                    transactionNotificationService.notifyTransactionParticipants(latestTransactionEntity);
+                    transactionNotificationService.notifyStep2Completed(latestTransactionEntity);
                     return ResponseEntity.ok(transactionEntity);
             }
                 
