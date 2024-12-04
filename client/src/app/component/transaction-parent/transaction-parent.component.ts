@@ -20,6 +20,7 @@ import { TransactionStep2CompletedComponent } from './transaction-step2-complete
 import { TransactionStep3CompletedComponent } from './transaction-step3-completed/transaction-step3-completed.component';
 import { TransactionStep5BuyerComponent } from './transaction-step5-buyer/transaction-step5-buyer.component';
 import { TransactionStep5SellerComponent } from './transaction-step5-seller/transaction-step5-seller.component';
+import { TransactionStep4CompletedComponent } from './transaction-step4-completed/transaction-step4-completed.component';
 
 @Component({
   selector: 'app-transaction-parent',
@@ -37,6 +38,7 @@ import { TransactionStep5SellerComponent } from './transaction-step5-seller/tran
     TransactionStep3CompletedComponent,
     TransactionStep4BuyerComponent,
     TransactionStep4SellerComponent,
+    TransactionStep4CompletedComponent,
     TransactionStep5BuyerComponent,
     TransactionStep5SellerComponent
   ],
@@ -51,9 +53,10 @@ export class TransactionParentComponent implements OnInit{
     { index: 1, label: 'Step 1', completed: false },
     { index: 2, label: 'Step 2', completed: false },
     { index: 3, label: 'Step 3', completed: false },
-    { index: 4, label: 'Step 4', completed: false }
+    { index: 4, label: 'Step 4', completed: false },
+    { index: 5, label: 'Step 5', completed: false }
   ];
-  loading: boolean = true; // Loading state
+  loading: boolean = true;
 
   constructor(
     private authService: AuthService,

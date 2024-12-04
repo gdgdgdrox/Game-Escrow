@@ -3,7 +3,7 @@ import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 import { TransactionStep4Service } from '../../../service/transaction/transaction-step4.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TransactionStateService } from '../../../service/transaction-state.service';
-import { Router } from '@angular/router';
+import { createUrlTreeFromSnapshot, Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-step4-buyer',
@@ -17,7 +17,7 @@ export class TransactionStep4BuyerComponent implements OnInit {
   constructor(
     private transactionStep4Service: TransactionStep4Service,
     private transactionStateService: TransactionStateService,
-    private router: Router  
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +38,9 @@ export class TransactionStep4BuyerComponent implements OnInit {
             transaction.transactionID,
           ]);
         },
-        error: (error: HttpErrorResponse) => {},
+        error: (error: HttpErrorResponse) => {
+          console.log(error);
+        },
       });
   }
 }

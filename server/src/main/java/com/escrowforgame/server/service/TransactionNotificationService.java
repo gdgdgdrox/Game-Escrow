@@ -20,8 +20,9 @@ public class TransactionNotificationService {
     }
 
     public void notifySellerThatStep4IsCompleted(TransactionEntity transactionEntity) {
+        System.out.println("Sending message to topic: /topic/transaction/step4/" + transactionEntity.getTransactionID());
         messagingTemplate.convertAndSend(
-            "/topic/transaction/step4" + transactionEntity.getTransactionID(),
+            "/topic/transaction/step4/" + transactionEntity.getTransactionID(),
             transactionEntity
         );
     }

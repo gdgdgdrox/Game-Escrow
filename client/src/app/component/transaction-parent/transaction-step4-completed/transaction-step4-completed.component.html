@@ -1,0 +1,12 @@
+@if(userID && transaction){
+    <h3>Completed</h3>
+    @if(userID === transaction.buyer){
+        <p>You confirmed the receipt of {{transaction.game.gameName}} item on {{transaction.transactionSteps.transactionStep4.completedDate}}</p>
+    }
+    @else if(userID === transaction.seller){
+        <p>Buyer {{transaction.buyer}} confirmed item was received on {{transaction.transactionSteps.transactionStep4.completedDate}}</p>
+    }
+}
+@else {
+    <p>Something went wrong..</p>
+}

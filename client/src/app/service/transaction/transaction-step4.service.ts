@@ -19,14 +19,10 @@ export class TransactionStep4Service {
     );
   }
 
-  sellerUploadEvidence(transactionID: string, formData: FormData): Observable<HttpEvent<TransactionResponseDTO>> {
+  sellerUploadEvidence(transactionID: string, formData: FormData): Observable<TransactionResponseDTO> {
     return this.http.post<TransactionResponseDTO>(
       `${API_URL.TRANSACTION_STEP4_SELLER_UPLOAD_EVIDENCE}/${transactionID}/seller`,
       formData,
-      {
-        reportProgress: true,
-        observe: 'events',
-      }
     );
   }
 }

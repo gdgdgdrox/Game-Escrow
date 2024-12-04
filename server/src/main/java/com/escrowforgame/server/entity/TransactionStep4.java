@@ -16,12 +16,19 @@ public class TransactionStep4 extends BaseTransactionStep {
     }
 
     private boolean buyerConfirmed;
-    private String sellerProofOfReleaseAwsS3Url;
+    private boolean sellerPhotoUploaded;
+    private String sellerPhotoEvidenceS3Key;
+
+    public void markStep4AsCompleted(){
+        this.setBuyerConfirmed(true);
+        this.setCompletedDate();
+        this.setStatus("completed");
+    }
 
     @Override
     public String toString() {
         return "TransactionStep4 \n[createdDate=" + getCreatedDate() + ", \ncompletedDate=" + getCompletedDate()
-                + ", \nstatus=" + getStatus() + ", \nbuyerConfirmed= " + isBuyerConfirmed() + ", \nS3 URL= "
-                + getSellerProofOfReleaseAwsS3Url() + "].";
+                + ", \nstatus=" + getStatus() + ", \nbuyerConfirmed= " + isBuyerConfirmed() + ", \nS3 key= "
+                + getSellerPhotoEvidenceS3Key() + ", sellerPhotoUploaded=" + isSellerPhotoUploaded() +"].";
     }
 }

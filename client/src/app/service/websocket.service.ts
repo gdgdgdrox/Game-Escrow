@@ -4,13 +4,15 @@ import SockJS from 'sockjs-client';
 import { TransactionResponseDTO } from '../dto/transaction-response.dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WebsocketService {
-
-  constructor() { }
-
-  private stompClient!: Client;
+  private stompClient?: Client;
+  private isConnected = false;
+  private pendingSubscriptions: {
+    topic: string;
+    callback: (message: any) => void;
+  }[] = [];
 
   connect(): void {
     if (this.stompClient && this.stompClient.connected) {
@@ -20,13 +22,27 @@ export class WebsocketService {
 
     const jwt = localStorage.getItem('jwt');
     this.stompClient = new Client({
-      webSocketFactory: () => new SockJS(`http://localhost:8080/websocket?token=${jwt}`), // SockJS connection
+      webSocketFactory: () =>
+        new SockJS(`http://localhost:8080/websocket?token=${jwt}`), // SockJS connection
       // debug: (msg: string) => console.log(msg),
       reconnectDelay: 0,
     });
 
     this.stompClient.onConnect = () => {
       console.log('Connected to WebSocket');
+      this.isConnected = true;
+
+      // process pending subscriptions
+      this.pendingSubscriptions.forEach(({ topic, callback }) => {
+        console.log(`processing pending subscription for ${topic}`);
+        this.subscribeToTopic(topic, callback);
+      });
+      this.pendingSubscriptions = []; // Clear pending subscriptions
+    };
+
+    this.stompClient.onDisconnect = () => {
+      console.log('Disconnected from WebSocket');
+      this.isConnected = false; // Reset state
     };
 
     this.stompClient.onStompError = (frame) => {
@@ -37,39 +53,61 @@ export class WebsocketService {
     this.stompClient.activate();
   }
 
-  subscribeToTopic(transactionID: string, onMessageReceived: (message: any) => void){
-    if (!this.stompClient || !this.stompClient.connected) {
-      console.error('WebSocket not connected. Cannot subscribe to topic.');
-      return;
+  subscribeToTopic(
+    topic: string,
+    onMessageReceived: (message: any) => void
+  ) {
+    console.log(`subscribing to ${topic}`);
+    if (this.stompClient && this.isConnected) {
+      this.stompClient.subscribe(topic, (message: IMessage) => {
+        console.log(message);
+        const body = JSON.parse(message.body);
+        onMessageReceived(body as TransactionResponseDTO);
+      });
+    } else {
+      console.error(
+        'WebSocket not connected. Queuing subscription for:',
+        topic
+      );
+      this.pendingSubscriptions.push({
+        topic,
+        callback: onMessageReceived,
+      });
     }
-
-    const topic = `/topic/transaction/${transactionID}`;
-    this.stompClient.subscribe(topic, (message: IMessage) => {
-      console.log(message);
-      const body = JSON.parse(message.body);
-      onMessageReceived(body as TransactionResponseDTO);
-    });
   }
 
-  subscribeToStep4Topic(transactionID: string, onMessageReceived: (message: any) => void){
-    if (!this.stompClient || !this.stompClient.connected) {
-      console.error('WebSocket not connected. Cannot subscribe to topic.');
-      return;
-    }
-
-    const topic = `/topic/transaction/step4/${transactionID}`;
-    this.stompClient.subscribe(topic, (message: IMessage) => {
-      console.log(message);
-      const body = JSON.parse(message.body);
-      onMessageReceived(body as TransactionResponseDTO);
-    });
-  }
+  // subscribeToStep4Topic(
+  //   transactionID: string,
+  //   onMessageReceived: (message: any) => void
+  // ) {
+  //   const topic = `/topic/transaction/step4/${transactionID}`;
+  //   console.log(`subscribing to ${topic}`);
+  //   if (this.stompClient && this.isConnected) {
+  //     console.log('Message received on topic:', topic);
+  //     this.stompClient.subscribe(topic, (message: IMessage) => {
+  //       console.log(message);
+  //       const body = JSON.parse(message.body);
+  //       onMessageReceived(body as TransactionResponseDTO);
+  //     });
+  //   } else {
+  //     console.error(
+  //       'WebSocket not connected. Queuing subscription for:',
+  //       topic
+  //     );
+  //     this.pendingSubscriptions.push({
+  //       transactionID,
+  //       callback: onMessageReceived,
+  //     });
+  //   }
+  // }
 
   disconnect(): void {
     if (this.stompClient) {
       this.stompClient.deactivate();
+      this.isConnected = false;
+      this.stompClient = undefined; // Reset the client
+      console.log('WebSocket client reset.');
       console.log('Disconnected from WebSocket');
     }
   }
-
 }

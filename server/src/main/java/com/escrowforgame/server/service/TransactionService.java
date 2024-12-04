@@ -39,5 +39,9 @@ public class TransactionService {
         return transactionRepository.updateTransaction(transactionEntity);
     }
 
+    public TransactionEntity getTransactionState(String transactionID) {
+        return getTransactionByTransactionID(transactionID);
+    }
+
 
 }

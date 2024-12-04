@@ -19,8 +19,9 @@ export class TransactionStep1Service {
   createNewTransaction(
     transaction: TransactionRequestDTO
   ): Observable<TransactionResponseDTO> {
+    console.log(transaction);
     return this.http.post<TransactionResponseDTO>(
-      API_URL.CREATE_TRANSACTION,
+      API_URL.TRANSACTION_STEP1_CREATE_TRANSACTION,
       transaction
     );
   }

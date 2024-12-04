@@ -12,7 +12,8 @@ export interface TransactionStep3 extends BaseTransactionStep {}
 
 export interface TransactionStep4 extends BaseTransactionStep {
   buyerConfirmed: boolean;
-  sellerConfirmed: boolean;
+  sellerPhotoUploaded: boolean;
+  sellerPhotoEvidenceS3Key: string;
 }
 
 export interface TransactionSteps {
@@ -20,5 +21,5 @@ export interface TransactionSteps {
     transactionStep2: TransactionStep2;
     transactionStep3: TransactionStep3;
     transactionStep4: TransactionStep4;
-  }
+}
   

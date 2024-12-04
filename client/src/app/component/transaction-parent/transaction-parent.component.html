@@ -4,7 +4,6 @@
 
 <div class="custom-stepper">
   <!-- Step Indicators -->
-  <p>{{ currentStep }}</p>
   <div class="step-indicators">
     @for(step of steps; track step.label){
     <div
@@ -70,16 +69,24 @@
     </ng-container>
     <ng-container>
       @if(currentStep === 4){ 
-        @if (userID === transaction.buyer){
-      <app-transaction-step4-buyer 
-      [transaction]="transaction">
-        >
-      </app-transaction-step4-buyer>
-      } @else {
-      <app-transaction-step4-seller
-        [transaction]="transaction"
-      ></app-transaction-step4-seller>
-      } }
+        @if(transaction.transactionSteps.transactionStep4.status === 'completed'){
+          <app-transaction-step4-completed
+          [transaction]="transaction"
+          ></app-transaction-step4-completed>
+        }
+        @else{
+          @if (userID === transaction.buyer){
+        <app-transaction-step4-buyer 
+        [transaction]="transaction">
+          >
+        </app-transaction-step4-buyer>
+        } @else {
+        <app-transaction-step4-seller
+          [transaction]="transaction"
+        ></app-transaction-step4-seller>
+        } }
+
+        }
     </ng-container>
     <ng-container>
       @if(currentStep === 5){ 

@@ -26,12 +26,8 @@ export class TransactionStep2PendingComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('step 2 pending init');
     this.websocketService.connect(); // Connect to the WebSocket
-    setTimeout(() => {
-      this.websocketService.subscribeToTopic(
-        this.transaction.transactionID,
-        (transaction) => this.onMessageReceived(transaction)
-      );
-    },3000)
+    const topic = `/topic/transaction/${this.transaction.transactionID}`;
+    this.websocketService.subscribeToTopic(topic, (transaction) => this.onMessageReceived(transaction));
   }
 
   ngOnDestroy(): void {

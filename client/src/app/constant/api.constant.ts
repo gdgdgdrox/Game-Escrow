@@ -4,7 +4,7 @@ export const API_URL = {
   REGISTRATION: `${baseURL}/register`,
   LOGIN: `${baseURL}/login`,
   GET_ALL_GAMES: `${baseURL}/games`,
-  CREATE_TRANSACTION: `${baseURL}/transaction/step1/createTransaction`,
+  TRANSACTION_STEP1_CREATE_TRANSACTION: `${baseURL}/transaction/step1/createTransaction`,
   GET_ALL_TRANSACTION_BY_USER: `${baseURL}/transactions`,
   GET_TRANSACTION_BY_TRANSACTION_ID: `${baseURL}/transaction`,
   TRANSACTION_STEP2_ACCEPT_TRADE: `${baseURL}/transaction/step2`,

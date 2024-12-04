@@ -1,10 +1,5 @@
 <p>Please release the in-game item to Buyer {{transaction.buyer}}</p>
 <p>You are encouraged to upload supporting evidence of your trade</p>
-<input type="file" (change)="onFileSelected($event)" />
-<button (click)="uploadFile()" [disabled]="!selectedFile">Upload</button>
-@if(uploadProgress && uploadProgress != 100){
-    <p>upload progress {{uploadProgress}}</p>
-}
-@else {
-    <p>upload completed!</p>
-}
+<input type="file" (change)="onFileSelected($event)" [disabled]="isFileAlreadyUploaded" />
+<button (click)="uploadFile()" [disabled]="!selectedFile || isFileAlreadyUploaded">Upload</button>
+<p>{{fileUploadMessage}}</p>

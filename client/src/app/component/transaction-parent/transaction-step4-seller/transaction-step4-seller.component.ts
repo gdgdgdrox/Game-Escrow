@@ -18,6 +18,8 @@ export class TransactionStep4SellerComponent implements OnInit {
   selectedFile: File | null = null;
   uploadProgress: number = 0;
   message: string | null = null;
+  fileUploadMessage = '';
+  isFileAlreadyUploaded: boolean = false;
 
   constructor(
     private websocketService: WebsocketService,
@@ -30,13 +32,19 @@ export class TransactionStep4SellerComponent implements OnInit {
   ngOnInit(): void {
     console.log('step 4 seller init');
     this.websocketService.connect();
-    setTimeout(() => {
-      this.websocketService.subscribeToStep4Topic(
-        this.transaction.transactionID,
-        (TransactionResponseDTO) =>
-          this.onMessageReceived(TransactionResponseDTO)
-      );
-    }, 3000);
+    const topic = `/topic/transaction/step4/${this.transaction.transactionID}`;
+    this.websocketService.subscribeToTopic(
+      topic,
+      (TransactionResponseDTO) => this.onMessageReceived(TransactionResponseDTO)
+    );
+    if (
+      this.transaction &&
+      this.transaction.transactionSteps.transactionStep4.sellerPhotoUploaded
+    ) {
+      this.isFileAlreadyUploaded =
+        this.transaction.transactionSteps.transactionStep4.sellerPhotoUploaded;
+      this.fileUploadMessage = 'upload success!';
+    }
   }
 
   onMessageReceived(transaction: TransactionResponseDTO): void {
@@ -65,15 +73,22 @@ export class TransactionStep4SellerComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
 
-      this.transactionStep4Service.sellerUploadEvidence(this.transaction.transactionID,formData)
-        .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          if (event.total) {
-            this.uploadProgress = Math.round((event.loaded / event.total) * 100);
-          }
-        } else if (event.type === HttpEventType.Response) {
-          console.log('File uploaded successfully!', event.body);
-        }
-      });
+      this.transactionStep4Service
+        .sellerUploadEvidence(this.transaction.transactionID, formData)
+        .subscribe({
+          next: (transaction: TransactionResponseDTO) => {
+            console.log(
+              transaction.transactionSteps.transactionStep4
+                .sellerPhotoEvidenceS3Key
+            );
+            if (
+              transaction.transactionSteps.transactionStep4.sellerPhotoUploaded
+            ) {
+              this.isFileAlreadyUploaded = true;
+              this.fileUploadMessage = 'upload success!';
+            }
+          },
+        });
     }
-}}
+  }
+}
