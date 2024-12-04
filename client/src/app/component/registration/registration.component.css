@@ -1,0 +1,56 @@
+/* Center the form and give it a max width */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 16px;
+  }
+  
+  .form-card {
+    width: 400px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  /* Adjust width of form fields */
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  /* Style for the submit button */
+  button {
+    width: 100%;
+    margin-top: 16px;
+  }
+  
+  /* Optional: Add some padding for the gender selection */
+  .gender-selection {
+    margin-bottom: 16px;
+  }
+  
+  mat-radio-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+
+  
+  .success {
+    color: green;
+    font-weight: bold;
+    background-color: #e9f7e5;
+    border: 1px solid green;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+    background-color: #f8d7da;
+    border: 1px solid red;
+  }
+  

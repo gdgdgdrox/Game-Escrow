@@ -16,7 +16,7 @@ public class RegistrationService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void saveUser(User user) throws UserAlreadyExistsException {
+    public void createNewUser(User user) throws UserAlreadyExistsException {
         if (userRepository.existsByUsername(user.getUsername())){
             throw new UserAlreadyExistsException();
         }

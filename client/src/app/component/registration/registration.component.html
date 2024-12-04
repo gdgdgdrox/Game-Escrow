@@ -1,21 +1,102 @@
 <h1>Registration</h1>
+<div class="form-container">
+  <form [formGroup]="registrationForm" (ngSubmit)="processRegistration()">
+    <mat-card class="form-card">
+      <!-- First Name -->
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+        />
+      </mat-form-field>
+
+      <!-- Last Name -->
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" id="lastName" formControlName="lastName" />
+        @if(registrationForm.get('lastName')?.touched &&
+        registrationForm.get('lastName')?.invalid) {
+        <mat-error>Last name is required.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Username -->
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" id="username" formControlName="username" />
+        @if(registrationForm.get('username')?.touched &&
+        registrationForm.get('username')?.invalid) {
+        <mat-error>
+          @if(registrationForm.get('username')?.hasError('required')) { Username
+          is required. }
+          @if(registrationForm.get('username')?.hasError('minlength')) {
+          Username must be at least 5 characters long. }
+          @if(registrationForm.get('username')?.hasError('maxlength')) {
+          Username must not exceed 15 characters. }
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" id="email" formControlName="email" />
+        @if(registrationForm.get('email')?.touched &&
+        registrationForm.get('email')?.invalid) {
+        <mat-error>
+          @if(registrationForm.get('email')?.hasError('required')) { Email is
+          required. } @if(registrationForm.get('email')?.hasError('email')) {
+          Invalid email format. }
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="password"
+          formControlName="password"
+        />
+        @if(registrationForm.get('password')?.touched &&
+        registrationForm.get('password')?.invalid) {
+        <mat-error>
+          @if(registrationForm.get('password')?.hasError('required')) { Password
+          is required. }
+          <!-- @if(registrationForm.get('password')?.hasError('passwordStrength')) {
+              Password must contain at least one uppercase letter, one number, and one special character.
+            } -->
+          @if(registrationForm.get('password')?.hasError('minlength')) {
+          Password must be at least 8 characters long. }
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Gender Selection -->
+      <div>
+        <mat-radio-group formControlName="sex">
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="registrationForm.invalid"
+      >
+        Sign Up
+      </button>
+    </mat-card>
+  </form>
+</div>
 <div>
-    <form [formGroup]="registrationForm" (submit)="processRegistration()">
-        <label for="username">Username</label>
-        <input type="text" id="username" formControlName="username" />
-        <br />
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" />
-        <br />
-        <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" />
-        <br />
-        <p>Gender</p>
-        <label for="male">male</label>
-        <input type="radio" id="male" value="male" formControlName="sex" />
-        <label for="female">female</label>
-        <input type="radio" id="female" value="female" formControlName="sex" />
-        <br />
-        <button type="submit">Sign Up</button>
-    </form>
+  <p [ngClass]="registrationStatusClass">{{ registrationStatusMessage }}</p>
 </div>

@@ -24,7 +24,7 @@ public class RegistrationController {
         System.out.println("In create user controller");
         System.out.println("Received user: " + user.toString());
         try{
-            userService.saveUser(user);
+            userService.createNewUser(user);
         }
         catch (UserAlreadyExistsException e){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("user already exists");
