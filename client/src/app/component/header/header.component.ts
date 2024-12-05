@@ -9,13 +9,13 @@ import {MatMenuModule} from '@angular/material/menu';
 
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-header',
   standalone: true,
   imports: [RouterModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css'
 })
-export class HomeComponent {
+export class HeaderComponent {
 
   constructor(private router: Router, private authService: AuthService){}
 

@@ -98,5 +98,8 @@
   </form>
 </div>
 <div>
-  <p [ngClass]="registrationStatusClass">{{ registrationStatusMessage }}</p>
+  <p>{{ registrationStatusMessage }}</p>
+  @if (registrationStatusMessage === 'User already exists'){
+    <a [routerLink]="['/login']">Login?</a>
+  }
 </div>

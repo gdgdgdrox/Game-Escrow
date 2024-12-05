@@ -21,7 +21,8 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatRadioModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule
   ],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css'
@@ -34,7 +35,7 @@ export class RegistrationComponent {
 
   constructor(
     private registrationService: RegistrationService,
-    private router: Router
+    private router: Router,    
   ){
     // initialize form
     this.registrationForm = new FormGroup({
