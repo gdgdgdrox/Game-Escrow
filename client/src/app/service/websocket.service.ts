@@ -45,7 +45,7 @@ export class WebsocketService {
       this.isConnected = false; // Reset state
     };
 
-    this.stompClient.onStompError = (frame) => {
+    this.stompClient.onStompError = (frame:any) => {
       console.error('Broker reported error: ' + frame.headers['message']);
       console.error('Details: ' + frame.body);
     };
