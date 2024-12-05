@@ -4,9 +4,10 @@ import { LoginComponent } from './component/login/login.component';
 import { TransactionParentComponent } from './component/transaction-parent/transaction-parent.component';
 import { HeaderComponent } from './component/header/header.component';
 import { OrdersComponent } from './component/orders/orders.component';
+import { HomeComponent } from './component/home/home.component';
 
 export const routes: Routes = [
-    {path: '', component: LoginComponent},
+    {path: '', component: HomeComponent},
     {path: 'register', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},
     {path: 'transaction-parent', component: TransactionParentComponent},

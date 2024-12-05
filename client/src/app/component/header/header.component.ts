@@ -13,7 +13,7 @@ import {MatMenuModule} from '@angular/material/menu';
   standalone: true,
   imports: [RouterModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
 

@@ -1,0 +1,23 @@
+// /* You can add global styles to this file, and also import other style files */
+// DEFAULT
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Global Background and Body Styling */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    // background: linear-gradient(90deg, #1e90ff, #8a2be2); /* Same as hero section */
+    background:  black;
+    color: white; /* Make sure text is readable on the gradient */
+    min-height: 100vh; /* Ensure it covers the full viewport */
+  }
+  
+  /* Optional: Ensure spacing around the page */
+  .page-container {
+    padding: 20px;
+  }
+  
+
+
+  

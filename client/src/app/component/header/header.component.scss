@@ -1,0 +1,20 @@
+/* Toolbar */
+// .toolbar-title {
+//   font-size: 24px;
+//   font-weight: bold;
+// }
+
+// Override the default style
+mat-toolbar {
+    background-color: black !important; /* Ensure the toolbar has a black background */
+    color: white; /* Set the text color to white for readability */
+  }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.logo {
+  height: 40px; /* Adjust size as needed */
+  max-height: 100%;
+}

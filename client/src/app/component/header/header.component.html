@@ -1,20 +1,28 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
+  <img src="assets/image/logo_game_escrow.png" alt="Game Escrow Logo" class="logo" />
+  <!-- Spacer to push items to the right -->
+  <span class="spacer"></span>
+  <button mat-button [routerLink]="['/login']">Login</button>
+  <button mat-stroked-button color="accent" [routerLink]="['/registration']">Sign Up</button>
+</mat-toolbar>
+
+<!-- OLD -->
+<!-- <mat-toolbar color="primary"> -->
     <!-- Home Icon -->
-    <button mat-icon-button routerLink="/header" aria-label="Home">
+    <!-- <button mat-icon-button routerLink="/header" aria-label="Home">
       <mat-icon>home</mat-icon>
     </button>
   
-    <!-- Spacer to push items to the right -->
-    <span class="spacer"></span>
+    <span class="spacer"></span> -->
   
     <!-- Person Icon with Dropdown Menu -->
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User Options">
+    <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User Options">
       <mat-icon>person</mat-icon>
     </button>
-  </mat-toolbar>
+  </mat-toolbar> -->
   
   <!-- Dropdown Menu -->
-  <mat-menu #menu="matMenu">
+  <!-- <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/account">
       <mat-icon>account_circle</mat-icon>
       <span>Account</span>
@@ -23,8 +31,9 @@
       <mat-icon>shopping_cart</mat-icon>
       <span [routerLink]="['/orders']">Orders</span>
     </button>
-  </mat-menu>
+  </mat-menu> -->
   
-<a [routerLink]="['/login']">login</a>
+<!-- <a [routerLink]="['/login']">login</a>
 <br>
-<a [routerLink]="['/transaction-parent']">trade</a>
+<a [routerLink]="['/transaction-parent']">trade</a> -->
+<!-- OLD -->
