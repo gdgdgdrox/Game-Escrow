@@ -11,6 +11,7 @@
   font-size: 48px;
   font-weight: bold;
   margin-bottom: 20px;
+  color:goldenrod
 }
 
 .intro-content p {
@@ -31,11 +32,6 @@
 
 .escrow-steps {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 30px 0;
-  overflow: visible; /* Ensure no clipping at the parent level */
 
 }
 
@@ -43,25 +39,29 @@
   text-align: center;
   flex: 1 ;
   border-radius: 8px;
-  padding: 20px;
+  padding: 0 10px;
   box-shadow: none; 
-  background-color: transparent;
+  background-color:transparent;
   color: #333;
-  overflow: visible; /* Ensure no clipping at the parent level */
 
 }
 
 .step h3 {
-  margin-top: 10px;
-  font-size: 12px;
+  // margin-top: 10px;
+  font-size: 20px;
   font-weight: 500;
+  color: white;
+
 }
 
-mat-icon {
-  font-size: 60px;
-  color: #8a2be2; /* Accent color */
+svg {
+  border: 3px solid #808080; /* Circle border around the SVG */
+  border-radius: 80%;
+  border-color: cyan;
+  padding: 20px;
 }
 
 mat-divider {
-  border-color: #8a2be2; /* Set the color of the divider */
+  border-color: cyan; /* Set the color of the divider */
 }
+
