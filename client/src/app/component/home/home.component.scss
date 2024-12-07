@@ -1,9 +1,5 @@
-
-
 .intro {
   text-align: center;
-  // background: linear-gradient(90deg, #1e90ff, #8a2be2);
-  // color: white;
   padding: 60px 20px;
 }
 
@@ -11,12 +7,21 @@
   font-size: 48px;
   font-weight: bold;
   margin-bottom: 20px;
-  color:goldenrod
+  color:white
 }
+
+ .highlight {
+    color: cyan; /* Bright green to make it stand out */
+    font-size: 52px; /* Slightly larger font */
+    font-weight: 900; /* Extra-bold weight */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow effect */
+    text-decoration:wavy
+  }
 
 .intro-content p {
   font-size: 18px;
   margin-bottom: 30px;
+  
 }
 
 .intro-content button {
@@ -65,3 +70,43 @@ mat-divider {
   border-color: cyan; /* Set the color of the divider */
 }
 
+.game-list {
+  margin: 20px;
+}
+
+.game-tile {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ensures consistent layout within tiles */
+  height: 100%;
+}
+
+.game-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover; /* Ensures the image fits within the given dimensions */
+  margin-bottom: 10px;
+}
+
+.game-title {
+  font-size: 16px;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+.game-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}

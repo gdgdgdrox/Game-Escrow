@@ -1,9 +1,8 @@
-<h1>Registration</h1>
 <div class="form-container">
   <form [formGroup]="registrationForm" (ngSubmit)="processRegistration()">
     <mat-card class="form-card">
       <!-- First Name -->
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>First Name</mat-label>
         <input
           matInput
@@ -14,7 +13,7 @@
       </mat-form-field>
 
       <!-- Last Name -->
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Last Name</mat-label>
         <input matInput type="text" id="lastName" formControlName="lastName" />
         @if(registrationForm.get('lastName')?.touched &&
@@ -24,7 +23,7 @@
       </mat-form-field>
 
       <!-- Username -->
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input matInput type="text" id="username" formControlName="username" />
         @if(registrationForm.get('username')?.touched &&
@@ -41,7 +40,7 @@
       </mat-form-field>
 
       <!-- Email -->
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput type="email" id="email" formControlName="email" />
         @if(registrationForm.get('email')?.touched &&
@@ -55,7 +54,7 @@
       </mat-form-field>
 
       <!-- Password -->
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input
           matInput

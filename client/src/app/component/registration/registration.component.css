@@ -1,56 +1,128 @@
 /* Center the form and give it a max width */
 .form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 16px;
-  }
-  
-  .form-card {
-    width: 400px;
-    padding: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
-  }
-  
-  /* Adjust width of form fields */
-  mat-form-field {
-    width: 100%;
-    margin-bottom: 16px;
-  }
-  
-  /* Style for the submit button */
-  button {
-    width: 100%;
-    margin-top: 16px;
-  }
-  
-  /* Optional: Add some padding for the gender selection */
-  .gender-selection {
-    margin-bottom: 16px;
-  }
-  
-  mat-radio-group {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 16px;
+  background-color: #000; /* Black background */
+}
 
-  
-  .success {
-    color: green;
-    font-weight: bold;
-    background-color: #e9f7e5;
-    border: 1px solid green;
-  }
-  
-  .error {
-    color: red;
-    font-weight: bold;
-    background-color: #f8d7da;
-    border: 1px solid red;
-  }
-  
+/* Style the form card */
+.form-card {
+  width: 400px;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: #1e1e2f; /* Dark card background */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  color: #ffffff; /* White text */
+}
+
+/* Adjust width of form fields */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.mat-form-field-flex {
+  background-color: #2a2a3c; /* Input field background */
+  border-radius: 6px;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex:hover {
+  background-color: #343447; /* Darker hover state */
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  border: 1px solid #ffffff; /* White border */
+  transition: border-color 0.3s;
+}
+
+.mat-form-field-appearance-fill.mat-focused .mat-form-field-flex {
+  border-color: #ffffff; /* White focus border */
+}
+
+/* Style the input text */
+input.mat-input-element {
+  color: #ffffff; /* Input text color */
+}
+
+.mat-label {
+  color: #9c9caf; /* Label color */
+}
+
+.mat-form-field.mat-focused .mat-label {
+  color: #ffffff; /* White for focused label */
+}
+
+/* Style error messages */
+mat-error {
+  color: #f44336; /* Red for errors */
+  font-size: 12px;
+}
+
+/* Style the submit button */
+button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  color: cyan; /* White text */
+  background-color: #00acc1; /* Primary button color */
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #008ba3; /* Darker hover color */
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background-color: white; /* Disabled button color */
+  color: #9c9caf;
+}
+
+/* Style the radio buttons */
+mat-radio-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+mat-radio-button {
+  color: #ffffff;
+}
+
+mat-radio-button.mat-radio-checked {
+  color: #ffffff; /* White for checked radio button */
+}
+
+/* Optional: Add some padding for the gender selection */
+.gender-selection {
+  margin-bottom: 16px;
+}
+
+/* Add a small hover effect to the card */
+.form-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Success and error message styling */
+.success {
+  color: #4caf50;
+  font-weight: bold;
+  background-color: #1e3b1e;
+  border: 1px solid #4caf50;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.error {
+  color: #f44336;
+  font-weight: bold;
+  background-color: #3c1e1e;
+  border: 1px solid #f44336;
+  padding: 8px;
+  border-radius: 6px;
+}
