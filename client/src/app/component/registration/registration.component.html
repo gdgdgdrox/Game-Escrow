@@ -93,12 +93,13 @@
       >
         Sign Up
       </button>
+      @if(registrationStatusMessage){
+        <div [ngClass]="{'success' : registrationSuccess, 'failure': !registrationSuccess}">
+          {{registrationStatusMessage}}
+        </div>
+      }
     </mat-card>
   </form>
 </div>
 <div>
-  <p>{{ registrationStatusMessage }}</p>
-  @if (registrationStatusMessage === 'User already exists'){
-    <a [routerLink]="['/login']">Login?</a>
-  }
 </div>

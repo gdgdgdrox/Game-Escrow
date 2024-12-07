@@ -110,19 +110,13 @@ mat-radio-button.mat-radio-checked {
 
 /* Success and error message styling */
 .success {
-  color: #4caf50;
-  font-weight: bold;
-  background-color: #1e3b1e;
-  border: 1px solid #4caf50;
-  padding: 8px;
-  border-radius: 6px;
+  text-align: center;
+  color: goldenrod;
+  padding: 10px 0px 10px 10px;
 }
 
-.error {
+.failure {
+  text-align: center;
   color: #f44336;
-  font-weight: bold;
-  background-color: #3c1e1e;
-  border: 1px solid #f44336;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 10px 0px 10px 10px;
 }

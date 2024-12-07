@@ -30,8 +30,7 @@ import { CommonModule } from '@angular/common';
 export class RegistrationComponent {
   registrationForm!: FormGroup;
   registrationStatusMessage = '';
-  registrationStatusClass = '';
-
+  registrationSuccess = false;
 
   constructor(
     private registrationService: RegistrationService,
@@ -58,7 +57,7 @@ export class RegistrationComponent {
         console.log(response.status);
         if (response.status === 201){
           this.registrationStatusMessage = 'Success!';
-          this.registrationStatusClass = 'success';
+          this.registrationSuccess = true;
           setTimeout(() => this.router.navigate(['/login']), 2000
         )
         }
@@ -72,7 +71,7 @@ export class RegistrationComponent {
         else{
           this.registrationStatusMessage = 'Something went wrong. Please try again later.';
         }
-        this.registrationStatusClass = 'error';
+        this.registrationSuccess = false;
       }
     });
 
