@@ -1,38 +1,53 @@
 .custom-stepper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .step-indicators {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .step-indicators div {
-    margin: 0 10px;
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .step-indicators div.active {
-    background-color: #3f51b5;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .step-indicators div.completed {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .step-indicators div.disabled {
-    background-color: #f5f5f5;
-    color: #999;
-    cursor: not-allowed;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-indicators {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.step-indicators div {
+  margin: 0 10px;
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Set a fixed height to make it a circle */
+  line-height: 40px; /* Center the text vertically */
+  text-align: center; /* Center the text horizontally */
+  border: 1px solid #ccc;
+  border-radius: 50%; /* Make it circular */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.step-indicators div.active {
+  background-color: black;
+  border: 3px solid cyan; /* Add cyan border for active step */
+  color: white;
+  font-weight: bold;
+}
+
+.step-indicators div.completed {
+  border: 1px solid white; /* Add cyan border for active step */
+  background-color: white;
+  color: black;
+}
+
+.step-indicators div.disabled {
+  background-color: black;
+  border: 1px dashed white; /* Add cyan border for active step */
+  color: #999;
+  cursor: not-allowed;
+}
+
+.step-content {
+  margin: 20px 0;
+  padding: 100px;
+  background: #1a1a1a; /* Dark background for contrast */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  /* color: white; */
+  /* font-size: 16px; */
+}

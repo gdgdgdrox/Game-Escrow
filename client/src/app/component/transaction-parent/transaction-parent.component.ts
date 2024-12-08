@@ -21,6 +21,7 @@ import { TransactionStep3CompletedComponent } from './transaction-step3-complete
 import { TransactionStep5BuyerComponent } from './transaction-step5-buyer/transaction-step5-buyer.component';
 import { TransactionStep5SellerComponent } from './transaction-step5-seller/transaction-step5-seller.component';
 import { TransactionStep4CompletedComponent } from './transaction-step4-completed/transaction-step4-completed.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-transaction-parent',
@@ -28,6 +29,7 @@ import { TransactionStep4CompletedComponent } from './transaction-step4-complete
   imports: [
     RouterModule,
     MatStepperModule,
+    MatButtonModule,
     TransactionStep1Component,
     TransactionStep1CompletedComponent,
     TransactionStep2CounterpartyComponent,
@@ -50,11 +52,11 @@ export class TransactionParentComponent implements OnInit{
   userID!: string;
   currentStep = 1;
   steps = [
-    { index: 1, label: 'Step 1', completed: false },
-    { index: 2, label: 'Step 2', completed: false },
-    { index: 3, label: 'Step 3', completed: false },
-    { index: 4, label: 'Step 4', completed: false },
-    { index: 5, label: 'Step 5', completed: false }
+    { index: 1, label: '1', completed: false },
+    { index: 2, label: '2', completed: false },
+    { index: 3, label: '3', completed: false },
+    { index: 4, label: '4', completed: false },
+    { index: 5, label: '5', completed: false }
   ];
   loading: boolean = true;
 

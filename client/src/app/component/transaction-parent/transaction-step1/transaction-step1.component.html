@@ -1,10 +1,11 @@
-<h3>Step 1</h3>
-<div>
+<h2>
+  Initiate Trade
+</h2><div>
   <form [formGroup]="form" (ngSubmit)="processNewTransaction()">
     <!-- TO DO: disable form if step 1 already completed -->
     <!-- <fieldset> -->
       <div>
-        <p>I am</p>
+        <p style="display: inline">I am</p>
         <mat-button-toggle-group
           appearance="standard"
           exclusive
@@ -15,7 +16,8 @@
         </mat-button-toggle-group>
       </div>
       <!-- Game Selection -->
-      <mat-form-field appearance="fill">
+       <br>
+      <mat-form-field appearance="outline">
         <mat-label>Select Game</mat-label>
         <mat-select formControlName="gameID">
           @for (game of games; track game.gameID){
@@ -28,7 +30,8 @@
   
       <!-- Asset selection -->
       @if(selectedGame){
-        <mat-form-field appearance="fill">
+        <br>
+        <mat-form-field appearance="outline">
         <mat-label for="gameAsset">Game Asset Type:</mat-label>
         <mat-select name="gameAsset" id="gameAsset" formControlName="assetType">
           <mat-option value=""  disabled >See</mat-option>
@@ -40,6 +43,7 @@
       }
       <br>
       @if(selectedAsset){
+        <br>
         <mat-label for="gameAssetUnit">{{selectedAsset.assetUnit}}</mat-label>
         @if (selectedAsset.assetUnit === 'quantity'){
           <input type="text" id="gameAssetUnit" formControlName='assetQuantity'>
@@ -61,7 +65,6 @@
     <!-- </fieldset> -->
 </form>
 </div>
-  <button type="button" [routerLink]="['/header']">header</button>
   <div>
     <p>{{createTransactionStatusMessage}}</p>
   </div>
