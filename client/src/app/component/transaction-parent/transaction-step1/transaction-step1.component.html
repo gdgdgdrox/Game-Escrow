@@ -41,28 +41,34 @@
         </mat-select>
       </mat-form-field>
       }
-      <br>
+      <!-- <br> -->
       @if(selectedAsset){
+          <mat-form-field appearance="outline">
+            <mat-label for="gameAssetUnit">{{selectedAsset.assetUnit | titlecase}}</mat-label>
+            @if (selectedAsset.assetUnit === 'quantity'){
+              <input matInput type="text" id="gameAssetUnit" formControlName='assetQuantity'>
+            }
+            @else if (selectedAsset.assetUnit === 'name'){
+              <input matInput type="text" id="gameAssetUnit" formControlName='assetName'>
+            }
+          </mat-form-field>
         <br>
-        <mat-label for="gameAssetUnit">{{selectedAsset.assetUnit}}</mat-label>
-        @if (selectedAsset.assetUnit === 'quantity'){
-          <input type="text" id="gameAssetUnit" formControlName='assetQuantity'>
-        }
-        @else if (selectedAsset.assetUnit === 'name'){
-          <input type="text" id="gameAssetUnit" formControlName='assetName'>
-        }
+        <mat-form-field appearance="outline">
+          <mat-label>Amount</mat-label>
+          <input matInput type="number" formControlName="price" placeholder="0" />
+          <span matTextPrefix>$&nbsp;</span>
+        </mat-form-field>
         <br>
-        <mat-label for="price">for </mat-label>
-        <input type="number" id="price" formControlName="price">
-        <br>
-        <mat-label for="counterparty">with </mat-label>
-        <input type="text" id="counterparty" formControlName="counterparty">
+        <mat-form-field appearance="outline">
+          <mat-label>{{form.controls['transactionType'].value === 'buy' ? 'Seller Name' : 'Buyer Name'}}</mat-label>
+          <input matInput type="text" id="counterparty" formControlName="counterparty">
+        </mat-form-field>
       }
-  
-      <button mat-raised-button color="primary" type="submit" 
-      [disabled]="isProcessing"
-      >Submit</button>
-    <!-- </fieldset> -->
+      <br>
+      <div id="btn-container">
+        <button mat-stroked-button id="submit-btn" type="submit" [disabled]="isProcessing">Submit</button>
+      </div>
+
 </form>
 </div>
   <div>

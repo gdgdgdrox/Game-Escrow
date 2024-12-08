@@ -17,6 +17,8 @@ import { AuthService } from '../../../service/auth.service';
 import { TransactionRequestDTO } from '../../../dto/transaction-request.dto';
 import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 import { TransactionStateService } from '../../../service/transaction-state.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-transaction-step1',
@@ -28,6 +30,8 @@ import { TransactionStateService } from '../../../service/transaction-state.serv
     MatSelectModule,
     RouterModule,
     ReactiveFormsModule,
+    CommonModule,
+    MatButtonModule
   ],
   templateUrl: './transaction-step1.component.html',
   styleUrl: './transaction-step1.component.css',

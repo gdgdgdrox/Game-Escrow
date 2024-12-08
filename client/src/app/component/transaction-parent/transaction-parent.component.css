@@ -43,11 +43,23 @@
 }
 
 .step-content {
+  position: relative; 
   margin: 20px 0;
   padding: 100px;
-  background: #1a1a1a; /* Dark background for contrast */
+  padding-top: 80px;
+  background: #1a1a1a; 
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  /* color: white; */
-  /* font-size: 16px; */
 }
+
+
+/* .step-content {
+  position: relative; 
+  margin: 20px 0;
+  padding: 100px; 
+  padding-top: 20px; 
+  background: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+} */
+

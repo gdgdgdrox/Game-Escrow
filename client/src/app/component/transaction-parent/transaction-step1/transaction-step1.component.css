@@ -1,8 +1,23 @@
 h2 {
-    text-align:center
+  text-align: center;
+  margin-top: 0; 
+  color: #ffffff;
+  font-size: 24px;
 }
+
 
 p {
     display: inline-block;
     padding-right: 10px;
+}
+
+#btn-container {
+    display: flex;
+    justify-content: center;
+  }
+
+#btn-container button{
+    width: 100%;
+    color:black;
+    background-color: cyan
 }
