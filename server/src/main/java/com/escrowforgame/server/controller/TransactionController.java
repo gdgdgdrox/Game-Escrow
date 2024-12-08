@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.escrowforgame.server.dto.TransactionDTO;
 import com.escrowforgame.server.entity.TransactionEntity;
 import com.escrowforgame.server.service.TransactionService;
 

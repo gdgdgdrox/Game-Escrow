@@ -1,19 +1,19 @@
 h2 {
   text-align: center;
-  margin-top: 0; 
+  margin-top: 0;
   color: #ffffff;
   font-size: 24px;
 }
 
 p {
-    display: inline-block;
-    padding-right: 10px;
+  display: inline-block;
+  padding-right: 10px;
 }
 
-#btn-container button{
-    width: 100%;
-    color:black;
-    background-color: cyan
+#btn-container button {
+  width: 100%;
+  color: black;
+  background-color: cyan;
 }
 
 #btn-container button:disabled {
@@ -21,12 +21,11 @@ p {
   color: #9c9caf;
 }
 
-
 .spinner-container {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   z-index: 1000;
 }
 
@@ -40,3 +39,14 @@ p {
   z-index: 999;
 }
 
+.success-msg {
+  margin-top: 5px;
+  color: goldenrod;
+  text-align: center;
+}
+
+.error-msg {
+  margin-top: 5px;
+  color: red;
+  text-align: center;
+}

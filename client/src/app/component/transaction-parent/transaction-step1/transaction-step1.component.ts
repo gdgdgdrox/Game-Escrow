@@ -9,6 +9,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Router, RouterModule } from '@angular/router';
 import { GameAssetResponseDTO } from '../../../dto/game-asset-response.dto';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
+
 import {
   FormControl,
   FormGroup,
@@ -21,6 +23,7 @@ import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 import { TransactionStateService } from '../../../service/transaction-state.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { finalize } from 'rxjs/internal/operators/finalize';
 
 @Component({
   selector: 'app-transaction-step1',
@@ -33,7 +36,7 @@ import { MatButtonModule } from '@angular/material/button';
     RouterModule,
     ReactiveFormsModule,
     CommonModule,
-    MatButtonModule, MatProgressSpinnerModule
+    MatButtonModule, MatProgressSpinnerModule,MatIconModule
   ],
   templateUrl: './transaction-step1.component.html',
   styleUrl: './transaction-step1.component.css',
@@ -105,15 +108,22 @@ export class TransactionStep1Component implements OnInit {
         const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser);
         console.log('creating new transaction');
         this.transactionStep1Service
-          .createNewTransaction(transactionRequestDTO)
+          .createNewTransaction(transactionRequestDTO).pipe(
+            finalize(() => {
+              this.isProcessing = false;
+            }))
           .subscribe({
-            next: (transaction: TransactionResponseDTO) => {
-              setTimeout(() => {
-                this.createTransactionStatusMessage = 'Transaction successfully created!';
+            next: (transaction: TransactionResponseDTO | null) => {
+              if (transaction){
+                this.createTransactionStatusMessage = 'Success !';
                 this.transactionStateService.transaction = transaction;
-                this.isProcessing = false;
-                this.router.navigate(['/transaction-parent/step2',transaction.transactionID]);
-              }, 3000)
+                setTimeout(() => {
+                  this.router.navigate(['/transaction-parent/step2',transaction.transactionID]);
+                }, 3000)
+              }
+              else{
+                this.createTransactionStatusMessage = `${transactionRequestDTO.counterparty} is not a registered user. Unable to proceed.`
+              }
             },
             error: (error) => {
               console.log(error);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
-import { TransactionService } from '../../service/transaction/transaction.service';
+import { TransactionSharedService } from '../../service/transaction/transaction-shared.service';
 import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TransactionStateService } from '../../service/transaction-state.service';
@@ -19,7 +19,7 @@ export class OrdersComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private transactionService: TransactionService,
+    private transactionSharedService: TransactionSharedService,
     private transactionStateService: TransactionStateService
   ) {}
 
@@ -27,7 +27,7 @@ export class OrdersComponent implements OnInit {
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login']);
     }
-    this.transactionService.getAllTransactionsByUser(
+    this.transactionSharedService.getAllTransactionsByUser(
       this.authService.getLoggedInUser()
     ).subscribe(
       {next: (response: TransactionResponseDTO[]) => {
@@ -47,8 +47,6 @@ export class OrdersComponent implements OnInit {
       console.log('shared service state updated. navigating to parent');
       this.router.navigate(['/transaction-parent',`step${transaction.currentStep}`,transactionID])
     }
-  //   this.transactionService
-  //     .getTransactionByTransactionID(transactionID);
-      
+
   }
 }

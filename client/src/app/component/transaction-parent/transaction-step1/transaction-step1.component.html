@@ -1,85 +1,127 @@
-<h2>
-  Initiate Trade
-</h2><div>
+<h2>Initiate Trade</h2>
+<div>
   <form [formGroup]="form" (ngSubmit)="processNewTransaction()">
-    <!-- TO DO: disable form if step 1 already completed -->
-    <!-- <fieldset> -->
-      <div>
-        <p style="display: inline">I am</p>
-        <mat-button-toggle-group
-          appearance="standard"
-          exclusive
-          formControlName="transactionType"
-        >
-          <mat-button-toggle value="buy">Buying</mat-button-toggle>
-          <mat-button-toggle value="sell">Selling</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-      <!-- Game Selection -->
-       <br>
-      <mat-form-field appearance="outline">
-        <mat-label>Select Game</mat-label>
-        <mat-select formControlName="gameID">
-          @for (game of games; track game.gameID){
-          <mat-option [value]="game.gameID">
-            {{ game.gameName }}
-          </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-  
-      <!-- Asset selection -->
-      @if(selectedGame){
-        <br>
-        <mat-form-field appearance="outline">
-        <mat-label for="gameAsset">Game Asset Type:</mat-label>
-        <mat-select name="gameAsset" id="gameAsset" formControlName="assetType">
-          <mat-option value=""  disabled >See</mat-option>
-          @for(gameAsset of selectedGame.gameAssets; track gameAsset){
-          <mat-option [value]="gameAsset.assetType">{{ gameAsset.assetType }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      }
-      <!-- <br> -->
-      @if(selectedAsset){
-          <mat-form-field appearance="outline">
-            <mat-label for="gameAssetUnit">{{selectedAsset.assetUnit | titlecase}}</mat-label>
-            @if (selectedAsset.assetUnit === 'quantity'){
-              <input matInput type="text" id="gameAssetUnit" formControlName='assetQuantity'>
-            }
-            @else if (selectedAsset.assetUnit === 'name'){
-              <input matInput type="text" id="gameAssetUnit" formControlName='assetName'>
-            }
-          </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline">
-          <mat-label>Amount</mat-label>
-          <input matInput type="number" formControlName="price"/>
-          <span matTextPrefix>$&nbsp;</span>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline">
-          <mat-label>{{form.controls['transactionType'].value === 'buy' ? 'Seller Name' : 'Buyer Name'}}</mat-label>
-          <input matInput type="text" id="counterparty" formControlName="counterparty">
-        </mat-form-field>
-      }
-      <br>
-      <div id="btn-container">
-        <button mat-stroked-button id="submit-btn" type="submit" [disabled]=" form.invalid||isProcessing">Submit</button>
-      </div>
-      
-      <div>
-        @if(isProcessing){
-            <div class="spinner-overlay"></div>
-            <div class="spinner-container">
-              <mat-spinner color="accent"></mat-spinner>
-          </div>        
+    <!-- Buy / Sell -->
+    <div>
+      <p style="display: inline">I am</p>
+      <mat-button-toggle-group
+        appearance="standard"
+        exclusive
+        formControlName="transactionType"
+      >
+        <mat-button-toggle value="buy">Buying</mat-button-toggle>
+        <mat-button-toggle value="sell">Selling</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <!-- Game Selection -->
+    <br />
+    <mat-form-field appearance="outline">
+      <mat-label>Select Game</mat-label>
+      <mat-select formControlName="gameID">
+        @for (game of games; track game.gameID){
+        <mat-option [value]="game.gameID">
+          {{ game.gameName }}
+        </mat-option>
         }
-      </div>
+      </mat-select>
+    </mat-form-field>
 
-</form>
+    <!-- Asset selection -->
+    @if(selectedGame){
+    <br />
+    <mat-form-field appearance="outline">
+      <mat-label for="gameAsset">Game Asset Type:</mat-label>
+      <mat-select name="gameAsset" id="gameAsset" formControlName="assetType">
+        <!-- <mat-option value="" disabled>See</mat-option> -->
+        @for(gameAsset of selectedGame.gameAssets; track gameAsset){
+        <mat-option [value]="gameAsset.assetType">{{
+          gameAsset.assetType
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    }
+
+    <!-- Asset Unit -->
+    @if(selectedAsset){
+    <mat-form-field appearance="outline">
+      <mat-label for="gameAssetUnit">{{selectedAsset.assetUnit | titlecase}}</mat-label>
+      @if (selectedAsset.assetUnit === 'quantity'){
+      <input
+        matInput
+        type="text"
+        id="gameAssetUnit"
+        formControlName="assetQuantity"
+      />
+      } @else if (selectedAsset.assetUnit === 'name'){
+      <input
+        matInput
+        type="text"
+        id="gameAssetUnit"
+        formControlName="assetName"
+      />
+    }
+  </mat-form-field>
+    <br />
+
+    <!-- Transaction Value -->
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input matInput type="number" formControlName="price" />
+      <span matTextPrefix>$&nbsp;</span>
+    </mat-form-field>
+    <br />
+
+    <!-- Counterparty Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>{{
+        form.controls["transactionType"].value === "buy"
+          ? "Seller Name"
+          : "Buyer Name"
+      }}</mat-label>
+      <input
+        matInput
+        type="text"
+        id="counterparty"
+        formControlName="counterparty"
+      />
+    </mat-form-field>
+    }
+    <br />
+
+    <!-- Submit button -->
+    <div id="btn-container">
+      <button
+        mat-stroked-button
+        id="submit-btn"
+        type="submit"
+        [disabled]="form.invalid || isProcessing"
+      >
+        Submit
+      </button>
+    </div>
+
+    <div>
+      @if(isProcessing){
+      <div class="spinner-overlay"></div>
+      <div class="spinner-container">
+        <mat-spinner color="accent"></mat-spinner>
+      </div>
+      }
+    </div>
+    @if(createTransactionStatusMessage){
+      @if (createTransactionStatusMessage === 'Success !'){
+        <div class="success-msg">
+          <p>{{ createTransactionStatusMessage }}</p>
+        </div>
+      }
+      @else {
+        <div class="error-msg">
+          <mat-icon>error</mat-icon>
+          <p>{{ createTransactionStatusMessage }}</p>
+        </div>
+      }
+    }
+  </form>
 </div>
-  <div>
-    <p>{{createTransactionStatusMessage}}</p>
-  </div>
+<div></div>

@@ -7,7 +7,7 @@ import { AuthService } from '../../service/auth.service';
 import { TransactionStep2CounterpartyComponent } from './transaction-step2-counterparty/transaction-step2-counterparty.component';
 import { TransactionStep2PendingComponent } from './transaction-step2-pending/transaction-step2-pending.component';
 import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
-import { TransactionService } from '../../service/transaction/transaction.service';
+import { TransactionSharedService } from '../../service/transaction/transaction-shared.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TransactionStep3SellerComponent } from './transaction-step3-seller/transaction-step3-seller.component';
 import { TransactionStep4BuyerComponent } from './transaction-step4-buyer/transaction-step4-buyer.component';
@@ -62,7 +62,7 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
 
   constructor(
     private authService: AuthService,
-    private transactionService: TransactionService,
+    private transactionSharedService: TransactionSharedService,
     private route: ActivatedRoute,
     private transactionStateService: TransactionStateService
 
@@ -85,7 +85,7 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
     }
     else if (transactionID && !this.transaction){
       console.log(`getting transaction ${transactionID}`);
-      this.transactionService
+      this.transactionSharedService
         .getTransactionByTransactionID(transactionID)
         .subscribe({
           next: (transaction: TransactionResponseDTO) => {

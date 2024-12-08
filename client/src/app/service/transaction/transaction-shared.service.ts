@@ -4,14 +4,20 @@ import { Injectable } from '@angular/core';
 import { API_URL } from '../../constant/api.constant';
 import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TransactionService {
+export class TransactionSharedService {
   transaction!: TransactionResponseDTO;
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  checkIfUserExists(username: string): Observable<boolean>{
+    const httpParams = new HttpParams().set('username',username);
+    return this.http.get<boolean>(API_URL.CHECK_IF_USER_EXISTS,{params:httpParams});
+  }
 
   getAllTransactionsByUser(username: string){
     const httpParams = new HttpParams().set('username',username);
