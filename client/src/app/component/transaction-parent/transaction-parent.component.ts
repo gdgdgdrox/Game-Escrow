@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { TransactionStep1Component } from './transaction-step1/transaction-step1.component';
@@ -47,7 +47,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './transaction-parent.component.html',
   styleUrl: './transaction-parent.component.css',
 })
-export class TransactionParentComponent implements OnInit{
+export class TransactionParentComponent implements OnInit, OnDestroy{
   transaction!: TransactionResponseDTO;
   userID!: string;
   currentStep = 1;
@@ -68,6 +68,9 @@ export class TransactionParentComponent implements OnInit{
 
 
   ) {}
+  ngOnDestroy(): void {
+    this.transactionStateService.transaction = null;
+  }
 
   ngOnInit(): void { 
     console.log('transaction-parent init');

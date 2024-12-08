@@ -4,6 +4,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -16,6 +17,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatIconModule,
     MatDividerModule,
     MatGridListModule,
+    RouterModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

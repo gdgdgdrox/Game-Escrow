@@ -55,7 +55,7 @@
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Amount</mat-label>
-          <input matInput type="number" formControlName="price" placeholder="0" />
+          <input matInput type="number" formControlName="price"/>
           <span matTextPrefix>$&nbsp;</span>
         </mat-form-field>
         <br>
@@ -66,7 +66,16 @@
       }
       <br>
       <div id="btn-container">
-        <button mat-stroked-button id="submit-btn" type="submit" [disabled]="isProcessing">Submit</button>
+        <button mat-stroked-button id="submit-btn" type="submit" [disabled]=" form.invalid||isProcessing">Submit</button>
+      </div>
+      
+      <div>
+        @if(isProcessing){
+            <div class="spinner-overlay"></div>
+            <div class="spinner-container">
+              <mat-spinner color="accent"></mat-spinner>
+          </div>        
+        }
       </div>
 
 </form>

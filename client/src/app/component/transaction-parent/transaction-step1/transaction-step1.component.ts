@@ -8,10 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Router, RouterModule } from '@angular/router';
 import { GameAssetResponseDTO } from '../../../dto/game-asset-response.dto';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../service/auth.service';
 import { TransactionRequestDTO } from '../../../dto/transaction-request.dto';
@@ -31,7 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
     RouterModule,
     ReactiveFormsModule,
     CommonModule,
-    MatButtonModule
+    MatButtonModule, MatProgressSpinnerModule
   ],
   templateUrl: './transaction-step1.component.html',
   styleUrl: './transaction-step1.component.css',
@@ -52,13 +54,13 @@ export class TransactionStep1Component implements OnInit {
     private transactionStateService: TransactionStateService
   ) {
     this.form = new FormGroup({
-      transactionType: new FormControl<string>('buy'),
+      transactionType: new FormControl<string>('buy', [Validators.required]),
       gameID: new FormControl<number>(0),
       assetType: new FormControl<string>(''),
       assetName: new FormControl<string>(''),
       assetQuantity: new FormControl<string>(''),
-      price: new FormControl<number>(0),
-      counterparty: new FormControl<string>(''),
+      price: new FormControl<number>(0, [Validators.required, Validators.min(1)]),
+      counterparty: new FormControl<string>('', [Validators.required]),
     });
   }
 
@@ -106,9 +108,12 @@ export class TransactionStep1Component implements OnInit {
           .createNewTransaction(transactionRequestDTO)
           .subscribe({
             next: (transaction: TransactionResponseDTO) => {
-              this.createTransactionStatusMessage = 'Transaction successfully created!';
-              this.transactionStateService.transaction = transaction;
-              this.router.navigate(['/transaction-parent/step2',transaction.transactionID]);
+              setTimeout(() => {
+                this.createTransactionStatusMessage = 'Transaction successfully created!';
+                this.transactionStateService.transaction = transaction;
+                this.isProcessing = false;
+                this.router.navigate(['/transaction-parent/step2',transaction.transactionID]);
+              }, 3000)
             },
             error: (error) => {
               console.log(error);
