@@ -1,0 +1,9 @@
+.tabs-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  mat-tab-group {
+    width: 100%;   
+  }
+  

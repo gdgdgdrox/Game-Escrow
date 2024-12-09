@@ -26,39 +26,39 @@ export class HomeComponent {
   games = [
     {
       title: 'Maplestory',
-      image: 'assets/image/home_component/games/maplestory.png'
+      image: 'assets/image/games/maplestory.png'
     },
     {
       title: 'Clash Of Clans',
-      image: 'assets/image/home_component/games/clash_of_clans.jpeg'
+      image: 'assets/image/games/clash_of_clans.jpeg'
     },
     {
       title: 'CS GO',
-      image: 'assets/image/home_component/games/cs_go.png'
+      image: 'assets/image/games/cs_go.png'
     },
     {
       title: 'Dota',
-      image: 'assets/image/home_component/games/dota.png'
+      image: 'assets/image/games/dota.png'
     },
     {
       title: 'Genshin Impact',
-      image: 'assets/image/home_component/games/genshin_impact.png'
+      image: 'assets/image/games/genshin_impact.png'
     },
     {
       title: 'Honkai Star Rail',
-      image: 'assets/image/home_component/games/honkai_star_rail.jpg'
+      image: 'assets/image/games/honkai_star_rail.jpg'
     },
     {
       title: 'Pokemon GO',
-      image: 'assets/image/home_component/games/pokemon_go.png'
+      image: 'assets/image/games/pokemon_go.png'
     },
     {
       title: 'Team Fortress 2',
-      image: 'assets/image/home_component/games/team_fortress_2.png'
+      image: 'assets/image/games/team_fortress_2.png'
     },
     {
       title: 'Wuthering Waves',
-      image: 'assets/image/home_component/games/wuthering_waves.png'
+      image: 'assets/image/games/wuthering_waves.png'
     },
 
   ]

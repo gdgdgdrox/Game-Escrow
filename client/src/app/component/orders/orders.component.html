@@ -1,6 +1,25 @@
-<p>orders works!</p>
-<ul>
-    @for(transaction of transactions; track transaction.transactionID){
-        <li (click)="getTransactionDetails(transaction.transactionID)">Transaction ID: {{transaction.transactionID}}</li>
-    }
-</ul>
+<div class="tabs-container">
+  <mat-tab-group>
+    <mat-tab label="Pending Action">
+      <mat-list role="list">
+        @for(transaction of transactionsPendingUserAction; track transaction.transactionID){
+            <mat-list-item role="listitem">
+                <span>{{transaction.transactionID}}</span>
+                <span>{{transaction.game.gameName}}</span>
+                <span>{{transaction.currentStep}}</span>
+            </mat-list-item>
+        }
+      </mat-list>
+    </mat-tab>
+    <mat-tab label="Pending Other Party">
+      <mat-list-item role="listitem">Item 1</mat-list-item>
+      <mat-list-item role="listitem">Item 2</mat-list-item>
+      <mat-list-item role="listitem">Item 3</mat-list-item>
+    </mat-tab>
+    <mat-tab label="Completed">
+      <mat-list-item role="listitem">Item 1</mat-list-item>
+      <mat-list-item role="listitem">Item 2</mat-list-item>
+      <mat-list-item role="listitem">Item 3</mat-list-item>
+    </mat-tab>
+  </mat-tab-group>
+</div>
