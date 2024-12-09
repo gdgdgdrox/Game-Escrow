@@ -28,7 +28,7 @@ public class TransactionStep1Controller {
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
         }
         catch (DynamoDbException d){
-            System.err.println(d.getStackTrace());
+            d.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
