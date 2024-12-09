@@ -101,7 +101,7 @@ export class TransactionStep1Component implements OnInit {
 
     processNewTransaction() {
       this.isProcessing = true;
-      const loggedInUser = this.authService.getLoggedInUser();
+      const loggedInUser = this.authService.getLoggedInUsername();
       if (!loggedInUser) {
         this.router.navigate(['/login']);
       } 
@@ -110,7 +110,7 @@ export class TransactionStep1Component implements OnInit {
         this.isProcessing = false;
         return;
       }
-        const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser);
+        const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser!);
         console.log('creating new transaction');
         this.transactionStep1Service
           .createNewTransaction(transactionRequestDTO).pipe(

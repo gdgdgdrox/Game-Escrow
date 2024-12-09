@@ -16,7 +16,7 @@ export class TransactionStep2CompletedComponent implements OnInit{
   constructor(private authService: AuthService){}
   
   ngOnInit(): void {
-    this.userID = this.authService.getLoggedInUser();
+    this.userID = this.authService.getLoggedInUsername()!;
   }
 
 }

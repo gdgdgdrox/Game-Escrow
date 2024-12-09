@@ -1,50 +1,94 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { API_URL } from '../constant/api.constant';
 import {jwtDecode} from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private tokenKey = 'jwt';
+  private usernameSubject = new BehaviorSubject<string | null>(null);
+  public username$ = this.usernameSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(username:string,password:string){
     return this.http.post<string>(API_URL.LOGIN, {username,password}, {observe: 'response', responseType:'text' as 'json'})
     .pipe(tap(response => {
       const jwt = response.body;
+      console.log(response.body);
       if (jwt){
-        localStorage.setItem('jwt',jwt);
+        this.saveToken(jwt);
+        this.usernameSubject.next(this.getLoggedInUsername());
       }
     }))
   }
 
-  isLoggedIn(): boolean{
-    const jwt = localStorage.getItem('jwt');
-    if (!jwt){
-      return false;
+  saveToken(token:string){
+    localStorage.setItem(this.tokenKey,token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  clearToken(): void{
+    localStorage.removeItem(this.tokenKey);
+  }
+
+  isAuthenticated(): boolean {
+    const jwt = this.getToken();
+    if (jwt){
+      return this.isTokenExpired(jwt);
     }
-    const decodedJwt = jwtDecode(jwt);
+    return false;
+  }
+
+  isTokenExpired(token:string){
+    const decodedJwt = jwtDecode(token);
     const expiresAt = decodedJwt.exp ? decodedJwt.exp * 1000 : null;
-    return expiresAt ? Date.now() < expiresAt : false; 
+    return expiresAt ? Date.now() < expiresAt : false;  
   }
 
   logout(): void{
-    console.log('logging out');
-    localStorage.removeItem('jwt');
+    this.clearToken();
+    this.usernameSubject.next('');
+    this.router.navigate(['/']);
   }
 
-  getLoggedInUser(): string{
-    const jwt = localStorage.getItem('jwt');
-    if (!jwt){
-      return '';
+  
+
+  
+
+  // isLoggedIn(): boolean{
+  //   const jwt = localStorage.getItem('jwt');
+  //   if (!jwt){
+  //     return false;
+  //   }
+  //   const decodedJwt = jwtDecode(jwt);
+  //   const expiresAt = decodedJwt.exp ? decodedJwt.exp * 1000 : null;
+  //   return expiresAt ? Date.now() < expiresAt : false; 
+  // }
+
+  // logout(): void{
+  //   console.log('logging out');
+  //   localStorage.removeItem('jwt');
+  //   this.usernameSubject.next(null);
+  // }
+
+  getLoggedInUsername(): string | null{
+    if (this.isAuthenticated()){
+      const jwt = this.getToken()!;
+      const decodedJwt = jwtDecode(jwt);
+      return decodedJwt.sub!;
     }
-    const decodedJwt = jwtDecode(jwt);
-    return decodedJwt.sub!;
-    
+    return null;
   }
+    
 
 
 }

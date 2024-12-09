@@ -4,38 +4,21 @@
   />
   <!-- Spacer to push items to the right -->
   <span class="spacer"></span>
-  <button mat-button id="login-btn" [routerLink]="['/login']">Login</button>
-  <button mat-stroked-button id="signup-btn" [routerLink]="['/register']">Sign Up</button>
+  @if(loggedInUser){
+    <div>
+      <button id="user-btn" mat-stroked-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>person</mat-icon>
+        {{loggedInUser}}
+      </button>
+      <mat-menu #userMenu="matMenu" yPosition="below">
+        <button mat-menu-item [routerLink]="['/orders']">My Trades</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
+    <button id="trade-btn" mat-stroked-button [routerLink]="['/transaction-parent']">Trade</button>
+  }
+  @else {
+    <button mat-button id="login-btn" [routerLink]="['/login']">Login</button>
+    <button mat-stroked-button id="signup-btn" [routerLink]="['/register']">Sign Up</button>
+  }
 </mat-toolbar>
-
-<!-- OLD -->
-<!-- <mat-toolbar color="primary"> -->
-    <!-- Home Icon -->
-    <!-- <button mat-icon-button routerLink="/header" aria-label="Home">
-      <mat-icon>home</mat-icon>
-    </button>
-  
-    <span class="spacer"></span> -->
-  
-    <!-- Person Icon with Dropdown Menu -->
-    <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User Options">
-      <mat-icon>person</mat-icon>
-    </button>
-  </mat-toolbar> -->
-  
-  <!-- Dropdown Menu -->
-  <!-- <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/account">
-      <mat-icon>account_circle</mat-icon>
-      <span>Account</span>
-    </button>
-    <button mat-menu-item routerLink="/orders">
-      <mat-icon>shopping_cart</mat-icon>
-      <span [routerLink]="['/orders']">Orders</span>
-    </button>
-  </mat-menu> -->
-  
-<!-- <a [routerLink]="['/login']">login</a>
-<br>
-<a [routerLink]="['/transaction-parent']">trade</a> -->
-<!-- OLD -->

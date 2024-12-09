@@ -1,14 +1,48 @@
-<div>
-    <p>Buyer: {{transaction.buyer}}</p>
-    <p>Seller: {{transaction.seller}}</p>
-    <p>Game: {{transaction.game.gameName}}</p>
-    <p>Game Asset: {{transaction.game.assetType}}</p>
+<div class="container">
+    <h2>Review & Accept</h2>
+    <p>Transaction ID = 
+        <span>
+            {{transaction.transactionID}}
+        </span>
+    </p>
+    <p>Buyer = 
+        <span>
+            {{transaction.buyer}}        
+        </span>
+    </p>
+    <p>Seller = 
+        <span>
+            {{transaction.seller}}        
+        </span>
+    </p>
+    <p>Game =
+        <span>
+            {{transaction.game.gameName}}
+        </span> 
+    </p>
+    <p>Game Asset = 
+        <span>
+            {{transaction.game.assetType}}
+        </span>
+    </p>
     @if(transaction.game.assetName){
-        <p>Asset Name: {{transaction.game.assetName}}</p>
+        <p>Asset Name = 
+            <span>
+                {{transaction.game.assetName}}
+            </span>
+        </p>
     }
     @else if(transaction.game.assetQuantity){
-        <p>Asset Quantity: {{transaction.game.assetQuantity}}</p>        
+        <p>Asset Quantity =
+            <span>
+                {{transaction.game.assetQuantity}}
+            </span>
+        </p>
     }
-    <p>Price: {{transaction.price}}</p>
+    <p>Price = 
+        <span>
+            SGD {{transaction.price}}
+        </span>
+    </p>
     <button type="button" (click)="acceptTrade()">ACCEPT</button>
 </div>

@@ -30,7 +30,7 @@ export class LoginComponent {
       next: (response: HttpResponse<string>) => {
         this.loginOutcomeMessage = 'Success!';
         this.loginSuccess = true;
-        setTimeout(() => this.router.navigate(['/transaction-parent']), 1000);
+        setTimeout(() => this.router.navigate(['']), 1000);
       },
       error: (error: HttpErrorResponse) => {
         this.loginOutcomeMessage = 'Login failed';

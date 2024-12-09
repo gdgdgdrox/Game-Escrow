@@ -24,19 +24,19 @@ export class OrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
-    }
-    this.transactionSharedService.getAllTransactionsByUser(
-      this.authService.getLoggedInUser()
-    ).subscribe(
-      {next: (response: TransactionResponseDTO[]) => {
-        this.transactions = response;
-      },
-      error: error => {
-        console.error(error);
-      }}
-    )
+    // if (!this.authService.isLoggedIn()) {
+    //   this.router.navigate(['/login']);
+    // }
+    // this.transactionSharedService.getAllTransactionsByUser(
+    //   this.authService.getLoggedInUser()
+    // ).subscribe(
+    //   {next: (response: TransactionResponseDTO[]) => {
+    //     this.transactions = response;
+    //   },
+    //   error: error => {
+    //     console.error(error);
+    //   }}
+    // )
   }
 
   getTransactionDetails(transactionID: string) {

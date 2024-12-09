@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -15,19 +15,23 @@ import {MatMenuModule} from '@angular/material/menu';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
+  loggedInUser: string | null = '';
 
   constructor(private router: Router, private authService: AuthService){}
 
-  startTrade(): void{
-    console.log('user clicked trade button');
-    if (this.authService.isLoggedIn()){
-      console.log('user is logged in. navigating to transaction parent');
-      this.router.navigateByUrl('/transaction-parent');
-    }
-    else{
-      console.log('user is not logged in. navigating to login page');
-      this.router.navigateByUrl('/login');
-    }
+  ngOnInit(): void {
+    this.authService.username$.subscribe(
+      {
+        next: (username) => {
+          this.loggedInUser = username;
+        }
+      }
+    )
+    this.loggedInUser = this.authService.getLoggedInUsername();
+  }
+
+  logout(){
+    this.authService.logout();
   }
 }
