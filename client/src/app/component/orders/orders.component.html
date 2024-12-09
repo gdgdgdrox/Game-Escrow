@@ -2,12 +2,28 @@
   <mat-tab-group>
     <mat-tab label="Pending Action">
       <mat-list role="list">
-        @for(transaction of transactionsPendingUserAction; track transaction.transactionID){
-            <mat-list-item role="listitem">
-                <span>{{transaction.transactionID}}</span>
-                <span>{{transaction.game.gameName}}</span>
-                <span>{{transaction.currentStep}}</span>
-            </mat-list-item>
+        @for(transaction of transactionsPendingUserAction; track
+        transaction.transactionID){
+        <mat-list-item role="listitem" class="list-item"  [routerLink]="['/transaction-parent',transaction.transactionID]">
+          <div class="list-content">
+            <img
+              [src]="'assets/image/games/' + transaction.game.gameName + '.png'"
+              alt="game"
+              class="game-image"
+            />
+            <div class="transaction-info">
+              <span class="game-name">{{ transaction.game.gameName }}</span>
+              <span class="transaction-id"
+                >Transaction ID {{ transaction.transactionID }}</span
+              >
+              <span class="counterparty">{{
+                transaction.buyer === loggedInUser
+                  ? transaction.seller
+                  : transaction.buyer
+              }}</span>
+            </div>
+          </div>
+        </mat-list-item>
         }
       </mat-list>
     </mat-tab>

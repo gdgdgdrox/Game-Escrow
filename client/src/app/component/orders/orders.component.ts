@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TransactionSharedService } from '../../service/transaction/transaction-shared.service';
 import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
 import { TransactionStateService } from '../../service/transaction-state.service';
@@ -12,11 +12,12 @@ import {MatListModule} from '@angular/material/list';
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [MatTabsModule,MatListModule],
+  imports: [MatTabsModule,MatListModule, RouterModule],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
 export class OrdersComponent implements OnInit {
+  loggedInUser: string | null = null;
   transactions: TransactionResponseDTO[] = [];
   transactionsPendingUserAction: TransactionResponseDTO[] = [];
   // transactionsPendingUserPayment: TransactionResponseDTO[] = [];
@@ -26,14 +27,14 @@ export class OrdersComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private transactionSharedService: TransactionSharedService,
-    private transactionStateService: TransactionStateService
+    private transactionStateService: TransactionStateService,
   ) {}
 
   ngOnInit(): void {
     console.log('init');
-    this.transactionSharedService.getAllTransactionsByUser(
-      this.authService.getLoggedInUsername()!
-    ).subscribe(
+    this.loggedInUser = this.authService.getLoggedInUsername();
+    this.transactionSharedService.getAllTransactionsByUser(this.loggedInUser!)
+    .subscribe(
       {next: (response: TransactionResponseDTO[]) => {
         this.transactions = response;
         this.arrangeTransactionsBasedOnStatus();
