@@ -104,7 +104,12 @@ export class TransactionStep1Component implements OnInit {
       const loggedInUser = this.authService.getLoggedInUser();
       if (!loggedInUser) {
         this.router.navigate(['/login']);
-      } else {
+      } 
+      if (loggedInUser === this.form.controls['counterparty'].value){
+        this.createTransactionStatusMessage = 'You cannot start a trade with yourself.';
+        this.isProcessing = false;
+        return;
+      }
         const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser);
         console.log('creating new transaction');
         this.transactionStep1Service
@@ -122,7 +127,7 @@ export class TransactionStep1Component implements OnInit {
                 }, 3000)
               }
               else{
-                this.createTransactionStatusMessage = `${transactionRequestDTO.counterparty} is not a registered user. Unable to proceed.`
+                this.createTransactionStatusMessage = `${transactionRequestDTO.counterparty} is not a registered user.`
               }
             },
             error: (error) => {
@@ -130,7 +135,6 @@ export class TransactionStep1Component implements OnInit {
               this.createTransactionStatusMessage = 'Failed to create transaction due to unknown server error.'
             },
           });
-      }
     }
 
 

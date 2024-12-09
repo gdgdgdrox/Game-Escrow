@@ -30,7 +30,7 @@
     @if(selectedGame){
     <br />
     <mat-form-field appearance="outline">
-      <mat-label for="gameAsset">Game Asset Type:</mat-label>
+      <mat-label for="gameAsset">Game Asset Type</mat-label>
       <mat-select name="gameAsset" id="gameAsset" formControlName="assetType">
         <!-- <mat-option value="" disabled>See</mat-option> -->
         @for(gameAsset of selectedGame.gameAssets; track gameAsset){
@@ -67,7 +67,7 @@
     <!-- Transaction Value -->
     <mat-form-field appearance="outline">
       <mat-label>Amount</mat-label>
-      <input matInput type="number" formControlName="price" />
+      <input matInput type="number" formControlName="price" min="0" />
       <span matTextPrefix>$&nbsp;</span>
     </mat-form-field>
     <br />
