@@ -1,4 +1,11 @@
-.inline-icon {
+h2 {
+    text-align: center;
+    color: #FDF5E6;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #FFEB99;
+  }
+
+.person-icon {
     vertical-align: middle;
 }
 

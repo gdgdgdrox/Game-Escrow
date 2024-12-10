@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 import { TransactionStep2Service } from '../../../service/transaction/transaction-step2.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { TransactionStateService } from '../../../service/transaction-state.service';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @Component({
   selector: 'app-transaction-step2-counterparty',
   standalone: true,
-  imports: [],
+  imports: [MatButtonModule],
   templateUrl: './transaction-step2-counterparty.component.html',
   styleUrl: './transaction-step2-counterparty.component.css',
 })
