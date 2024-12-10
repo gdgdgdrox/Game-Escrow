@@ -1,0 +1,30 @@
+.step3-buyer-container img{
+    display: block;
+    margin: 0 auto;
+}
+
+h2{
+    text-align: center;
+    color: #FDF5E6;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #FFEB99;
+}
+
+.price{
+    font-weight: bold;
+
+}
+
+
+
+.transfer-btn{    
+    width: 100%;
+    margin: 20px 0px;
+    color:white;
+}
+
+.transfer-btn:hover{
+    background-color:black;
+    border-color: cyan
+
+}

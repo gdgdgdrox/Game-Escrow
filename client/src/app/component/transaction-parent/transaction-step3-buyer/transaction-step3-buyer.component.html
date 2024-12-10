@@ -1,6 +1,10 @@
-<p>Please transfer {{transaction.price}} via PayNow QR Code</p>
-<button (click)="getQR()">Get QR</button>
-@if (qrPic){
-    <img [src]="qrPic" alt="qr picture">
-    <button type="button" (click)="onTransfer()">I have transferred</button>
-}
+<div class="step3-buyer-container">
+  <h2>Pay Escrow</h2>
+  <p>Please transfer 
+      <span class="price">
+        SGD {{ transaction.price }}
+    </span>
+     to us via PayNow</p>
+  <img [src]="qrPic" alt="qr"/>
+  <button mat-stroked-button class="transfer-btn" type="button" (click)="onTransfer()">Done</button>
+</div>
