@@ -1,4 +1,3 @@
-import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { TransactionSharedService } from '../../service/transaction/transaction-shared.service';
@@ -6,14 +5,15 @@ import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
 import { TransactionStateService } from '../../service/transaction-state.service';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 
 
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [MatTabsModule,MatListModule, RouterModule, DatePipe],
+  imports: [MatTabsModule,MatListModule, RouterModule, DatePipe, CommonModule],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
@@ -21,7 +21,6 @@ export class OrdersComponent implements OnInit {
   loggedInUser: string | null = null;
   transactions: TransactionResponseDTO[] = [];
   transactionsPendingUserAction: TransactionResponseDTO[] = [];
-  // transactionsPendingUserPayment: TransactionResponseDTO[] = [];
   transactionsCompleted: TransactionResponseDTO[] = [];
 
   constructor(
@@ -29,6 +28,7 @@ export class OrdersComponent implements OnInit {
     private router: Router,
     private transactionSharedService: TransactionSharedService,
     private transactionStateService: TransactionStateService,
+
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +73,10 @@ export class OrdersComponent implements OnInit {
       return new Date(b.transactionSteps.transactionStep1.createdDate).getTime() - new Date(a.transactionSteps.transactionStep1.createdDate).getTime();
     });
 
-    this.transactionsCompleted = this.transactions.filter(transaction => transaction.currentStep === 5);
+    this.transactionsCompleted = this.transactions.filter(transaction => transaction.currentStep === 5)
+     .sort((a:TransactionResponseDTO, b:TransactionResponseDTO) => {
+      return new Date(b.transactionSteps.transactionStep4.completedDate).getTime() - new Date(a.transactionSteps.transactionStep4.completedDate).getTime();
+    });
   }
 
   getTransactionDetails(transactionID: string) {
