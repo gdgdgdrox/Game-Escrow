@@ -1,0 +1,21 @@
+h2{
+    text-align: center;
+    color: #FDF5E6;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #FFEB99;
+
+}
+
+.container p {
+    font-size: 16px; /* Slightly larger text for better readability */
+}
+.container p span {
+    font-weight: bold; /* Highlight values */
+    color: #fff; /* Maintain contrast with the background */
+}
+
+#accept-btn{
+    width: 100%;
+    background-color: cyan;
+    color:black
+}

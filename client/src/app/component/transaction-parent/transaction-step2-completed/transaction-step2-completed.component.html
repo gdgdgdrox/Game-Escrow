@@ -1,2 +1,8 @@
-<h3>Completed</h3>
-<p>{{userID === transaction.counterparty ? 'You' : transaction.counterparty}} had accepted the trade.</p>
+<h2>Completed</h2>
+<p>
+    <mat-icon class="person-icon">person</mat-icon>
+    <span>
+        {{userID === transaction.counterparty ? 'You' : transaction.counterparty}} 
+    </span>
+     accepted the trade on {{transaction.transactionSteps.transactionStep2.completedDate | date}}
+</p>
