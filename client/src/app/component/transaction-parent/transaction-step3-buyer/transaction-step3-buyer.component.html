@@ -8,3 +8,11 @@
   <img [src]="qrPic" alt="qr"/>
   <button mat-stroked-button class="transfer-btn" type="button" (click)="onTransfer()">Done</button>
 </div>
+<div>
+  @if(isVerifyingTransfer){
+  <div class="spinner-overlay"></div>
+  <div class="spinner-container">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+  }
+</div>
