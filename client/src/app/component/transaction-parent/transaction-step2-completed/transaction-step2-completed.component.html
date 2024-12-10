@@ -1,8 +1,12 @@
 <h2>Completed</h2>
-<p>
-    <mat-icon class="person-icon">person</mat-icon>
-    <span>
-        {{userID === transaction.counterparty ? 'You' : transaction.counterparty}} 
-    </span>
-     accepted the trade on {{transaction.transactionSteps.transactionStep2.completedDate | date}}
-</p>
+@if(userID === transaction.counterparty){
+    <p>You accepted the trade on {{transaction.transactionSteps.transactionStep2.completedDate | date}}
+    </p>
+}
+@else {
+    <p>
+        <mat-icon class="person-icon">person</mat-icon>
+        {{transaction.counterparty}}
+        accepted the trade on {{transaction.transactionSteps.transactionStep2.completedDate | date}}
+    </p>
+}

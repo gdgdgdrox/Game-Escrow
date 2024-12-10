@@ -1,2 +1,21 @@
-<h3>Completed</h3>
-<p>We have received SGD {{transaction.price}} from {{userID === transaction.buyer ? 'you' : transaction.seller}}</p>
+<h2>Completed</h2>
+@if(userID === transaction.buyer){
+    <p>We received 
+        <span class="price">SGD {{transaction.price}}</span>
+        from you on 
+        {{transaction.transactionSteps.transactionStep3.completedDate | date}}
+    </p>
+}
+@else {
+    <p>We received 
+        <span class="price">SGD {{transaction.price}}</span>
+        from 
+        <mat-icon class="person-icon">person</mat-icon> 
+        <span class="buyer">
+            {{transaction.buyer}}
+        </span>
+        on {{transaction.transactionSteps.transactionStep2.completedDate | date }}
+    </p>
+<p>
+}
+    
