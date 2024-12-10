@@ -3,7 +3,7 @@
   <form [formGroup]="form" (ngSubmit)="processNewTransaction()">
     <!-- Buy / Sell -->
     <div>
-      <p style="display: inline">I am</p>
+      <p>I am</p>
       <mat-button-toggle-group
         appearance="standard"
         exclusive
@@ -19,9 +19,10 @@
       <mat-label>Select Game</mat-label>
       <mat-select formControlName="gameID">
         @for (game of games; track game.gameID){
-        <mat-option [value]="game.gameID">
-          {{ game.gameName }}
-        </mat-option>
+          <div>
+            <!-- <img [src]="game.gameImagePath" alt="game_image" > -->
+            <mat-option [value]="game.gameID">{{ game.gameName }}</mat-option>
+          </div>
         }
       </mat-select>
     </mat-form-field>

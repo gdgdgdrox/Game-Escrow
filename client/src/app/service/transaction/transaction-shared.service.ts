@@ -5,6 +5,7 @@ import { API_URL } from '../../constant/api.constant';
 import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { GameResponseDTO } from '../../dto/game-response.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,25 +25,13 @@ export class TransactionSharedService {
     return this.http.get<TransactionResponseDTO[]>(API_URL.GET_ALL_TRANSACTION_BY_USER, {params: httpParams});
   }
 
-  // getTransactionByTransactionID(transactionID: string){
-  //   const httpParams = new HttpParams().set('transactionID', transactionID);
-  //   this.http.get<TransactionEntity>(API_URL.GET_TRANSACTION_BY_TRANSACTION_ID, {params:httpParams})
-  //   .subscribe({
-  //     next: (response:TransactionEntity) => {
-  //       console.log(response);
-  //       this.transaction = response as TransactionEntity;
-  //       this.router.navigate(['/transaction-parent'])
-  //     },
-  //     error: (error: HttpErrorResponse) => {
-  //       console.error(error);
-  //     },
-  //   });
-  // }
-
   getTransactionByTransactionID(transactionID: string){
     const httpParams = new HttpParams().set('transactionID', transactionID);
-    return this.http.get<TransactionResponseDTO>(API_URL.GET_TRANSACTION_BY_TRANSACTION_ID, {params:httpParams});
-    
+    return this.http.get<TransactionResponseDTO>(API_URL.GET_TRANSACTION_BY_TRANSACTION_ID, {params:httpParams}); 
+  }
+
+  getAllGames(): Observable<GameResponseDTO[]> {
+    return this.http.get<GameResponseDTO[]>(API_URL.GET_ALL_GAMES);
   }
 
   

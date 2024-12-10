@@ -6,13 +6,14 @@ import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
 import { TransactionStateService } from '../../service/transaction-state.service';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
+import { DatePipe } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [MatTabsModule,MatListModule, RouterModule],
+  imports: [MatTabsModule,MatListModule, RouterModule, DatePipe],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
@@ -46,9 +47,7 @@ export class OrdersComponent implements OnInit {
   }
 
   arrangeTransactionsBasedOnStatus(){
-    console.log(`transaction size: ${this.transactions.length}`);
     const currentLoggedInUser = this.authService.getLoggedInUsername();
-    console.log(`current logged in user is = ${currentLoggedInUser}`);
     this.transactions.forEach(txn => {
       if (txn.currentStep===2){
         console.log(`step 2 - ${txn.transactionID}`);
@@ -73,7 +72,6 @@ export class OrdersComponent implements OnInit {
     .sort((a, b) => {
       return new Date(b.transactionSteps.transactionStep1.createdDate).getTime() - new Date(a.transactionSteps.transactionStep1.createdDate).getTime();
     });
-    console.log(this.transactionsPendingUserAction.length);
 
     this.transactionsCompleted = this.transactions.filter(transaction => transaction.currentStep === 5);
   }

@@ -1,0 +1,15 @@
+aws dynamodb create-table \
+    --table-name Transaction \
+    --attribute-definitions AttributeName=transactionID,AttributeType=S AttributeName=counterparty,AttributeType=S \
+    --key-schema AttributeName=transactionID,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --global-secondary-indexes '[
+        {
+            "IndexName": "CounterpartyGSI",
+            "KeySchema": [
+                {"AttributeName": "counterparty", "KeyType": "HASH"}
+            ],
+            "Projection": {"ProjectionType": "ALL"},
+            "ProvisionedThroughput": {"ReadCapacityUnits": 5, "WriteCapacityUnits": 5}
+        }
+    ]'

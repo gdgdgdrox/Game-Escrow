@@ -24,6 +24,7 @@ import { TransactionStateService } from '../../../service/transaction-state.serv
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { finalize } from 'rxjs/internal/operators/finalize';
+import { TransactionSharedService } from '../../../service/transaction/transaction-shared.service';
 
 @Component({
   selector: 'app-transaction-step1',
@@ -52,6 +53,7 @@ export class TransactionStep1Component implements OnInit {
 
   constructor(
     private transactionStep1Service: TransactionStep1Service,
+    private transactionSharedService: TransactionSharedService,
     private authService: AuthService,
     private router: Router,
     private transactionStateService: TransactionStateService
@@ -69,7 +71,7 @@ export class TransactionStep1Component implements OnInit {
 
   ngOnInit(): void {
     console.log('step 1 init');
-    this.transactionStep1Service.getAllGames().subscribe({
+    this.transactionSharedService.getAllGames().subscribe({
       next: (games: GameResponseDTO[]) => {
         this.games = games;
       },
@@ -102,9 +104,6 @@ export class TransactionStep1Component implements OnInit {
     processNewTransaction() {
       this.isProcessing = true;
       const loggedInUser = this.authService.getLoggedInUsername();
-      if (!loggedInUser) {
-        this.router.navigate(['/login']);
-      } 
       if (loggedInUser === this.form.controls['counterparty'].value){
         this.createTransactionStatusMessage = 'You cannot start a trade with yourself.';
         this.isProcessing = false;
@@ -112,6 +111,7 @@ export class TransactionStep1Component implements OnInit {
       }
         const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser!);
         console.log('creating new transaction');
+        console.log(transactionRequestDTO);
         this.transactionStep1Service
           .createNewTransaction(transactionRequestDTO).pipe(
             finalize(() => {
@@ -152,6 +152,7 @@ export class TransactionStep1Component implements OnInit {
       game: {
         gameID: formControls['gameID'].value,
         gameName: this.selectedGame.gameName,
+        gameImagePath: this.selectedGame.gameImagePath,
         assetType: formControls['assetType'].value,
         assetName:
           formControls['assetName'].value != ''

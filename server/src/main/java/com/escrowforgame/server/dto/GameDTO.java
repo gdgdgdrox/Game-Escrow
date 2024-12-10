@@ -11,5 +11,6 @@ public class GameDTO {
 
     private Integer gameID;
     private String gameName;
+    private String gameImagePath;
     private List<GameAssetDTO> gameAssets;
 }

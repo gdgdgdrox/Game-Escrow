@@ -1,49 +1,67 @@
 .tabs-container {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  mat-tab-group {
-    width: 100%;
-  }
-  
-  /* Style each list item */
-  .list-item {
-    display: flex;
-    align-items: center; /* Vertically aligns content */
-    /* border: 1px solid white; */
-    border-radius: 8px;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #1c1c1c; /* Dark background for contrast */
-  }
-  
-  /* Style the image */
-  .game-image {
-    width: 50px;
-    /* height: 50px; */
-    /* object-fit: cover; */
-    /* margin-right: 15px; */
-  }
-  
-  /* Style the transaction info */
-  .transaction-info {
-    display: flex;
-    justify-content: space-between; /* Space out text evenly */
-    align-items: center;
-    width: 100%;
-  }
-  
-  .transaction-id,
-  .game-name,
-  .counterparty {
-    color:white;
-    font-size: 14px; 
-    /* margin-right: 10px;  */
-  }
-  
-  .list-content {
-    display: flex;
-    align-items: justify;
-    width: 100%; 
-  }
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* mat-tab-group {
+  width: 100%;
+} */
+
+.list-item {
+  display: flex;
+  align-items: center; 
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #1c1c1c;
+}
+
+.list-content {
+  display: flex;
+  /* align-items: center; */
+  width: 100%; 
+}
+
+.transaction-info {
+  display: flex;
+  justify-content:space-between; 
+  align-items: center;
+  width: 100%;
+}
+
+.transaction-id,
+.game-name,
+.counterparty,
+.completed-date,
+.status {
+  color:white;
+  font-size: 14px; 
+}
+
+.game-name {
+  flex: 1; /* Allows the game name to take up the available space */
+  text-align: left; /* Aligns the text to the left */
+  margin-right: 10px; /* Adds some spacing between items */
+
+}
+
+.transaction-id {
+  flex: 2; /* Adjust the width proportion as necessary */
+  text-align:center; /* Aligns text to the left */
+  white-space: nowrap; /* Prevents the text from breaking to the next line */
+  overflow: hidden; /* Hides overflowing text */
+  text-overflow: ellipsis; /* Adds "..." for truncated text */
+}
+
+.status {
+  flex: 1; /* Allows status to take less space */
+  text-align: right; /* Aligns status to the right */
+}
+
+.game-image {
+  width: 50px;
+  /* height: 50px; */
+  /* object-fit: cover; */
+  margin-right: 5px;
+}
+

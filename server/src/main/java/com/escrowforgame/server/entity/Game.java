@@ -24,6 +24,9 @@ public class Game {
     @Column(name="name", nullable=false)
     private String gameName;
 
+    @Column(name="image_path")
+    private String gameImagePath;
+
     @OneToMany(mappedBy="game",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GameAsset> gameAssets;
 

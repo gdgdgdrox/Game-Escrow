@@ -13,10 +13,6 @@ import { TransactionSharedService } from './transaction-shared.service';
 export class TransactionStep1Service {
   constructor(private http: HttpClient, private transactionSharedService: TransactionSharedService) {}
 
-  getAllGames(): Observable<GameResponseDTO[]> {
-    return this.http.get<GameResponseDTO[]>(API_URL.GET_ALL_GAMES);
-  }
-
   createNewTransaction(transaction: TransactionRequestDTO): Observable<TransactionResponseDTO | null> {
     return this.transactionSharedService.checkIfUserExists(transaction.counterparty).pipe(
       concatMap((userExists) => {

@@ -1,10 +1,13 @@
-<p>Pending 
-    <span id="counterparty">
-        {{transaction.counterparty}} 
-    </span>
-    to accept
-    <span>
-        Transaction {{transaction.transactionID}}..
-    </span>
-</p>
-<p>{{message}}</p>
+<div class="step2-pending-container">
+    <p>Pending 
+        <mat-icon class="inline-icon">person</mat-icon>
+        <span id="counterparty">
+            {{transaction.counterparty}} 
+        </span>
+        to accept
+        <span>
+            Transaction {{transaction.transactionID}}..
+        </span>
+    </p>
+    <p>{{message}}</p>
+</div>

@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 import { WebsocketService } from '../../../service/websocket.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatStepper } from '@angular/material/stepper';
 import { TransactionStateService } from '../../../service/transaction-state.service';
 import { Router } from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-transaction-step2-pending',
   standalone: true,
-  imports: [MatSnackBarModule],
+  imports: [MatIconModule],
   templateUrl: './transaction-step2-pending.component.html',
   styleUrl: './transaction-step2-pending.component.css',
 })

@@ -22,6 +22,7 @@ public class GameService {
             GameDTO gameDTO = GameDTO.builder()
                     .gameID(game.getGameID())
                     .gameName(game.getGameName())
+                    .gameImagePath(game.getGameImagePath())
                     .gameAssets(game.getGameAssets().stream().map(gameAsset -> {
                         return GameAssetDTO.builder()
                                 .assetType(gameAsset.getAssetType())

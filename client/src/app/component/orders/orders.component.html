@@ -4,10 +4,31 @@
       <mat-list role="list">
         @for(transaction of transactionsPendingUserAction; track
         transaction.transactionID){
-        <mat-list-item role="listitem" class="list-item"  [routerLink]="['/transaction-parent',transaction.transactionID]">
+        <mat-list-item role="listitem" class="list-item" [routerLink]="['/transaction-parent', transaction.transactionID]">
+          <div class="list-content">
+            <img [src]="transaction.game.gameImagePath" alt="game" class="game-image"/>
+            <div class="transaction-info">
+              <span class="game-name">{{ transaction.game.gameName }}</span>
+              <span class="transaction-id">Transaction ID {{ transaction.transactionID }}</span>
+              <span class="counterparty">{{transaction.buyer === loggedInUser ? transaction.seller : transaction.buyer}}</span>
+            </div>
+          </div>
+        </mat-list-item>
+        }
+      </mat-list>
+    </mat-tab>
+    <mat-tab label="Completed">
+      <mat-list role="list">
+        @for(transaction of transactionsCompleted; track
+        transaction.transactionID){
+        <mat-list-item
+          role="listitem"
+          class="list-item"
+          [routerLink]="['/transaction-parent', transaction.transactionID]"
+        >
           <div class="list-content">
             <img
-              [src]="'assets/image/games/' + transaction.game.gameName + '.png'"
+              [src]="transaction.game.gameImagePath"
               alt="game"
               class="game-image"
             />
@@ -16,26 +37,52 @@
               <span class="transaction-id"
                 >Transaction ID {{ transaction.transactionID }}</span
               >
-              <span class="counterparty">{{
-                transaction.buyer === loggedInUser
-                  ? transaction.seller
-                  : transaction.buyer
-              }}</span>
+              <span class="completed-date">{{
+                transaction.transactionSteps.transactionStep4.completedDate| date }}</span>
             </div>
           </div>
         </mat-list-item>
         }
       </mat-list>
     </mat-tab>
-    <mat-tab label="Pending Other Party">
-      <mat-list-item role="listitem">Item 1</mat-list-item>
-      <mat-list-item role="listitem">Item 2</mat-list-item>
-      <mat-list-item role="listitem">Item 3</mat-list-item>
-    </mat-tab>
-    <mat-tab label="Completed">
-      <mat-list-item role="listitem">Item 1</mat-list-item>
-      <mat-list-item role="listitem">Item 2</mat-list-item>
-      <mat-list-item role="listitem">Item 3</mat-list-item>
+    <mat-tab label="All">
+      <mat-list role="list">
+        @for(transaction of transactions; track transaction.transactionID){
+        <mat-list-item
+          role="listitem"
+          class="list-item"
+          [routerLink]="['/transaction-parent', transaction.transactionID]"
+        >
+          <div class="list-content">
+            <img
+              [src]="transaction.game.gameImagePath"
+              alt="game"
+              class="game-image"
+            />
+            <div class="transaction-info">
+              <span class="game-name">{{ transaction.game.gameName }}</span>
+              <span class="transaction-id"
+                >Transaction ID {{ transaction.transactionID }}</span
+              >
+              <span class="status">
+                @if(transaction.currentStep === 2){
+                  pending accept trade
+                }
+                @else if (transaction.currentStep === 3){
+                  pending buyer pay escrow
+                }
+                @else if (transaction.currentStep === 4){
+                  pending buyer confirm item received
+                }
+                @else if (transaction.currentStep === 5){
+                  completed
+                }
+              </span>
+            </div>
+          </div>
+        </mat-list-item>
+        }
+      </mat-list>
     </mat-tab>
   </mat-tab-group>
 </div>

@@ -394,11 +394,11 @@
 <div class="supported_games">
   <h1>Browse our growing list of games and start trading with confidence today!</h1>
   <mat-grid-list cols="4" rowHeight="150px" gutterSize="16px" class="game-list">
-    @for(game of games; track game.title){
+    @for(game of games; track game.gameID){
       <mat-grid-tile class="game-title">
-        <img [src]="game.image" alt="{{ game.title }}" class="game-image" />
+        <img [src]="game.gameImagePath" alt="{{ game.gameName }}" class="game-image" />
         <mat-grid-tile-footer>
-          <h3 class="game-title">{{ game.title }}</h3>
+          <h3 class="game-title">{{ game.gameName }}</h3>
         </mat-grid-tile-footer>
       </mat-grid-tile>    
     }

@@ -5,3 +5,4 @@ asset_type varchar(255) not null,
 asset_unit varchar(255),
 foreign key (game_id) references game(id)
 );
+    

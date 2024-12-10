@@ -32,7 +32,6 @@ export class TransactionStep2CounterpartyComponent implements OnInit {
       .acceptTrade(this.transaction.transactionID)
       .subscribe({
         next: (transaction: TransactionResponseDTO) => {
-          // this.onTradeAccepted.emit(response);
           console.log(`transaction step 2 status updated to ${transaction.transactionSteps.transactionStep2.status}`);
           console.log(`current step is now ${transaction.currentStep}`);
           this.transactionStateService.transaction = transaction;

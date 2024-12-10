@@ -14,6 +14,7 @@ export interface TransactionResponseDTO{
 export interface TransactionGameResponseDTO{
     gameID: number,
     gameName: string,
+    gameImagePath: string,
     assetType: string,
     assetName?: string,
     assetQuantity?: string
