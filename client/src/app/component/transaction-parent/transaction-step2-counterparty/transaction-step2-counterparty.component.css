@@ -7,14 +7,14 @@ h2{
 }
 
 .container p {
-    font-size: 16px; /* Slightly larger text for better readability */
+    font-size: 16px;
 }
 .container p span {
-    font-weight: bold; /* Highlight values */
-    color: #fff; /* Maintain contrast with the background */
+    font-weight: bold;
+    color: #fff;
 }
 
-#accept-btn{
+.accept-btn{
     width: 100%;
     background-color: cyan;
     color:black

@@ -9,7 +9,7 @@ h2 {
     vertical-align: middle;
 }
 
-#counterparty{
+.counterparty{
     font-weight: bold;
     color: cyan;
 }
