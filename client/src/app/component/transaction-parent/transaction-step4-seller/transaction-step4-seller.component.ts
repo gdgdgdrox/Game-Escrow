@@ -3,23 +3,27 @@ import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
 import { WebsocketService } from '../../../service/websocket.service';
 import { TransactionStateService } from '../../../service/transaction-state.service';
 import { Router } from '@angular/router';
-import { HttpClient, HttpEventType } from '@angular/common/http';
 import { TransactionStep4Service } from '../../../service/transaction/transaction-step4.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { finalize } from 'rxjs/internal/operators/finalize';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-transaction-step4-seller',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './transaction-step4-seller.component.html',
   styleUrl: './transaction-step4-seller.component.css',
 })
 export class TransactionStep4SellerComponent implements OnInit {
   @Input() transaction!: TransactionResponseDTO;
   selectedFile: File | null = null;
-  uploadProgress: number = 0;
-  message: string | null = null;
+  // message: string | null = null;
   fileUploadMessage = '';
-  isFileAlreadyUploaded: boolean = false;
+  isUploading = false;
+  isFileAlreadyUploaded = false;
 
   constructor(
     private websocketService: WebsocketService,
@@ -41,9 +45,8 @@ export class TransactionStep4SellerComponent implements OnInit {
       this.transaction &&
       this.transaction.transactionSteps.transactionStep4.sellerPhotoUploaded
     ) {
-      this.isFileAlreadyUploaded =
-        this.transaction.transactionSteps.transactionStep4.sellerPhotoUploaded;
-      this.fileUploadMessage = 'upload success!';
+      this.isFileAlreadyUploaded = true;
+      this.fileUploadMessage = 'File uploaded!';
     }
   }
 
@@ -51,7 +54,7 @@ export class TransactionStep4SellerComponent implements OnInit {
     console.log('received notification that buyer has received item');
 
     if (transaction.transactionSteps.transactionStep4.status === 'completed') {
-      this.message = `${transaction.buyer} has received the item!`;
+      // this.message = `${transaction.buyer} has received the item!`;
       setTimeout(() => {
         this.transactionStateService.transaction = transaction;
         console.log('shared service state updated. navigating to parent');
@@ -70,11 +73,15 @@ export class TransactionStep4SellerComponent implements OnInit {
 
   uploadFile(): void {
     if (this.selectedFile) {
+      this.isUploading = true;
       const formData = new FormData();
       formData.append('file', this.selectedFile);
 
       this.transactionStep4Service
-        .sellerUploadEvidence(this.transaction.transactionID, formData)
+        .sellerUploadEvidence(this.transaction.transactionID, formData).pipe(
+          finalize(() => {
+            this.isUploading = false;
+          }))
         .subscribe({
           next: (transaction: TransactionResponseDTO) => {
             console.log(
@@ -85,9 +92,15 @@ export class TransactionStep4SellerComponent implements OnInit {
               transaction.transactionSteps.transactionStep4.sellerPhotoUploaded
             ) {
               this.isFileAlreadyUploaded = true;
-              this.fileUploadMessage = 'upload success!';
+              this.fileUploadMessage = 'File uploaded!';
             }
           },
+          error: (error: HttpErrorResponse) => {
+            console.error(error);
+            this.isUploading = false;
+            this.isFileAlreadyUploaded = false;
+            this.fileUploadMessage = 'Upload failed. Please try again later.';
+          }
         });
     }
   }

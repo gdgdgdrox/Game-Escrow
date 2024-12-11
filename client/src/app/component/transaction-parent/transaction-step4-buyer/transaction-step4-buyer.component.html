@@ -1,3 +1,16 @@
-<p>Seller {{transaction.seller}} has been informed to release the in-game item to you</p>
-<p>Please confirm receipt of item</p>
-<button type="button" (click)="confirmItemReceived()">item received!</button>
+<div class="step4-buyer-container">
+  <h2>Confirm Item Received</h2>
+  <p>
+    We have informed
+    <mat-icon class="person-icon">person</mat-icon>
+    <span class="seller">
+        {{ transaction.seller }}
+    </span>
+   to release the
+    <img [src]="transaction.game.gameImagePath" alt="game-image" class="game-image"/>
+    {{ transaction.game.gameName }}
+    item / account
+  </p>
+  <p>Please confirm receipt of item</p>
+  <button  mat-stroked-button class="confirm-item-received-btn" type="button" (click)="confirmItemReceived()">Item Received!</button>
+</div>

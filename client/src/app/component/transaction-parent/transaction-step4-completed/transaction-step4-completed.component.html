@@ -1,4 +1,4 @@
-@if(userID && transaction){
+<!-- @if(userID && transaction){
     <h3>Completed</h3>
     @if(userID === transaction.buyer){
         <p>You confirmed the receipt of {{transaction.game.gameName}} item on {{transaction.transactionSteps.transactionStep4.completedDate}}</p>
@@ -9,4 +9,17 @@
 }
 @else {
     <p>Something went wrong..</p>
+} -->
+
+<h2>Completed</h2>
+@if(userID === transaction.buyer){
+    <p>You confirmed the receipt of {{transaction.game.gameName}} item / account on
+         {{transaction.transactionSteps.transactionStep4.completedDate | date}}</p>
+}
+@else {
+    <p>
+        <mat-icon class="person-icon">person</mat-icon>
+         {{transaction.buyer}} confirmed item / account was received on 
+         {{transaction.transactionSteps.transactionStep4.completedDate | date}}
+    </p>
 }

@@ -1,5 +1,44 @@
-<p>Please release the in-game item to Buyer {{transaction.buyer}}</p>
+<!-- <p>Please release the in-game item to Buyer {{transaction.buyer}}</p>
 <p>You are encouraged to upload supporting evidence of your trade</p>
 <input type="file" (change)="onFileSelected($event)" [disabled]="isFileAlreadyUploaded" />
 <button (click)="uploadFile()" [disabled]="!selectedFile || isFileAlreadyUploaded">Upload</button>
-<p>{{fileUploadMessage}}</p>
+<p>{{fileUploadMessage}}</p> -->
+
+<div class="step4-seller-container">
+    <h2>Release Game Item</h2>
+    <p>Please release 
+        <img [src]="transaction.game.gameImagePath" alt="game-image" class="game-image">
+        <span class="transaction-info">
+            {{transaction.game.gameName}} 
+            {{transaction.game.assetType}}
+            {{transaction.game.assetName ? transaction.game.assetName : transaction.game.assetQuantity}}
+        </span>
+        to
+        <mat-icon class="person-icon">person</mat-icon>
+        <span class="buyer">{{transaction.buyer}} </span>
+    </p>
+    <div>
+        <p>You are encouraged to upload supporting evidence of your trade</p>
+        <input type="file" (change)="onFileSelected($event)" [disabled]="isFileAlreadyUploaded" />
+        <br>
+        <button mat-stroked-button class="upload-btn" type="button" (click)="uploadFile()" [disabled]="!selectedFile || isFileAlreadyUploaded">
+            Upload
+        </button>
+        @if (fileUploadMessage){
+            @if (fileUploadMessage === 'File uploaded!'){
+                <p class="success-msg">{{fileUploadMessage}}</p>
+            }
+            @else {
+                <p class="failure-msg">{{fileUploadMessage}}</p>
+            }
+        }
+    </div>
+    <div>
+        @if(isUploading){
+        <div class="spinner-overlay"></div>
+        <div class="spinner-container">
+          <mat-spinner color="accent"></mat-spinner>
+    </div>
+        }
+
+</div>
