@@ -32,6 +32,7 @@ export class TransactionStep4BuyerComponent implements OnInit {
       .buyerConfirmItemReceived(this.transaction.transactionID)
       .subscribe({
         next: (transaction: TransactionResponseDTO) => {
+          console.log(transaction);
           this.transactionStateService.transaction = transaction;
           console.log('shared service state updated. navigating to parent');
           this.router.navigate([

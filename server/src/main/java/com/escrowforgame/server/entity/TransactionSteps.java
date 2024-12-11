@@ -10,6 +10,7 @@ public class TransactionSteps {
     private TransactionStep2 transactionStep2;
     private TransactionStep3 transactionStep3;
     private TransactionStep4 transactionStep4;
+    private TransactionStep5 transactionStep5;
 
     public TransactionSteps(){
         this.transactionStep1 = new TransactionStep1();

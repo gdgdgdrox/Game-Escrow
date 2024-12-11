@@ -1,2 +1,14 @@
-<p>We have released the money to your registered PayNow account</p>
-<button type="button">Contact Support</button>
+<div class="step5-seller-container">
+    <h2>Completed</h2>
+    <p>We have released 
+        <span class="price"> SGD {{transaction?.price}}</span>
+         to your registered
+        </p>
+    <p>
+         PayNow account
+        <span>on {{transaction?.transactionSteps?.transactionStep5?.completedDate | date:'medium'}}</span>
+    </p>
+
+         
+    <!-- <button  mat-stroked-button c lass="dispute-btn" type="button" (click)="dispute()">Contact Support</button> -->
+</div>

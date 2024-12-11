@@ -13,13 +13,20 @@
 
 <h2>Completed</h2>
 @if(userID === transaction.buyer){
-    <p>You confirmed the receipt of {{transaction.game.gameName}} item / account on
+    <p>You confirmed the receipt of {{transaction.game.gameName}} 
+        {{transaction.game.assetType === 'account' ? 'account' : 'item'}}
+        on
          {{transaction.transactionSteps.transactionStep4.completedDate | date}}</p>
 }
 @else {
     <p>
         <mat-icon class="person-icon">person</mat-icon>
-         {{transaction.buyer}} confirmed item / account was received on 
+        <span class="buyer">
+            {{transaction.buyer}} 
+        </span>
+        confirmed
+        {{transaction.game.assetType === 'account' ? 'account' : 'item'}}
+        was received on 
          {{transaction.transactionSteps.transactionStep4.completedDate | date}}
     </p>
 }

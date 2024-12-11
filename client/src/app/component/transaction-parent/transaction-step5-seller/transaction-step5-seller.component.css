@@ -1,0 +1,18 @@
+.step5-seller-container{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+    color: goldenrod;
+    padding: 10px;
+}
+
+.price{
+    font-weight: bold;
+}
+
+
+.completed-date{
+    font-style: italic;
+}

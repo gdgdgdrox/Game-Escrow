@@ -1,0 +1,14 @@
+.step5-buyer-container{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+    color: goldenrod;
+    padding: 10px;
+}
+
+
+.completed-date{
+    font-style: italic;
+}

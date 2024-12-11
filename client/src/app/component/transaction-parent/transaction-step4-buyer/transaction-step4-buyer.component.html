@@ -9,8 +9,8 @@
    to release the
     <img [src]="transaction.game.gameImagePath" alt="game-image" class="game-image"/>
     {{ transaction.game.gameName }}
-    item / account
+    {{ transaction.game.assetType === 'account' ? 'account' : 'item'}}
   </p>
-  <p>Please confirm receipt of item</p>
+  <p>Please confirm receipt</p>
   <button  mat-stroked-button class="confirm-item-received-btn" type="button" (click)="confirmItemReceived()">Item Received!</button>
 </div>

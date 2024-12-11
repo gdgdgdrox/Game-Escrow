@@ -10,8 +10,8 @@
         <img [src]="transaction.game.gameImagePath" alt="game-image" class="game-image">
         <span class="transaction-info">
             {{transaction.game.gameName}} 
-            {{transaction.game.assetType}}
             {{transaction.game.assetName ? transaction.game.assetName : transaction.game.assetQuantity}}
+            {{transaction.game.assetType}}
         </span>
         to
         <mat-icon class="person-icon">person</mat-icon>

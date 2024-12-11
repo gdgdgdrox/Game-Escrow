@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.escrowforgame.server.entity.TransactionEntity;
 import com.escrowforgame.server.entity.TransactionStep4;
+import com.escrowforgame.server.entity.TransactionStep5;
 import com.escrowforgame.server.service.JwtService;
 import com.escrowforgame.server.service.S3Service;
 import com.escrowforgame.server.service.TransactionNotificationService;
@@ -58,7 +59,9 @@ public class TransactionStep4Controller {
             transactionStep4.markStep4AsCompleted();
             transactionEntity.getTransactionSteps().setTransactionStep4(transactionStep4);
             transactionEntity.setCurrentStep(5);
+            transactionEntity.getTransactionSteps().setTransactionStep5(new TransactionStep5());
             transactionService.updateTransaction(transactionEntity);
+            System.out.println(transactionEntity.toString());
             // notify seller
             transactionNotificationService.notifySellerThatStep4IsCompleted(transactionEntity);
             return ResponseEntity.ok(transactionEntity);

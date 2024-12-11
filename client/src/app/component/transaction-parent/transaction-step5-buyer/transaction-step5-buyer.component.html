@@ -1,2 +1,8 @@
-<h3>Completed!</h3>
-<p>Please give {{transaction.seller}} a rating</p>
+<div class="step5-buyer-container">
+    <h2>Completed</h2>
+    <p>Congratulations on securing the deal!</p>
+    <p class="completed-date">Completed on 
+            {{transaction.transactionSteps.transactionStep5.completedDate | date}}
+    </p>
+
+</div>
