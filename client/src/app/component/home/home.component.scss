@@ -1,3 +1,4 @@
+// start of intro content
 .intro {
   text-align: center;
   padding: 60px 20px;
@@ -5,50 +6,44 @@
 
 .intro-content h1 {
   font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color:white
+  margin-bottom: 10px;
+  color: white;
+  font-style: italic;
 }
 
- .highlight {
-    color: cyan; /* Bright green to make it stand out */
-    font-size: 52px; /* Slightly larger font */
-    font-weight: 900; /* Extra-bold weight */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow effect */
-    text-decoration:wavy
-  }
+.italic-sword img {
+  display: inline-block;
+  transform: skewX(-15deg);
+  vertical-align: -0.5em; /* Adjust the value to raise/lower the image */
+  height: 1.5em; /* Slightly larger than text for emphasis */
+}
 
-.intro-content p {
-  font-size: 18px;
-  margin-bottom: 30px;
-  
+.securely {
+  color: goldenrod;
 }
 
 .intro-content button {
-  font-size: 16px;
-  padding: 10px 20px;
+  border: 1px solid cyan;
 }
 
-.transaction-overview{
+//start of transaction overview
+.transaction-overview {
   text-align: center;
   font-size: 32px;
-
 }
 
 .escrow-steps {
   display: flex;
-
 }
 
 .step {
   text-align: center;
-  flex: 1 ;
+  flex: 1;
   border-radius: 8px;
   padding: 0 10px;
-  box-shadow: none; 
-  background-color:transparent;
+  box-shadow: none;
+  background-color: transpaerent;
   color: #333;
-
 }
 
 .step h3 {
@@ -56,7 +51,6 @@
   font-size: 20px;
   font-weight: 500;
   color: white;
-
 }
 
 svg {
@@ -69,6 +63,8 @@ svg {
 mat-divider {
   border-color: cyan; /* Set the color of the divider */
 }
+
+// start of game
 
 .game-list {
   margin: 20px;

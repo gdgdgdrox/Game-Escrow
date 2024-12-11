@@ -1,19 +1,18 @@
 <div class="intro">
   <div class="intro-content">
-    <h1>Your Trusted Escrow Service for <span class="highlight">Game Transactions</span></h1>
-    <p>
-      We provide a safe secure platform for gamers to buy and sell in-game
-      items.
-    </p>
-    <p>
-      Whether you're a buyer or seller, our service ensures peace of mind
-      by holding payments in escrow until both parties are satisfied.
-    </p>
-    <p>
-      Join us today and trade your game items with confidence!
-
-    </p>
-    <button mat-raised-button color="accent" [routerLink]="['/transaction-parent']">Get Started</button>
+    <h1>
+      TRADE GAME I<span class="italic-sword">
+        <img src="assets/image/t_sword.png" alt="sword" /> </span
+      >EMS
+      <span class="securely"> SECURELY</span>
+    </h1>
+    <p>We are a neutral third-party that safekeep the money until both parties are satisfied</p>
+    <button
+      mat-raised-button
+      [routerLink]="['/transaction-parent']"
+    >
+      Get Started
+    </button>
   </div>
 </div>
 <!-- <mat-divider></mat-divider> -->
@@ -392,15 +391,21 @@
 </div>
 <!-- <mat-divider></mat-divider> -->
 <div class="supported_games">
-  <h1>Browse our growing list of games and start trading with confidence today!</h1>
+  <h1>
+    Browse our growing list of games and start trading with confidence today!
+  </h1>
   <mat-grid-list cols="4" rowHeight="150px" gutterSize="16px" class="game-list">
     @for(game of games; track game.gameID){
-      <mat-grid-tile class="game-title">
-        <img [src]="game.gameImagePath" alt="{{ game.gameName }}" class="game-image" />
-        <mat-grid-tile-footer>
-          <h3 class="game-title">{{ game.gameName }}</h3>
-        </mat-grid-tile-footer>
-      </mat-grid-tile>    
+    <mat-grid-tile class="game-title">
+      <img
+        [src]="game.gameImagePath"
+        alt="{{ game.gameName }}"
+        class="game-image"
+      />
+      <mat-grid-tile-footer>
+        <h3 class="game-title">{{ game.gameName }}</h3>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
     }
   </mat-grid-list>
   <!-- <div class="game-card-container">
@@ -412,5 +417,4 @@
     </mat-card>
   }
   </div> -->
-  
 </div>

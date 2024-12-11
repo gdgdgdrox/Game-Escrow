@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { TransactionSharedService } from '../../service/transaction/transaction-shared.service';
 import { GameResponseDTO } from '../../dto/game-response.dto';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -20,7 +21,8 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatIconModule,
     MatDividerModule,
     MatGridListModule,
-    RouterModule
+    RouterModule,
+    MatButtonModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
