@@ -11,7 +11,7 @@
     {{ transaction.game.gameName }}
     {{ transaction.game.assetType === 'account' ? 'account' : 'item'}}
   </p>
-  <p>Please confirm receipt</p>
+  <p>After receiving the item, please press the button below</p>
   <button  mat-stroked-button class="confirm-item-received-btn" type="button" (click)="confirmItemReceived()">Item Received!</button>
   <div>
     <p [ngClass]="{'failure-msg':!itemReceived}">
