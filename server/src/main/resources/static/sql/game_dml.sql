@@ -9,4 +9,10 @@ values
     ('Honkai Star Rail','assets/image/games/honkai_star_rail.jpg'),
     ('Pokemon GO'),'assets/image/games/pokemon_go.webp',
     ('Team Fortress 2','assets/image/games/team_fortress_2.png'),
-    ('Wuthering Waves','assets/image/games/wuthering_waves.png');
+    ('Wuthering Waves','assets/image/games/wuthering_waves.png'),
+    ('World Of Warcraft', 'assets/image/games/wow.jpeg'),
+    ('Valorant', 'assets/image/games/valorant.png'),
+    ('Runescape', 'assets/image/games/runescape.png'),
+    ('PUBG', 'assets/image/games/pubg.png'),
+    ('EVE Online', 'assets/image/games/eve_online.png'),
+    ('Fortnite', 'assets/image/games/fortnite.png')

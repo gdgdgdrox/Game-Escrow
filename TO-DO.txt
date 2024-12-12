@@ -1,13 +1,10 @@
-Registration
-validate fields
-check if username already taken
-collect phone number
+remove unused import
+remove chatgpt comment
+fix home page game display
+fix home page ugly text
+fix header login / sign up color
+add badges to orders
 
-Login
 
-Order
-different tabs for transactions at different stages 
-
-Step 1
-Valdate if counterparty is registered user, otherwise dont create txn
-
+migrate to AWS RDS, DDB, EC2, Docker
+final: purge commit history of secrets

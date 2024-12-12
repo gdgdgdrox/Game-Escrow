@@ -6,7 +6,7 @@
       >EMS
       <span class="securely"> SECURELY</span>
     </h1>
-    <p>We are a neutral third-party that safekeep the money until both parties are satisfied</p>
+    <p>We are a neutral third-party that safekeep your payment until both parties are satisfied</p>
     <button
       mat-raised-button
       [routerLink]="['/transaction-parent']"
@@ -436,23 +436,15 @@
     </div>
   </div>
 </div>
-<!-- <mat-divider></mat-divider> -->
-<!-- <div class="supported_games">
-  <h1>
-    Browse our growing list of games and start trading with confidence today!
-  </h1>
-  <mat-grid-list cols="4" rowHeight="150px" gutterSize="16px" class="game-list">
+<!-- GAMES -->
+<div class="games-section">
+  <h2>Our Growing List of Games</h2>
+  <div class="games-container">
     @for(game of games; track game.gameID){
-    <mat-grid-tile class="game-title">
-      <img
-        [src]="game.gameImagePath"
-        alt="{{ game.gameName }}"
-        class="game-image"
-      />
-      <mat-grid-tile-footer>
-        <h3 class="game-title">{{ game.gameName }}</h3>
-      </mat-grid-tile-footer>
-    </mat-grid-tile>
+      <div class="game-item">
+        <img [src]="game.gameImagePath" alt="{{ game.gameName }}" />
+        <p>{{ game.gameName }}</p>
+      </div>
     }
-  </mat-grid-list>
-</div> -->
+  </div>
+</div>

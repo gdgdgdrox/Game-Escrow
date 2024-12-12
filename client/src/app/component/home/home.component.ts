@@ -45,45 +45,70 @@ export class HomeComponent implements OnInit{
   constructor(private transactionSharedService: TransactionSharedService){}
   // games = [
   //   {
-  //     title: 'Maplestory',
-  //     image: 'assets/image/games/maplestory.png'
+  //     gameName: 'Maplestory',
+  //     gameImagePath: 'assets/image/games/maplestory.png'
   //   },
   //   {
-  //     title: 'Clash Of Clans',
-  //     image: 'assets/image/games/clash_of_clans.png'
+  //     gameName: 'Clash Of Clans',
+  //     gameImagePath: 'assets/image/games/clash_of_clans.png'
   //   },
   //   {
-  //     title: 'CS GO',
-  //     image: 'assets/image/games/cs_go.webp'
+  //     gameName: 'CS GO',
+  //     gameImagePath: 'assets/image/games/cs_go.webp'
   //   },
   //   {
-  //     title: 'Dota',
-  //     image: 'assets/image/games/Dota 2.png'
+  //     gameName: 'Dota',
+  //     gameImagePath: 'assets/image/games/Dota 2.png'
   //   },
   //   {
-  //     title: 'Genshin Impact',
-  //     image: 'assets/image/games/genshin_impact.png'
+  //     gameName: 'Genshin Impact',
+  //     gameImagePath: 'assets/image/games/genshin_impact.png'
   //   },
   //   {
-  //     title: 'Honkai Star Rail',
-  //     image: 'assets/image/games/honkai_star_rail.jpg'
+  //     gameName: 'Honkai Star Rail',
+  //     gameImagePath: 'assets/image/games/honkai_star_rail.jpg'
   //   },
   //   {
-  //     title: 'Pokemon GO',
-  //     image: 'assets/image/games/Pokemon GO.webp'
+  //     gameName: 'Pokemon GO',
+  //     gameImagePath: 'assets/image/games/Pokemon GO.webp'
   //   },
   //   {
-  //     title: 'Team Fortress 2',
-  //     image: 'assets/image/games/team_fortress_2.png'
+  //     gameName: 'Team Fortress 2',
+  //     gameImagePath: 'assets/image/games/team_fortress_2.png'
   //   },
   //   {
-  //     title: 'Wuthering Waves',
-  //     image: 'assets/image/games/wuthering_waves.png'
+  //     gameName: 'Wuthering Waves',
+  //     gameImagePath: 'assets/image/games/wuthering_waves.png'
   //   },
   //   {
-  //     title: 'Default Icon',
-  //     image: 'assets/image/games/default.jpg'
+  //     gameName: 'Default Icon',
+  //     gameImagePath: 'assets/image/games/default.jpg'
+  //   },
+  //   {
+  //     gameName: 'World Of Warcraft',
+  //     gameImagePath: 'assets/image/games/wow.jpeg'
+  //   },
+  //   {
+  //     gameName: 'Valorant',
+  //     gameImagePath: 'assets/image/games/valorant.png'
+  //   },
+  //   {
+  //     gameName: 'Runescape',
+  //     gameImagePath: 'assets/image/games/runescape.png'
+  //   },
+  //   {
+  //     gameName: 'PUBG',
+  //     gameImagePath: 'assets/image/games/pubg.png'
+  //   },
+  //   {
+  //     gameName: 'EVE Online',
+  //     gameImagePath: 'assets/image/games/eve_online.png'
+  //   },
+  //   {
+  //     gameName: 'Fortnite',
+  //     gameImagePath: 'assets/image/games/fortnite.png'
   //   }
+  // ]
 
   
 

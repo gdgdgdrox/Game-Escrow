@@ -18,4 +18,16 @@ values
     (7, 'account', 'name'),
     (8, 'account', 'name'),
     (9, 'lunite', 'quantity'),
-    (9, 'account', 'name');
+    (9, 'account', 'name'),
+    (10, 'token', 'quantity'),
+    (10, 'item', 'name'),
+    (11, 'account', 'name'),
+    (11, 'valorant points', 'quantity'),
+    (12, 'gold', 'quantity'),
+    (13, 'unknown cash', 'quantity'),
+    (13, 'account', 'name'),
+    (14, 'PLEX', 'quantity'),
+    (14, 'ship', 'name'),
+    (15, 'V-Bucks', 'quantity'),
+    (15, 'skin', 'name'),
+    (15, 'account', 'name')

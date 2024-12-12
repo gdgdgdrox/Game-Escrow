@@ -36,7 +36,7 @@
 }
 
 .transaction-overview h2 {
-  font-size: 44px;
+  font-size: 40px;
   font-style:italic;
   color: #FAFAD2;
 }
@@ -74,48 +74,40 @@ svg {
 
 
 // *********** start of game ***********
-
-.game-list {
-  margin: 20px;
-}
-
-.game-tile {
+.games-section {
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.game-content {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%; /* Ensures consistent layout within tiles */
-  height: 100%;
-}
-
-.game-image {
-  width: 80px;
-  height: 80px;
-  object-fit: cover; /* Ensures the image fits within the given dimensions */
-  margin-bottom: 10px;
-}
-
-.game-title {
-  font-size: 16px;
+  padding: 20px;
   color: white;
-  margin: 0;
-  text-align: center;
+  max-width: 50%; /* Restrict the container width */
+  margin: 0 auto;
 }
 
-.game-card-container {
+.games-section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.games-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  justify-content: center; /* Center items horizontally */
+  gap: 20px; /* Adjust spacing between items */
 }
 
-// mat-divider {
-//   border-color: cyan;
-// }
+.game-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center image and text */
+  width: 120px; /* Adjust the size of each item */
+}
+
+.game-item img {
+  width: 80px; /* Adjust image size */
+  height: 80px;
+  border-radius: 50%; /* Makes the image circular */
+}
+
+.game-item p {
+  margin: 5px 0 0; /* Reduce spacing between image and text */
+  font-size: 14px;
+}
