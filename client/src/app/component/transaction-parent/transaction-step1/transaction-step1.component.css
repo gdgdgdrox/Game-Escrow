@@ -4,6 +4,18 @@ h2 {
   padding-bottom: 10px;
   border-bottom: 1px solid #FFEB99;
 }
+.game-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-option img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover;  /* Ensures image scales properly */
+}
 
 p {
   display: inline-block;
@@ -51,3 +63,4 @@ p {
   color: red;
   text-align: center;
 }
+

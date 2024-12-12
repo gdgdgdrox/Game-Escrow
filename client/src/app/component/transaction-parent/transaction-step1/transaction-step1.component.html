@@ -19,10 +19,12 @@
       <mat-label>Select Game</mat-label>
       <mat-select formControlName="gameID">
         @for (game of games; track game.gameID){
-          <div>
-            <!-- <img [src]="game.gameImagePath" alt="game_image" > -->
-            <mat-option [value]="game.gameID">{{ game.gameName }}</mat-option>
-          </div>
+          <mat-option [value]="game.gameID">
+            <div class="game-option">
+              <img [src]="game.gameImagePath" alt="{{ game.gameName }} image" />
+              <span>{{ game.gameName }}</span>
+            </div>
+          </mat-option>
         }
       </mat-select>
     </mat-form-field>
