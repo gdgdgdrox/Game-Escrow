@@ -2,7 +2,7 @@
   <mat-tab-group>
     <mat-tab>
       <ng-template mat-tab-label>
-        Pending Action
+        Pending Your Action
         <span
           matBadge="{{ transactionsPendingUserAction.length }}"
           matBadgeOverlap="false"
@@ -61,7 +61,7 @@
             <div class="transaction-info">
               <span class="game-name">{{ transaction.game.gameName }}</span>
               <span class="transaction-id"
-                >Transaction ID {{ transaction.transactionID }}</span
+                >ID {{ transaction.transactionID }}</span
               >
               <span class="completed-date">{{
                 transaction.transactionSteps.transactionStep4.completedDate| date }}</span>
@@ -96,22 +96,25 @@
             <div class="transaction-info">
               <span class="game-name">{{ transaction.game.gameName }}</span>
               <span class="transaction-id"
-                >Transaction ID {{ transaction.transactionID }}</span
+                >ID {{ transaction.transactionID }}</span
               >
-              <span class="status">
+              <span class="created-date">
+                {{transaction.transactionSteps.transactionStep1.createdDate | date}}
+              </span>
+              <!-- <span class="status">
                 @if(transaction.currentStep === 2){
                   pending accept trade
                 }
-                @else if (transaction.currentStep === 3){
-                  pending buyer pay escrow
+                @else if (transaction.currentStep === 3 && transaction.buyer != loggedInUser){
+                  pending {{transaction.buyer}} payment
                 }
-                @else if (transaction.currentStep === 4){
-                  pending buyer confirmation
+                @else if (transaction.currentStep === 4 ){
+                  pending {{transaction.buyer}} confiment
                 }
                 @else if (transaction.currentStep === 5){
                   completed
                 }
-              </span>
+              </span> -->
             </div>
           </div>
         </mat-list-item>
@@ -119,4 +122,13 @@
       </mat-list>
     </mat-tab>
   </mat-tab-group>
+  @if(transactions.length === 0){
+    <div class="no-trades">
+      <h3>You have no trades yet</h3>
+      <button mat-stroked-button type="button"
+      [routerLink]="['/transaction-parent']"
+      >New Trade
+    </button>
+    </div>
+  }
 </div>

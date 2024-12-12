@@ -8,11 +8,12 @@ import {MatListModule} from '@angular/material/list';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {MatBadgeModule} from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [MatTabsModule,MatListModule, RouterModule, DatePipe, CommonModule, MatBadgeModule],
+  imports: [MatTabsModule,MatListModule, RouterModule, DatePipe, CommonModule, MatBadgeModule, MatButtonModule],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
@@ -36,7 +37,9 @@ export class OrdersComponent implements OnInit {
     this.transactionSharedService.getAllTransactionsByUser(this.loggedInUser!)
     .subscribe(
       {next: (response: TransactionResponseDTO[]) => {
-        this.transactions = response;
+        this.transactions = response.sort((a, b) => {
+          return new Date(b.transactionSteps.transactionStep1.createdDate).getTime() - new Date(a.transactionSteps.transactionStep1.createdDate).getTime();
+        });;
         this.arrangeTransactionsBasedOnStatus();
       },
       error: error => {

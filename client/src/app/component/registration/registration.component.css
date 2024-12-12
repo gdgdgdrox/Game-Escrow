@@ -72,17 +72,22 @@ button {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover {
-  background-color: #008ba3; /* Darker hover color */
-  transform: translateY(-2px);
+/* button:hover { */
+  /* background-color: #008ba3;  */
+  /* transform: translateY(-2px); */
+/* } */
+
+ #register-btn {
+  width: 100%;
+  color: black; 
+  background-color: cyan;
 }
 
-button:disabled {
-  background-color: white; /* Disabled button color */
+#register-btn:disabled {
+  background-color: white; 
   color: #9c9caf;
 }
 
-/* Style the radio buttons */
 mat-radio-group {
   display: flex;
   flex-direction: row;
