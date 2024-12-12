@@ -1,9 +1,3 @@
-<!-- <p>Please release the in-game item to Buyer {{transaction.buyer}}</p>
-<p>You are encouraged to upload supporting evidence of your trade</p>
-<input type="file" (change)="onFileSelected($event)" [disabled]="isFileAlreadyUploaded" />
-<button (click)="uploadFile()" [disabled]="!selectedFile || isFileAlreadyUploaded">Upload</button>
-<p>{{fileUploadMessage}}</p> -->
-
 <div class="step4-seller-container">
     <h2>Release Game Item</h2>
     <p>Please release 
@@ -24,14 +18,9 @@
         <button mat-stroked-button class="upload-btn" type="button" (click)="uploadFile()" [disabled]="!selectedFile || isFileAlreadyUploaded">
             Upload
         </button>
-        @if (fileUploadMessage){
-            @if (fileUploadMessage === 'File uploaded!'){
-                <p class="success-msg">{{fileUploadMessage}}</p>
-            }
-            @else {
-                <p class="failure-msg">{{fileUploadMessage}}</p>
-            }
-        }
+    </div>
+    <div [ngClass]="{'success-msg':isFileAlreadyUploaded,'failure-msg':!isFileAlreadyUploaded}">
+        <p>{{fileUploadStatusMessage}}</p>
     </div>
     <div>
         @if(isUploading){

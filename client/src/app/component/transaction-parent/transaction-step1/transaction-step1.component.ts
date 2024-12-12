@@ -48,6 +48,7 @@ export class TransactionStep1Component implements OnInit {
   gameAssets: GameAssetResponseDTO[] = [];
   selectedGame!: GameResponseDTO;
   selectedAsset!: GameAssetResponseDTO;
+  createTransactionSuccess = false;
   createTransactionStatusMessage = '';
   isProcessing = false;
 
@@ -113,26 +114,25 @@ export class TransactionStep1Component implements OnInit {
         console.log('creating new transaction');
         console.log(transactionRequestDTO);
         this.transactionStep1Service
-          .createNewTransaction(transactionRequestDTO).pipe(
-            finalize(() => {
-              this.isProcessing = false;
-            }))
+          .createNewTransaction(transactionRequestDTO)
           .subscribe({
             next: (transaction: TransactionResponseDTO | null) => {
               if (transaction){
-                this.createTransactionStatusMessage = 'Success !';
                 this.transactionStateService.transaction = transaction;
                 setTimeout(() => {
+                  this.isProcessing = false;
                   this.router.navigate(['/transaction-parent/step2',transaction.transactionID]);
                 }, 3000)
               }
               else{
-                this.createTransactionStatusMessage = `${transactionRequestDTO.counterparty} is not a registered user.`
+                this.isProcessing = false;
+                this.createTransactionStatusMessage = `${transactionRequestDTO.counterparty} is not a registered user`
               }
             },
             error: (error) => {
               console.log(error);
-              this.createTransactionStatusMessage = 'Failed to create transaction due to unknown server error.'
+              this.isProcessing = false;
+              this.createTransactionStatusMessage = 'Failed to create transaction due to unknown server error'
             },
           });
     }

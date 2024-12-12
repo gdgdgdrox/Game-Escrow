@@ -3,7 +3,7 @@
   <form [formGroup]="form" (ngSubmit)="processNewTransaction()">
     <!-- Buy / Sell -->
     <div>
-      <p>I am</p>
+      <p class="i-am">I am</p>
       <mat-button-toggle-group
         appearance="standard"
         exclusive
@@ -111,19 +111,12 @@
       </div>
       }
     </div>
-    @if(createTransactionStatusMessage){
-      @if (createTransactionStatusMessage === 'Success !'){
-        <div class="success-msg">
-          <p>{{ createTransactionStatusMessage }}</p>
-        </div>
-      }
-      @else {
-        <div class="error-msg">
-          <mat-icon>error</mat-icon>
-          <p>{{ createTransactionStatusMessage }}</p>
-        </div>
-      }
-    }
+    <!-- did not set success message in component as user should be routed to next step upon success -
+     no need to see the success message  -->
+    <div [ngClass]="{'success-msg':createTransactionSuccess,'failure-msg':!createTransactionSuccess}">
+      <p>{{createTransactionStatusMessage}}</p>
+    </div>
+    
   </form>
 </div>
 <div></div>

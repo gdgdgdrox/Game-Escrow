@@ -9,11 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { finalize } from 'rxjs/internal/operators/finalize';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-step4-seller',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatProgressSpinnerModule],
+  imports: [MatIconModule, MatButtonModule, MatProgressSpinnerModule, CommonModule],
   templateUrl: './transaction-step4-seller.component.html',
   styleUrl: './transaction-step4-seller.component.css',
 })
@@ -21,8 +22,9 @@ export class TransactionStep4SellerComponent implements OnInit {
   @Input() transaction!: TransactionResponseDTO;
   selectedFile: File | null = null;
   // message: string | null = null;
-  fileUploadMessage = '';
   isUploading = false;
+  fileUploadSuccess = false;
+  fileUploadStatusMessage = '';
   isFileAlreadyUploaded = false;
 
   constructor(
@@ -46,7 +48,7 @@ export class TransactionStep4SellerComponent implements OnInit {
       this.transaction.transactionSteps.transactionStep4.sellerPhotoUploaded
     ) {
       this.isFileAlreadyUploaded = true;
-      this.fileUploadMessage = 'File uploaded!';
+      this.fileUploadStatusMessage = 'File uploaded!';
     }
   }
 
@@ -92,14 +94,15 @@ export class TransactionStep4SellerComponent implements OnInit {
               transaction.transactionSteps.transactionStep4.sellerPhotoUploaded
             ) {
               this.isFileAlreadyUploaded = true;
-              this.fileUploadMessage = 'File uploaded!';
+              this.fileUploadSuccess = true;
+              this.fileUploadStatusMessage = 'File uploaded!';
             }
           },
           error: (error: HttpErrorResponse) => {
             console.error(error);
             this.isUploading = false;
             this.isFileAlreadyUploaded = false;
-            this.fileUploadMessage = 'Upload failed. Please try again later.';
+            this.fileUploadStatusMessage = 'Upload failed. Please try again later.';
           }
         });
     }

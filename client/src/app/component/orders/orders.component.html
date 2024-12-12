@@ -9,11 +9,6 @@
           matBadgePosition="below after"
         ></span>
       </ng-template>
-      <div class="list-header">
-        <span class="header-game">Game</span>
-        <span class="header-transaction-id">Transaction ID</span>
-        <span class="header-status">Status</span>
-      </div>
       <mat-list role="list">
         @for(transaction of transactionsPendingUserAction; track
         transaction.transactionID){
@@ -22,13 +17,13 @@
             <img [src]="transaction.game.gameImagePath" alt="game" class="game-image"/>
             <div class="transaction-info">
               <span class="game-name">{{ transaction.game.gameName }}</span>
-              <span class="transaction-id">{{ transaction.transactionID }}</span>
+              <span class="transaction-id">ID {{ transaction.transactionID }}</span>
               <div>
                 @if(transaction.currentStep === 2 && transaction.counterparty === loggedInUser){
-                  <span class="pending-accept-trade">accept trade</span>
+                  <span class="pending-accept-trade">pending accept trade</span>
                 }
                 @else if (transaction.currentStep === 3 && transaction.buyer === loggedInUser){
-                  <span class="pending-payment">pay escrow</span>
+                  <span class="pending-payment">pending pay escrow</span>
                 }
                 @else if (transaction.currentStep === 4 && transaction.buyer === loggedInUser){
                   <span class="pending-receive-item">pending receive item</span>

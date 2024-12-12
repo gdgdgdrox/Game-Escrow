@@ -6,16 +6,20 @@ import { TransactionStateService } from '../../../service/transaction-state.serv
 import { createUrlTreeFromSnapshot, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-step4-buyer',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, CommonModule],
   templateUrl: './transaction-step4-buyer.component.html',
   styleUrl: './transaction-step4-buyer.component.css',
 })
 export class TransactionStep4BuyerComponent implements OnInit {
   @Input() transaction!: TransactionResponseDTO;
+  itemReceived = false;
+  itemReceivedStatusMessage = '';
+
   constructor(
     private transactionStep4Service: TransactionStep4Service,
     private transactionStateService: TransactionStateService,
@@ -43,6 +47,7 @@ export class TransactionStep4BuyerComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
+          this.itemReceivedStatusMessage = 'Something went wrong. Please try again later.';
         },
       });
   }

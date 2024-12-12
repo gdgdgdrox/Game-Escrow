@@ -1,5 +1,5 @@
 .tabs-container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -27,7 +27,7 @@
 
 .list-content {
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   width: 100%; 
 }
 
@@ -40,7 +40,9 @@
 
 .transaction-id,
 .game-name,
-.counterparty,
+.pending-accept-trade,
+.pending-payment,
+.pending-receive-item,
 .completed-date,
 .status {
   color:white;
@@ -48,35 +50,35 @@
 }
 
 .pending-accept-trade {
-  color:beige;
+  color:white;
 }
 
 .pending-payment{
-  color: rgb(168, 106, 37)
-}
-
-.pending-receive-item{
   color: goldenrod;
 }
 
+.pending-receive-item{
+  color: beige;
+}
+
 .game-name {
-  flex: 1; /* Allows the game name to take up the available space */
-  text-align: left; /* Aligns the text to the left */
-  margin-right: 10px; /* Adds some spacing between items */
+  flex: 1;
+  text-align: left;
+  margin-right: 10px;
 
 }
 
 .transaction-id {
-  flex: 2; /* Adjust the width proportion as necessary */
-  text-align:center; /* Aligns text to the left */
-  white-space: nowrap; /* Prevents the text from breaking to the next line */
-  overflow: hidden; /* Hides overflowing text */
-  text-overflow: ellipsis; /* Adds "..." for truncated text */
+  flex: 2;
+  text-align:center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .status {
-  flex: 1; /* Allows status to take less space */
-  text-align: right; /* Aligns status to the right */
+  flex: 1; 
+  text-align: right;
 }
 
 .game-image {
@@ -85,34 +87,4 @@
   object-fit: cover;
   border-radius: 50%;
   margin-right: 5px;
-}
-
-
-/* HEADER */
-/* Header Row */
-.list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px; /* Adjust spacing as needed */
-  font-weight: bold;
-  font-size: 15px; /* Adjust font size as needed */
-  color: beige;
-  background-color: #1c1c1c;
-  /* border-bottom: 1px solid #333;  */
-}
-
-.header-game {
-  flex: 1; /* Matches .game-name flex */
-  text-align: left;
-}
-
-.header-transaction-id {
-  flex: 2; /* Matches .transaction-id flex */
-  text-align: center;
-}
-
-.header-status {
-  flex: 1; /* Matches .status flex */
-  text-align: right;
 }

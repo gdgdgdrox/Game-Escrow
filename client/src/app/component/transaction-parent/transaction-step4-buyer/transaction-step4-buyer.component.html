@@ -13,4 +13,9 @@
   </p>
   <p>Please confirm receipt</p>
   <button  mat-stroked-button class="confirm-item-received-btn" type="button" (click)="confirmItemReceived()">Item Received!</button>
+  <div>
+    <p [ngClass]="{'failure-msg':!itemReceived}">
+      {{itemReceivedStatusMessage}}
+    </p>
+  </div>
 </div>

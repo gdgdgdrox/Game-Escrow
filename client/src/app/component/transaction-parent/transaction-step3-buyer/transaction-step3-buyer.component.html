@@ -1,12 +1,17 @@
 <div class="step3-buyer-container">
   <h2>Pay Escrow</h2>
-  <p>Please transfer 
-      <span class="price">
-        SGD {{ transaction.price }}
-    </span>
-     to us via PayNow</p>
+  <div class="payment-info">
+    <p>Please transfer 
+        <span class="price">
+          SGD {{ transaction.price }}
+      </span>
+       to us via PayNow</p>
+  </div>
   <img [src]="qrPic" alt="qr"/>
   <button mat-stroked-button class="transfer-btn" type="button" (click)="onTransfer()">Done</button>
+</div>
+<div [ngClass]="{'failure-msg':!transferSuccess}">
+  <p>{{transferStatusMessage}}</p>
 </div>
 <div>
   @if(isVerifyingTransfer){

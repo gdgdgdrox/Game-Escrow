@@ -5,17 +5,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TransactionStateService } from '../../../service/transaction-state.service';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-transaction-step2-counterparty',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule,CommonModule],
   templateUrl: './transaction-step2-counterparty.component.html',
   styleUrl: './transaction-step2-counterparty.component.css',
 })
 export class TransactionStep2CounterpartyComponent implements OnInit {
   @Input() transaction!: TransactionResponseDTO;
+  acceptTradeSuccess = false;
+  acceptTradeStatusMessage = '';
 
   constructor(
     private transactionStep2Service: TransactionStep2Service,
@@ -41,6 +44,7 @@ export class TransactionStep2CounterpartyComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           console.error(error);
+          this.acceptTradeStatusMessage = 'Something went wrong. Please try again later.';
         },
       });
   }

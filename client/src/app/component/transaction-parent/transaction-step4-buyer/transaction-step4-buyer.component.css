@@ -20,9 +20,16 @@ h2 {
 .game-image {
     height: 1.8em;
     vertical-align: middle;
+    border-radius: 50%
   }
 
 
 .confirm-item-received-btn{
     border: 2px solid cyan;
 }
+
+
+.failure-msg {
+    color: red;
+    text-align: center;
+  }

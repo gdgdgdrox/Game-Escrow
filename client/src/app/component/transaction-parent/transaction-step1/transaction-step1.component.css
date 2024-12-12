@@ -4,6 +4,10 @@ h2 {
   padding-bottom: 10px;
   border-bottom: 1px solid #FFEB99;
 }
+
+.i-am{
+  font-weight: bold;
+}
 .game-option {
   display: flex;
   align-items: center;
@@ -52,14 +56,8 @@ p {
   z-index: 999;
 }
 
-.success-msg {
-  margin-top: 5px;
-  color: goldenrod;
-  text-align: center;
-}
 
-.error-msg {
-  margin-top: 5px;
+.failure-msg {
   color: red;
   text-align: center;
 }

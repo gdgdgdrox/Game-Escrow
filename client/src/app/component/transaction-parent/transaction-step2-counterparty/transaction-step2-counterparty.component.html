@@ -47,4 +47,5 @@
     <button mat-stroked-button class="accept-btn" type="button" (click)="acceptTrade()">
         Accept
   </button>
+  <p [ngClass]="{'failure-msg': !acceptTradeSuccess}">{{ acceptTradeStatusMessage }}</p>
 </div>
