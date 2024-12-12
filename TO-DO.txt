@@ -1,10 +1,7 @@
 remove unused import
 remove chatgpt comment
-fix home page game display
-fix home page ugly text
-fix header login / sign up color
-add badges to orders
-
 
 migrate to AWS RDS, DDB, EC2, Docker
 final: purge commit history of secrets
+
+rename transaction-parent
