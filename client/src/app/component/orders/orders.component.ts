@@ -7,13 +7,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-
-
+import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [MatTabsModule,MatListModule, RouterModule, DatePipe, CommonModule],
+  imports: [MatTabsModule,MatListModule, RouterModule, DatePipe, CommonModule, MatBadgeModule],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })

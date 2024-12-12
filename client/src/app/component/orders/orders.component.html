@@ -1,6 +1,19 @@
 <div class="tabs-container">
   <mat-tab-group>
-    <mat-tab label="Pending Action">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Pending Action
+        <span
+          matBadge="{{ transactionsPendingUserAction.length }}"
+          matBadgeOverlap="false"
+          matBadgePosition="below after"
+        ></span>
+      </ng-template>
+      <div class="list-header">
+        <span class="header-game">Game</span>
+        <span class="header-transaction-id">Transaction ID</span>
+        <span class="header-status">Status</span>
+      </div>
       <mat-list role="list">
         @for(transaction of transactionsPendingUserAction; track
         transaction.transactionID){
@@ -9,15 +22,33 @@
             <img [src]="transaction.game.gameImagePath" alt="game" class="game-image"/>
             <div class="transaction-info">
               <span class="game-name">{{ transaction.game.gameName }}</span>
-              <span class="transaction-id">Transaction ID {{ transaction.transactionID }}</span>
-              <span class="counterparty">{{transaction.buyer === loggedInUser ? transaction.seller : transaction.buyer}}</span>
+              <span class="transaction-id">{{ transaction.transactionID }}</span>
+              <div>
+                @if(transaction.currentStep === 2 && transaction.counterparty === loggedInUser){
+                  <span class="pending-accept-trade">accept trade</span>
+                }
+                @else if (transaction.currentStep === 3 && transaction.buyer === loggedInUser){
+                  <span class="pending-payment">pay escrow</span>
+                }
+                @else if (transaction.currentStep === 4 && transaction.buyer === loggedInUser){
+                  <span class="pending-receive-item">pending receive item</span>
+                }
+              </div>
             </div>
           </div>
         </mat-list-item>
         }
       </mat-list>
     </mat-tab>
-    <mat-tab label="Completed">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Completed
+        <span
+          matBadge="{{ transactionsCompleted.length }}"
+          matBadgeOverlap="false"
+          matBadgePosition="below after"
+        ></span>
+      </ng-template>
       <mat-list role="list">
         @for(transaction of transactionsCompleted; track
         transaction.transactionID){
@@ -45,7 +76,15 @@
         }
       </mat-list>
     </mat-tab>
-    <mat-tab label="All">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        All
+        <span
+          matBadge="{{ transactions.length }}"
+          matBadgeOverlap="false"
+          matBadgePosition="below after"
+        ></span>
+      </ng-template>
       <mat-list role="list">
         @for(transaction of transactions; track transaction.transactionID){
         <mat-list-item
