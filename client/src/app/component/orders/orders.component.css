@@ -43,9 +43,8 @@
 .pending-accept-trade,
 .pending-payment,
 .pending-receive-item,
-.completed-date,
-.created-date
-.status {
+.created-date,
+.completed-date {
   color:white;
   font-size: 14px; 
 }
