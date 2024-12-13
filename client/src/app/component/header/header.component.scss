@@ -1,13 +1,6 @@
-/* Toolbar */
-// .toolbar-title {
-//   font-size: 24px;
-//   font-weight: bold;
-// }
-
-// Override the default style
 mat-toolbar {
-    background-color: black !important; /* Ensure the toolbar has a black background */
-    color: white; /* Set the text color to white for readability */
+    background-color: black !important;
+    color: white; 
   }
 
 .spacer {
@@ -15,7 +8,7 @@ mat-toolbar {
 }
 
 .logo {
-  height: 40px; /* Adjust size as needed */
+  height: 40px;
   max-height: 100%;
 }
 

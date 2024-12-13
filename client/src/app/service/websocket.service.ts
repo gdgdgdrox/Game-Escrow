@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Client, IMessage, Stomp } from '@stomp/stompjs';
+import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { TransactionResponseDTO } from '../dto/transaction-response.dto';
 
@@ -75,31 +75,6 @@ export class WebsocketService {
       });
     }
   }
-
-  // subscribeToStep4Topic(
-  //   transactionID: string,
-  //   onMessageReceived: (message: any) => void
-  // ) {
-  //   const topic = `/topic/transaction/step4/${transactionID}`;
-  //   console.log(`subscribing to ${topic}`);
-  //   if (this.stompClient && this.isConnected) {
-  //     console.log('Message received on topic:', topic);
-  //     this.stompClient.subscribe(topic, (message: IMessage) => {
-  //       console.log(message);
-  //       const body = JSON.parse(message.body);
-  //       onMessageReceived(body as TransactionResponseDTO);
-  //     });
-  //   } else {
-  //     console.error(
-  //       'WebSocket not connected. Queuing subscription for:',
-  //       topic
-  //     );
-  //     this.pendingSubscriptions.push({
-  //       transactionID,
-  //       callback: onMessageReceived,
-  //     });
-  //   }
-  // }
 
   disconnect(): void {
     if (this.stompClient) {
