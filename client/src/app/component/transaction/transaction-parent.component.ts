@@ -119,9 +119,5 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
       }
     }
   }
-
-  markStepComplete(index: number) {
-    this.steps[index].completed = true;
-  }
   
 }

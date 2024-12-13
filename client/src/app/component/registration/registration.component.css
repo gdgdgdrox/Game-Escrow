@@ -5,7 +5,7 @@
   align-items: center;
   height: 100vh;
   padding: 16px;
-  background-color: #000; /* Black background */
+  background-color: #000; 
 }
 
 /* Style the form card */
@@ -15,7 +15,7 @@
   border-radius: 12px;
   background-color: #1e1e2f; /* Dark card background */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-  color: #ffffff; /* White text */
+  color: #ffffff; 
 }
 
 /* Adjust width of form fields */
@@ -25,34 +25,34 @@ mat-form-field {
 }
 
 .mat-form-field-flex {
-  background-color: #2a2a3c; /* Input field background */
+  background-color: #2a2a3c;
   border-radius: 6px;
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex:hover {
-  background-color: #343447; /* Darker hover state */
+  background-color: #343447;
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
-  border: 1px solid #ffffff; /* White border */
+  border: 1px solid #ffffff;
   transition: border-color 0.3s;
 }
 
 .mat-form-field-appearance-fill.mat-focused .mat-form-field-flex {
-  border-color: #ffffff; /* White focus border */
+  border-color: #ffffff;
 }
 
 /* Style the input text */
 input.mat-input-element {
-  color: #ffffff; /* Input text color */
+  color: #ffffff;
 }
 
 .mat-label {
-  color: #9c9caf; /* Label color */
+  color: #9c9caf;
 }
 
 .mat-form-field.mat-focused .mat-label {
-  color: #ffffff; /* White for focused label */
+  color: #ffffff;
 }
 
 /* Style error messages */
@@ -72,10 +72,6 @@ button {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-/* button:hover { */
-  /* background-color: #008ba3;  */
-  /* transform: translateY(-2px); */
-/* } */
 
  #register-btn {
   width: 100%;
@@ -100,15 +96,13 @@ mat-radio-button {
 }
 
 mat-radio-button.mat-radio-checked {
-  color: #ffffff; /* White for checked radio button */
+  color: #ffffff; 
 }
 
-/* Optional: Add some padding for the gender selection */
 .gender-selection {
   margin-bottom: 16px;
 }
 
-/* Add a small hover effect to the card */
 .form-card:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
 }

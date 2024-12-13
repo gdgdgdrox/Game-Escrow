@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../model/user';
 import { RegistrationService } from '../../service/registration.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';

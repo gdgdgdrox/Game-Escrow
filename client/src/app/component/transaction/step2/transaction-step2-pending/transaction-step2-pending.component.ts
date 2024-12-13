@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
 import { WebsocketService } from '../../../../service/websocket.service';
 import { TransactionStateService } from '../../../../service/transaction-state.service';

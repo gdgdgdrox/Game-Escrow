@@ -3,7 +3,7 @@ import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto
 import { TransactionStep4Service } from '../../../../service/transaction/transaction-step4.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TransactionStateService } from '../../../../service/transaction-state.service';
-import { createUrlTreeFromSnapshot, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';

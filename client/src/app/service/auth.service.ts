@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { API_URL } from '../constant/api.constant';
 import {jwtDecode} from 'jwt-decode';
 import { Router } from '@angular/router';

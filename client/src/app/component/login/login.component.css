@@ -4,7 +4,7 @@
     align-items: center;
     height: 100vh;
     /* padding: 16px; */
-    background-color: #000; /* Black background */
+    background-color: #000;
   }
 
   .form-card {
@@ -13,7 +13,7 @@
     border-radius: 12px;
     background-color: #1e1e2f; /* Dark card background */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-    color: #ffffff; /* White text */
+    color: #ffffff;
   }
 
   mat-form-field {
@@ -22,7 +22,7 @@
   }
   
   .mat-form-field-flex {
-    background-color: #2a2a3c; /* Input field background */
+    background-color: #2a2a3c;
     border-radius: 6px;
   }
 
