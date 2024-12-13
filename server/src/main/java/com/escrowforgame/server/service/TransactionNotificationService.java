@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.escrowforgame.server.entity.TransactionEntity;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class TransactionNotificationService {
     @Autowired
@@ -13,6 +16,7 @@ public class TransactionNotificationService {
 
 
     public void notifyStep2Completed(TransactionEntity transactionEntity) {
+        log.info("notifying subscriber that txn {} step 2 is completed",transactionEntity.getTransactionID());
         messagingTemplate.convertAndSend(
             "/topic/transaction/step2/" + transactionEntity.getTransactionID(),
             transactionEntity
@@ -20,6 +24,7 @@ public class TransactionNotificationService {
     }
 
     public void notifySellerThatStep3IsCompleted(TransactionEntity transactionEntity) {
+        log.info("notifying seller that txn {} step 3 is completed",transactionEntity.getTransactionID());
         messagingTemplate.convertAndSend(
             "/topic/transaction/step3/" + transactionEntity.getTransactionID(),
             transactionEntity
@@ -27,7 +32,7 @@ public class TransactionNotificationService {
     }
 
     public void notifySellerThatStep4IsCompleted(TransactionEntity transactionEntity) {
-        System.out.println("Sending message to topic: /topic/transaction/step4/" + transactionEntity.getTransactionID());
+       log.info("notifying seller that txn {} step 3 is completed",transactionEntity.getTransactionID());
         messagingTemplate.convertAndSend(
             "/topic/transaction/step4/" + transactionEntity.getTransactionID(),
             transactionEntity

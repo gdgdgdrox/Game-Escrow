@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.escrowforgame.server.entity.TransactionEntity;
 import com.escrowforgame.server.service.TransactionService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class TransactionController {
@@ -22,22 +25,21 @@ public class TransactionController {
     
     @GetMapping("/transactions")
     public List<TransactionEntity> getAllTransactionsByUser(@RequestParam String username){
-        System.out.println("Getting all transactions for " + username);
-        return this.transactionService.getAllTransactionsByUser(username);
+        log.info("in get all transactions for user: {}",username);
+        List<TransactionEntity> transactions =  this.transactionService.getAllTransactionsByUser(username);
+        log.debug("number of txn by {} = {}",username,transactions);
+        return transactions;
     }
 
-    @GetMapping("/transaction")
-    public TransactionEntity getTransactionByTransactionID(@RequestParam String transactionID) throws InterruptedException{
-        System.out.println("Getting transaction " + transactionID);
-        // Thread.sleep(5000);
-        return transactionService.getTransactionByTransactionID(transactionID);
-    }
 
+    
     @GetMapping("/transaction/{transactionID}")
     public ResponseEntity<TransactionEntity> getTransactionState(@PathVariable String transactionID) {
-        TransactionEntity state = transactionService.getTransactionState(transactionID);
-        if (state != null) {
-            return ResponseEntity.ok(state);
+        log.info("retrieving txn {}",transactionID);
+        TransactionEntity transaction = transactionService.getTransactionByTransactionID(transactionID);
+        if (transaction != null) {
+            log.info("retrieved");
+            return ResponseEntity.ok(transaction);
         }
         return ResponseEntity.notFound().build();
     }

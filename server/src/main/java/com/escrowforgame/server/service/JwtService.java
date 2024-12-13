@@ -16,7 +16,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class JwtService {
 
@@ -26,10 +28,11 @@ public class JwtService {
     @Value("${jwt.validity}")
     private String validity;
 
+    // utility function only used once
     public void generateSecretKey() {
         SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
         String encodedSecretKey = Base64.getEncoder().encodeToString(secretKey.getEncoded());
-        System.out.println(encodedSecretKey);
+        log.debug(encodedSecretKey);
     }
 
     public SecretKey decodeSecretKey() {

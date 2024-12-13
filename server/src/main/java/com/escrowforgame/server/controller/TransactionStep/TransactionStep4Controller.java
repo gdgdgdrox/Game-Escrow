@@ -1,12 +1,9 @@
 package com.escrowforgame.server.controller.TransactionStep;
 
-import java.io.File;
 import java.io.IOException;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +22,10 @@ import com.escrowforgame.server.service.S3Service;
 import com.escrowforgame.server.service.TransactionNotificationService;
 import com.escrowforgame.server.service.TransactionService;
 
+import lombok.extern.slf4j.Slf4j;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/transaction/step4")
 public class TransactionStep4Controller {
@@ -45,26 +44,33 @@ public class TransactionStep4Controller {
 
     @PutMapping("/{transactionID}/buyer")
     public ResponseEntity<TransactionEntity> buyerConfirmItemReceived(@PathVariable String transactionID, @RequestHeader("Authorization") String authorizationHeader){
-        System.out.println("buyer confirm item received");
-        String jwt = authorizationHeader.substring(7);
-        String username = jwtService.extractUsername(jwt);
+        log.info("in step 4 buyer confirm item received for txn {}",transactionID);
         TransactionEntity transactionEntity = transactionService.getTransactionByTransactionID(transactionID);
-
-
-        if (username.equals(transactionEntity.getBuyer())){
-            TransactionStep4 transactionStep4 = transactionEntity.getTransactionSteps().getTransactionStep4();
-            if (transactionStep4 == null){
-                transactionStep4 = new TransactionStep4();
-            }
-            transactionStep4.markStep4AsCompleted();
-            transactionEntity.getTransactionSteps().setTransactionStep4(transactionStep4);
-            transactionEntity.setCurrentStep(5);
-            transactionEntity.getTransactionSteps().setTransactionStep5(new TransactionStep5());
-            transactionService.updateTransaction(transactionEntity);
-            System.out.println(transactionEntity.toString());
-            // notify seller
-            transactionNotificationService.notifySellerThatStep4IsCompleted(transactionEntity);
-            return ResponseEntity.ok(transactionEntity);
+        if (transactionEntity == null) {
+            log.error("did not find txn {}",transactionID);
+            return ResponseEntity.badRequest().body(null);
+        }
+        else{
+            log.debug("retrieved txn {}", transactionEntity.getTransactionID());
+            String jwt = authorizationHeader.substring(7);
+            String username = jwtService.extractUsername(jwt);
+            if (username.equals(transactionEntity.getBuyer())){
+                TransactionStep4 transactionStep4 = transactionEntity.getTransactionSteps().getTransactionStep4();
+                if (transactionStep4 == null){
+                    transactionStep4 = new TransactionStep4();
+                }
+                log.debug("marking step 4 as completed and setting curent step to 5");
+                transactionStep4.markStep4AsCompleted();
+                transactionEntity.getTransactionSteps().setTransactionStep4(transactionStep4);
+                transactionEntity.setCurrentStep(5);
+                transactionEntity.getTransactionSteps().setTransactionStep5(new TransactionStep5());
+                log.debug("updating txn in ddb {}",transactionEntity.toString());
+                transactionService.updateTransaction(transactionEntity);
+                log.debug("updated");
+                // notify seller
+                transactionNotificationService.notifySellerThatStep4IsCompleted(transactionEntity);
+                return ResponseEntity.ok(transactionEntity);
+        }
 
         }
         return ResponseEntity.badRequest().body(null);
@@ -73,23 +79,28 @@ public class TransactionStep4Controller {
     @PostMapping("/{transactionID}/seller")
     public ResponseEntity<TransactionEntity> sellerUploadEvidence(@RequestParam("file") MultipartFile file,
     @PathVariable String transactionID){
-        System.out.println("seller uploaded picture");
+        log.debug("in step 4 seller upload file for txn {}", transactionID);
         String s3ObjectKey = String.format("%s_%s",transactionID,file.getOriginalFilename());
+        log.debug("object key = {}",s3ObjectKey);
         try {
             PutObjectResponse putObjectResponse = s3Service.uploadToS3(file, s3ObjectKey);
             if (putObjectResponse.sdkHttpResponse().isSuccessful()){
+                log.debug("s3 file successfully uploaded");
                 TransactionEntity transactionEntity = transactionService.getTransactionByTransactionID(transactionID);
                 TransactionStep4 transactionStep4 = transactionEntity.getTransactionSteps().getTransactionStep4();
                 if (transactionStep4 == null){
                     transactionStep4 = new TransactionStep4();
                 }
+                log.debug("updating txn object with s3 object key");
                 transactionStep4.setSellerPhotoUploaded(true);
                 transactionStep4.setSellerPhotoEvidenceS3Key(transactionID + "_" + file.getOriginalFilename());
+                log.debug("updating txn in ddb {}",transactionEntity.toString());
                 transactionService.updateTransaction(transactionEntity);
+                log.debug("updated");
                 return ResponseEntity.status(HttpStatus.CREATED).body(transactionEntity);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.debug("error uploading to s3 {}",e.getMessage(),e);
             return ResponseEntity.internalServerError().body(null);
         }
         return ResponseEntity.internalServerError().body(null);

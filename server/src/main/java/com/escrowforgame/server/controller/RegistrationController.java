@@ -12,6 +12,9 @@ import com.escrowforgame.server.entity.User;
 import com.escrowforgame.server.exception.UserAlreadyExistsException;
 import com.escrowforgame.server.service.RegistrationService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class RegistrationController {
@@ -21,12 +24,12 @@ public class RegistrationController {
 
     @PostMapping(path="/register")
     public ResponseEntity<String> createUser(@RequestBody User user){
-        System.out.println("In create user controller");
-        System.out.println("Received user: " + user.toString());
+        log.info("in registration controller. to create {}",user.getUsername());
         try{
             userService.createNewUser(user);
         }
         catch (UserAlreadyExistsException e){
+            log.info("failed to create new user as {} already exists",user.getUsername());
             return ResponseEntity.status(HttpStatus.CONFLICT).body("user already exists");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body("user created");

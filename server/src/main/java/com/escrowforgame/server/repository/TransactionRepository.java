@@ -33,14 +33,7 @@ public class TransactionRepository {
                 TableSchema.fromBean(TransactionEntity.class));
     }
 
-    // public DynamoDbTable<TransactionEntity> getTransactionTable() {
-    // return dynamoDbEnhancedClient.table("Transaction",
-    // TableSchema.fromBean(TransactionEntity.class));
-    // }
-
     public void createTransaction(TransactionEntity transactionEntity) throws DynamoDbException {
-        System.out.printf("Creating new Transaction Entity in DynamoDB with transaction ID=%s\n",
-                transactionEntity.getTransactionID());
         dynamoDbTransactionTable.putItem(transactionEntity);
     }
 
@@ -48,24 +41,24 @@ public class TransactionRepository {
         return this.dynamoDbTransactionTable.getItem(Key.builder().partitionValue(transactionID).build());
     }
 
-    public void getTransactionByCounterparty(String counterparty) {
-        DynamoDbIndex<TransactionEntity> counterpartyIndex = this.dynamoDbTransactionTable.index("CounterpartyGSI");
+    // public void getTransactionByCounterparty(String counterparty) {
+    //     DynamoDbIndex<TransactionEntity> counterpartyIndex = this.dynamoDbTransactionTable.index("CounterpartyGSI");
 
-        QueryConditional queryConditional = QueryConditional.keyEqualTo(
-                Key.builder()
-                        .partitionValue(counterparty)
-                        .build());
+    //     QueryConditional queryConditional = QueryConditional.keyEqualTo(
+    //             Key.builder()
+    //                     .partitionValue(counterparty)
+    //                     .build());
 
-        Iterable<Page<TransactionEntity>> results = (Iterable<Page<TransactionEntity>>) counterpartyIndex.query(
-                QueryEnhancedRequest.builder()
-                        .queryConditional(queryConditional)
-                        .build());
+    //     Iterable<Page<TransactionEntity>> results = (Iterable<Page<TransactionEntity>>) counterpartyIndex.query(
+    //             QueryEnhancedRequest.builder()
+    //                     .queryConditional(queryConditional)
+    //                     .build());
 
-        // Query the index
-        for (Page<TransactionEntity> page : results) {
-            page.items().forEach(item -> System.out.println(item.toString()));
-        }
-    }
+    //     // Query the index
+    //     for (Page<TransactionEntity> page : results) {
+    //         page.items().forEach(item -> log.info(item.toString()));
+    //     }
+    // }
 
     public List<TransactionEntity> getAllTransactionsByUser(String username) {
         Expression filterExpression = Expression.builder()
@@ -85,8 +78,7 @@ public class TransactionRepository {
 
         // Perform the scan and return the results
         PageIterable<TransactionEntity> pages = this.dynamoDbTransactionTable.scan(scanRequest);
-        // List<TransactionDTO> transactions = pages.items().stream().map(item ->
-        // item.mapEntityToDTO()).collect(Collectors.toList());
+
         List<TransactionEntity> transactions = pages.items().stream().toList();
         return transactions;
     }

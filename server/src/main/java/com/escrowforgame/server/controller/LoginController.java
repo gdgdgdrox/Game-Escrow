@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.escrowforgame.server.service.JwtService;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class LoginController {
@@ -28,27 +31,26 @@ public class LoginController {
     
     @PostMapping(value="/login")
     public ResponseEntity<String> login(@RequestBody Map<String,String> requestBody){
-        System.out.println("In login controller");
+        log.info("in login controller");
         String username = requestBody.get("username");
         String password = requestBody.get("password");
-        System.out.println("User = " + username + " Password = " + password);
 
         if (username != null && password != null){
             try{
                 Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(username, password, null));
                 if (authentication.isAuthenticated()){
-                    System.out.println("is authenticated");
+                    log.debug("authentication success");
                     String jwt = jwtService.generateJwt(username);
                     return ResponseEntity.ok().body(jwt);
                 }
             }
             catch (AuthenticationException ae){
-                System.out.println("authentication failed");
+                log.debug("authentication failed. exception message = {}",ae.getMessage());
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failed");
             }
         }
         else{
-            System.out.println("missing username/password");
+            log.debug("login failed because username or password is missing");
             return ResponseEntity.badRequest().body("missing username/password");
         }
         return null;

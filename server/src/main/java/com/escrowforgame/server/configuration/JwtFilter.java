@@ -19,7 +19,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -32,17 +34,16 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        System.out.println("Start jwt filter");
+                log.debug("start of jwt filter");
         String authorizationHeader = request.getHeader("Authorization");
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer")) {
-            System.out.println("no authorization header / header does not start with bearer");
+            log.debug("no authorization header / header does not start with bearer");
             filterChain.doFilter(request, response);
             return;
             
         }
 
         String jwt = authorizationHeader.substring(7);
-        System.out.println("token is " + jwt);
 
         // Validate jwt
         try {
@@ -50,7 +51,7 @@ public class JwtFilter extends OncePerRequestFilter {
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
                 if (jwtService.isTokenValid(jwt, userDetails)){
-                    System.out.println("jwt is valid");
+                    log.debug("jwt is valid");
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                             userDetails.getUsername(), userDetails.getPassword(), null);
                     usernamePasswordAuthenticationToken
@@ -59,14 +60,13 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
             }
         } catch (ExpiredJwtException eje) {
-            System.out.println("token expired");
+            log.debug("token expired");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json");
             response.getWriter().write("{\"error\": \"" + "token already expired" + "\"}");
             response.flushBuffer();
         } catch (Exception e){
-            System.out.println("exception");
-            e.printStackTrace();
+            log.error("An exception occurred: {}", e.getMessage(), e);
         }
 
         filterChain.doFilter(request, response);

@@ -16,7 +16,9 @@ import com.escrowforgame.server.service.CustomUserDetailsService;
 import com.escrowforgame.server.service.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class WebSocketJwtInterceptor implements HandshakeInterceptor {
 
@@ -29,40 +31,38 @@ public class WebSocketJwtInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
             Map<String, Object> attributes) throws Exception {
-                System.out.println("in beforehandshake");
+                log.debug("before handshake");
                 if (request instanceof ServletServerHttpRequest) {
                     HttpServletRequest servletRequest = ((ServletServerHttpRequest) request).getServletRequest();
-                    String token = servletRequest.getParameter("token"); // Extract token from query parameter
+                    String token = servletRequest.getParameter("token");
                     if (token == null || token.isEmpty()) {
-                        System.out.println("Token is missing or empty.");
+                        log.error("jwt is missing or empty");
                         return false; // Reject the handshake if no token is provided
                     }
                     
                     try {
                         String username = jwtService.extractUsername(token);
-                        System.out.println("username is " + username);
                         if (username != null) {
-                            System.out.println("Fetching user details for username: " + username);
+                            log.debug("fetching user details for username: {}",username);
                             UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
                         
                             if (jwtService.isTokenValid(token, userDetails)) {
-                                System.out.println("Token is valid. Storing authenticated user info in attributes.");
+                                log.debug("jwt is valid. toring authenticated user info in attributes.");
                                 attributes.put("username", username); // Store authenticated user info in attributes
                                 return true; // Allow handshake
                             } else {
-                                System.out.println("Token is invalid. Rejecting handshake.");
-                                return false; // Reject handshake
+                                log.debug("jwt is invalid. rejecting handshake.");
+                                return false;
                             }
                         } else if (SecurityContextHolder.getContext().getAuthentication() != null) {
-                            System.out.println("Authentication already exists. Proceeding with handshake.");
+                            log.debug("authentication already exists. proceeding with handshake.");
                             return true; // Allow handshake for authenticated users
                         } else {
-                            System.out.println("Username is null and no authentication exists. Rejecting handshake.");
-                            return false; // Reject handshake
+                            log.debug("username is null and no authentication exists. ejecting handshake.");
+                            return false; 
                         }
                     } catch (Exception e) {
-                        System.err.println("Error during token validation: " + e.getMessage());
-                        e.printStackTrace();
+                        log.error("error with jwt validation for websocket connection",e.getMessage(),e);
                     }}
                     return false;
     }

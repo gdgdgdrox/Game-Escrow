@@ -17,7 +17,6 @@ public class UserController {
     
     @GetMapping("/user")
     public boolean checkIfUserExists(@RequestParam String username){
-        System.out.println("in check user exist controller");
         return userService.checkIfUserExists(username);
     }
 }

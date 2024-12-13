@@ -12,7 +12,10 @@ import com.escrowforgame.server.dto.TransactionDTO;
 import com.escrowforgame.server.entity.TransactionEntity;
 import com.escrowforgame.server.service.TransactionService;
 
+import lombok.extern.slf4j.Slf4j;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
+
+@Slf4j
 @RestController
 @RequestMapping("/api/transaction/step1")
 public class TransactionStep1Controller {
@@ -22,13 +25,14 @@ public class TransactionStep1Controller {
     
     @PostMapping(value="/createTransaction")
     public ResponseEntity<TransactionEntity> createTransaction(@RequestBody TransactionDTO transactionDTO){
-        System.out.println("In create transaction controller");
+        log.info("in step 1 create transaction");
         try{
             TransactionEntity createdTransaction = transactionService.createTransaction(transactionDTO);
+            log.info("new transaction created with txn id {}",createdTransaction.getTransactionID());
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
         }
         catch (DynamoDbException d){
-            d.printStackTrace();
+            log.error("error creating new transaction. {}",d.getMessage(),d);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }

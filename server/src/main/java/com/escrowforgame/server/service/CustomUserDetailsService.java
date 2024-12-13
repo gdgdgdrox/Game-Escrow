@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import com.escrowforgame.server.entity.User;
 import com.escrowforgame.server.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class CustomUserDetailsService implements UserDetailsService{
 
@@ -19,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("In custom user details service");
+        log.debug("loading user details of {}",username);
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isEmpty()){
             throw new UsernameNotFoundException("username not found");

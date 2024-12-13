@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.escrowforgame.server.dto.GameDTO;
 import com.escrowforgame.server.service.GameService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class GameController {
@@ -19,8 +22,9 @@ public class GameController {
     
     @GetMapping(value="/games")
     public List<GameDTO> getGames(){
-        System.out.println("in game controller");
+        log.info("in game controller");
         List<GameDTO> gameDTOs =  gameService.getAllGames();
+        log.debug("number of games: {}",gameDTOs.size());
         return gameDTOs;
     }
 }
