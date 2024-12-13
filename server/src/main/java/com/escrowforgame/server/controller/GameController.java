@@ -21,7 +21,6 @@ public class GameController {
     public List<GameDTO> getGames(){
         System.out.println("in game controller");
         List<GameDTO> gameDTOs =  gameService.getAllGames();
-        gameDTOs.forEach(gameDTO -> System.out.println(gameDTO));
         return gameDTOs;
     }
 }

@@ -3,9 +3,6 @@ package com.escrowforgame.server.dto;
 import com.escrowforgame.server.entity.TransactionEntity;
 
 import lombok.Data;
-import lombok.Getter;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
 @Data
 public class TransactionDTO {
