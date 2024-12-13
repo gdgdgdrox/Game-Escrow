@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
-import { OCBCApiService } from '../../../service/ocbc-api.service';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
+import { OCBCApiService } from '../../../../service/ocbc-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { TransactionStep3Service } from '../../../service/transaction/transaction-step3.service';
-import { TransactionStateService } from '../../../service/transaction-state.service';
+import { TransactionStep3Service } from '../../../../service/transaction/transaction-step3.service';
+import { TransactionStateService } from '../../../../service/transaction-state.service';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -69,7 +69,7 @@ export class TransactionStep3BuyerComponent {
           this.transactionStateService.transaction = transaction;
           setTimeout(() => {
             this.router.navigate([
-              '/transaction-parent',
+              '/transaction',
               `step${transaction.currentStep}`,
               transaction.transactionID,
             ]);

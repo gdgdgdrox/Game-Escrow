@@ -4,9 +4,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
-import { WebsocketService } from '../../../service/websocket.service';
-import { TransactionStateService } from '../../../service/transaction-state.service';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
+import { WebsocketService } from '../../../../service/websocket.service';
+import { TransactionStateService } from '../../../../service/transaction-state.service';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -53,7 +53,7 @@ export class TransactionStep3SellerComponent implements OnInit, OnDestroy {
         this.transactionStateService.transaction = transaction;
         console.log('shared service state updated. navigating to parent');
         this.router.navigate([
-          '/transaction-parent',
+          '/transaction',
           `step${transaction.currentStep}`,
           transaction.transactionID,
         ]);

@@ -1,27 +1,25 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { TransactionStep1Component } from './transaction-step1/transaction-step1.component';
-import { TransactionStep3BuyerComponent } from './transaction-step3-buyer/transaction-step3-buyer.component';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { MatStepperModule } from '@angular/material/stepper';
+import { TransactionStep3BuyerComponent } from './step3/transaction-step3-buyer/transaction-step3-buyer.component';
 import { AuthService } from '../../service/auth.service';
-import { TransactionStep2CounterpartyComponent } from './transaction-step2-counterparty/transaction-step2-counterparty.component';
-import { TransactionStep2PendingComponent } from './transaction-step2-pending/transaction-step2-pending.component';
+import { TransactionStep2CounterpartyComponent } from './step2/transaction-step2-counterparty/transaction-step2-counterparty.component';
+import { TransactionStep2PendingComponent } from './step2/transaction-step2-pending/transaction-step2-pending.component';
 import { TransactionResponseDTO } from '../../dto/transaction-response.dto';
 import { TransactionSharedService } from '../../service/transaction/transaction-shared.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { TransactionStep3SellerComponent } from './transaction-step3-seller/transaction-step3-seller.component';
-import { TransactionStep4BuyerComponent } from './transaction-step4-buyer/transaction-step4-buyer.component';
-import { TransactionStep4SellerComponent } from './transaction-step4-seller/transaction-step4-seller.component';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { TransactionStep1CompletedComponent } from './transaction-step1-completed/transaction-step1-completed.component';
-import { TransactionSteps } from '../../dto/transaction-step';
+import { TransactionStep3SellerComponent } from './step3/transaction-step3-seller/transaction-step3-seller.component';
+import { TransactionStep4BuyerComponent } from './step4/transaction-step4-buyer/transaction-step4-buyer.component';
+import { TransactionStep4SellerComponent } from './step4/transaction-step4-seller/transaction-step4-seller.component';
 import { TransactionStateService } from '../../service/transaction-state.service';
-import { TransactionStep2CompletedComponent } from './transaction-step2-completed/transaction-step2-completed.component';
-import { TransactionStep3CompletedComponent } from './transaction-step3-completed/transaction-step3-completed.component';
-import { TransactionStep5BuyerComponent } from './transaction-step5-buyer/transaction-step5-buyer.component';
-import { TransactionStep5SellerComponent } from './transaction-step5-seller/transaction-step5-seller.component';
-import { TransactionStep4CompletedComponent } from './transaction-step4-completed/transaction-step4-completed.component';
+import { TransactionStep2CompletedComponent } from './step2/transaction-step2-completed/transaction-step2-completed.component';
+import { TransactionStep3CompletedComponent } from './step3/transaction-step3-completed/transaction-step3-completed.component';
+import { TransactionStep5BuyerComponent } from './step5/transaction-step5-buyer/transaction-step5-buyer.component';
+import { TransactionStep5SellerComponent } from './step5/transaction-step5-seller/transaction-step5-seller.component';
+import { TransactionStep4CompletedComponent } from './step4/transaction-step4-completed/transaction-step4-completed.component';
 import { MatButtonModule } from '@angular/material/button';
+import { TransactionStep1CompletedComponent } from './step1/transaction-step1-completed/transaction-step1-completed.component';
+import { TransactionStep1Component } from './step1/transaction-step1/transaction-step1.component';
 
 @Component({
   selector: 'app-transaction-parent',
@@ -109,49 +107,6 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
    }
 
 
-  // handleCreatedTransaction(transaction: TransactionResponseDTO) {
-  //   console.log('handle created transaction',transaction.transactionID);
-  //   this.transaction = transaction;
-  //   console.log(`assigned this.transaction to ${this.transaction.transactionID}`);
-  //   this.userID = this.authService.getLoggedInUser();
-  // }
-
-  // handleTradeAcceptedNotification(transaction: TransactionResponseDTO) {
-  //   this.transaction = transaction;
-  //   this.currentStep = 3;
-  // }
-
-  // handleTradeAccepted(transaction: TransactionResponseDTO) {
-  //   this.transaction = transaction;
-  //   console.log('txn current step',this.transaction.currentStep);
-  //   this.currentStep = 3;
-  // }
-
-  // handleMoneyTransferred(transaction: TransactionResponseDTO) {
-  //   this.transaction = transaction;
-  // }
-
-  // handleMoneyTransferredNotification(transaction: TransactionResponseDTO) {
-  //   this.transaction = transaction;
-  // }
-
-  // logStepperChange(event: StepperSelectionEvent) {
-  //   console.log(`Stepper changed to index: ${event.selectedIndex}`);
-  // }
-
-  // nextStep() {
-  //   if (this.currentStep < this.steps.length ) {
-  //     this.markStepComplete(this.currentStep);
-  //     this.currentStep++;
-  //   }
-  // }
-
-  // previousStep() {
-  //   if (this.currentStep > 1) {
-  //     this.currentStep--;
-  //   }
-  // }
-
   goToStep(index: number) {
     console.log(`currently on ${this.currentStep}, trying to go to ${index}`);
     if (index < this.currentStep) {
@@ -168,17 +123,5 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
   markStepComplete(index: number) {
     this.steps[index].completed = true;
   }
-
-  // isStepNavigatable(stepIndex: number){
-  //   console.log(`stepIndex=${stepIndex} | currentStep=${this.currentStep}`);
-  //   if (stepIndex > this.currentStep){
-  //     const stepKey = `transactionStep${stepIndex}` as keyof TransactionSteps;
-  //     if (this.transaction && (this.transaction.currentStep >= stepIndex)){
-  //       return true;
-  //     }
-  //     return false;
-  //   }
-  //   return false;
-  // }
   
 }

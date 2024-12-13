@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
+import { Component, Input } from '@angular/core';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
 import { DatePipe } from '@angular/common';
 
 @Component({

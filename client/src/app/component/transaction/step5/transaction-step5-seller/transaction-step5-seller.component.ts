@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
+import { Component, OnInit } from '@angular/core';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
 import { MatButtonModule } from '@angular/material/button';
-import { TransactionStateService } from '../../../service/transaction-state.service';
-import { TransactionSharedService } from '../../../service/transaction/transaction-shared.service';
+import { TransactionSharedService } from '../../../../service/transaction/transaction-shared.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';

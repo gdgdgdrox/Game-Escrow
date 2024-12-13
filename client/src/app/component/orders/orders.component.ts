@@ -87,7 +87,7 @@ export class OrdersComponent implements OnInit {
     if (transaction){
       this.transactionStateService.transaction = transaction;
       console.log('shared service state updated. navigating to parent');
-      this.router.navigate(['/transaction-parent',`step${transaction.currentStep}`,transactionID])
+      this.router.navigate(['/transaction',`step${transaction.currentStep}`,transactionID])
     }
 
   }

@@ -12,7 +12,7 @@
       <mat-list role="list">
         @for(transaction of transactionsPendingUserAction; track
         transaction.transactionID){
-        <mat-list-item role="listitem" class="list-item" [routerLink]="['/transaction-parent', transaction.transactionID]">
+        <mat-list-item role="listitem" class="list-item" [routerLink]="['/transaction', transaction.transactionID]">
           <div class="list-content">
             <img [src]="transaction.game.gameImagePath" alt="game" class="game-image"/>
             <div class="transaction-info">
@@ -50,7 +50,7 @@
         <mat-list-item
           role="listitem"
           class="list-item"
-          [routerLink]="['/transaction-parent', transaction.transactionID]"
+          [routerLink]="['/transaction', transaction.transactionID]"
         >
           <div class="list-content">
             <img
@@ -85,7 +85,7 @@
         <mat-list-item
           role="listitem"
           class="list-item"
-          [routerLink]="['/transaction-parent', transaction.transactionID]"
+          [routerLink]="['/transaction', transaction.transactionID]"
         >
           <div class="list-content">
             <img
@@ -126,7 +126,7 @@
     <div class="no-trades">
       <h3>You have no trades yet</h3>
       <button mat-stroked-button type="button"
-      [routerLink]="['/transaction-parent']"
+      [routerLink]="['/transaction']"
       >New Trade
     </button>
     </div>

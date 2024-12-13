@@ -1,13 +1,10 @@
 import { Component, OnInit,  } from '@angular/core';
-import { GameResponseDTO } from '../../../dto/game-response.dto';
-import { TransactionStep1Service } from '../../../service/transaction/transaction-step1.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Router, RouterModule } from '@angular/router';
-import { GameAssetResponseDTO } from '../../../dto/game-asset-response.dto';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 
@@ -17,14 +14,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../../service/auth.service';
-import { TransactionRequestDTO } from '../../../dto/transaction-request.dto';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
-import { TransactionStateService } from '../../../service/transaction-state.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { finalize } from 'rxjs/internal/operators/finalize';
-import { TransactionSharedService } from '../../../service/transaction/transaction-shared.service';
+import { GameResponseDTO } from '../../../../dto/game-response.dto';
+import { GameAssetResponseDTO } from '../../../../dto/game-asset-response.dto';
+import { TransactionStep1Service } from '../../../../service/transaction/transaction-step1.service';
+import { TransactionSharedService } from '../../../../service/transaction/transaction-shared.service';
+import { AuthService } from '../../../../service/auth.service';
+import { TransactionStateService } from '../../../../service/transaction-state.service';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
+import { TransactionRequestDTO } from '../../../../dto/transaction-request.dto';
 
 @Component({
   selector: 'app-transaction-step1',
@@ -121,7 +120,7 @@ export class TransactionStep1Component implements OnInit {
                 this.transactionStateService.transaction = transaction;
                 setTimeout(() => {
                   this.isProcessing = false;
-                  this.router.navigate(['/transaction-parent/step2',transaction.transactionID]);
+                  this.router.navigate(['/transaction/step2',transaction.transactionID]);
                 }, 3000)
               }
               else{

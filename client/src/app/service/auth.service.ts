@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { API_URL } from '../constant/api.constant';
@@ -59,26 +59,6 @@ export class AuthService {
     this.usernameSubject.next('');
     this.router.navigate(['/']);
   }
-
-  
-
-  
-
-  // isLoggedIn(): boolean{
-  //   const jwt = localStorage.getItem('jwt');
-  //   if (!jwt){
-  //     return false;
-  //   }
-  //   const decodedJwt = jwtDecode(jwt);
-  //   const expiresAt = decodedJwt.exp ? decodedJwt.exp * 1000 : null;
-  //   return expiresAt ? Date.now() < expiresAt : false; 
-  // }
-
-  // logout(): void{
-  //   console.log('logging out');
-  //   localStorage.removeItem('jwt');
-  //   this.usernameSubject.next(null);
-  // }
 
   getLoggedInUsername(): string | null{
     if (this.isAuthenticated()){

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
-import { TransactionStep4Service } from '../../../service/transaction/transaction-step4.service';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
+import { TransactionStep4Service } from '../../../../service/transaction/transaction-step4.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { TransactionStateService } from '../../../service/transaction-state.service';
+import { TransactionStateService } from '../../../../service/transaction-state.service';
 import { createUrlTreeFromSnapshot, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,7 +40,7 @@ export class TransactionStep4BuyerComponent implements OnInit {
           this.transactionStateService.transaction = transaction;
           console.log('shared service state updated. navigating to parent');
           this.router.navigate([
-            '/transaction-parent',
+            '/transaction',
             `step${transaction.currentStep}`,
             transaction.transactionID,
           ]);

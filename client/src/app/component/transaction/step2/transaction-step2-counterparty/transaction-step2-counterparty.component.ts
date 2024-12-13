@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
-import { TransactionStep2Service } from '../../../service/transaction/transaction-step2.service';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
+import { TransactionStep2Service } from '../../../../service/transaction/transaction-step2.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { TransactionStateService } from '../../../service/transaction-state.service';
+import { TransactionStateService } from '../../../../service/transaction-state.service';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 
@@ -40,7 +40,7 @@ export class TransactionStep2CounterpartyComponent implements OnInit {
           console.log(`current step is now ${transaction.currentStep}`);
           this.transactionStateService.transaction = transaction;
           console.log('shared service state updated. navigating to parent');
-          this.router.navigate(['/transaction-parent',`step${transaction.currentStep}`,transaction.transactionID]);
+          this.router.navigate(['/transaction',`step${transaction.currentStep}`,transaction.transactionID]);
         },
         error: (error: HttpErrorResponse) => {
           console.error(error);

@@ -15,7 +15,7 @@
         <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
     </div>
-    <button id="trade-btn" mat-stroked-button [routerLink]="['/transaction-parent']">Trade</button>
+    <button id="trade-btn" mat-stroked-button [routerLink]="['/transaction/step1']">Trade</button>
   }
   @else {
     <button mat-stroked-button id="login-btn" [routerLink]="['/login']">Login</button>

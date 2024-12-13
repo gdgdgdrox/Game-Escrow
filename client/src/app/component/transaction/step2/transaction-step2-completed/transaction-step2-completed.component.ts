@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
-import { AuthService } from '../../../service/auth.service';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
+import { AuthService } from '../../../../service/auth.service';
 import {MatIconModule} from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
 

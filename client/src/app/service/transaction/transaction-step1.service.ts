@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GameResponseDTO } from '../../dto/game-response.dto';
 import { concatMap, Observable, of } from 'rxjs';
 import { API_URL } from '../../constant/api.constant';
 import { TransactionRequestDTO } from '../../dto/transaction-request.dto';

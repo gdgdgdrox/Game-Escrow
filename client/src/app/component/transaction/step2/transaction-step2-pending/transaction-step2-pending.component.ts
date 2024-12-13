@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
-import { WebsocketService } from '../../../service/websocket.service';
-import { TransactionStateService } from '../../../service/transaction-state.service';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
+import { WebsocketService } from '../../../../service/websocket.service';
+import { TransactionStateService } from '../../../../service/transaction-state.service';
 import { Router } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 
@@ -41,7 +41,7 @@ export class TransactionStep2PendingComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.transactionStateService.transaction = transaction;
         console.log('shared service state updated. navigating to parent');
-        this.router.navigate(['/transaction-parent',`step${transaction.currentStep}`,transaction.transactionID]);
+        this.router.navigate(['/transaction',`step${transaction.currentStep}`,transaction.transactionID]);
       }, 3000);
     }
   }

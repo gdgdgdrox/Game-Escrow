@@ -1,4 +1,4 @@
-import { HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_URL } from '../../constant/api.constant';
 import { TransactionResponseDTO } from '../../dto/transaction-response.dto';

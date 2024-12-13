@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TransactionResponseDTO } from '../../../dto/transaction-response.dto';
+import { TransactionResponseDTO } from '../../../../dto/transaction-response.dto';
 
 @Component({
   selector: 'app-transaction-step1-completed',
