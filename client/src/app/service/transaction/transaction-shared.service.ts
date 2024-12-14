@@ -29,6 +29,7 @@ export class TransactionSharedService {
   }
 
   getAllGames(): Observable<GameResponseDTO[]> {
+    console.log(`API URL IS ${API_URL.GET_ALL_GAMES}`);
     return this.http.get<GameResponseDTO[]>(API_URL.GET_ALL_GAMES);
   }
 

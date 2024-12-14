@@ -6,7 +6,8 @@ values
     (1, 'equipment', 'name'),
     (1, 'account', 'name'),
     (2, 'skin', 'name'),
-    (3, 'skin', 'name') (4, 'town hall', 'name'),
+    (3, 'skin', 'name'),
+    (4, 'town hall', 'name'),
     (4, 'gems', 'quantity'),
     (4, 'account', 'name'),
     (5, 'genesis crystal', 'quantity'),
@@ -30,4 +31,4 @@ values
     (14, 'ship', 'name'),
     (15, 'V-Bucks', 'quantity'),
     (15, 'skin', 'name'),
-    (15, 'account', 'name')
+    (15, 'account', 'name');

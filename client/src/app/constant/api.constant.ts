@@ -1,4 +1,6 @@
-const baseURL = 'http://localhost:8080/api';
+import { environment } from "../../environments/environment";
+
+const baseURL = `${environment.apiBaseUrl}/api`;
 
 export const API_URL = {
   REGISTRATION: `${baseURL}/register`,

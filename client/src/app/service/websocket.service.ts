@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { TransactionResponseDTO } from '../dto/transaction-response.dto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class WebsocketService {
     const jwt = localStorage.getItem('jwt');
     this.stompClient = new Client({
       webSocketFactory: () =>
-        new SockJS(`http://localhost:8080/websocket?token=${jwt}`), // SockJS connection
+        new SockJS(`${environment.apiBaseUrl}/websocket?token=${jwt}`), // SockJS connection
       // debug: (msg: string) => console.log(msg),
       reconnectDelay: 0,
     });
