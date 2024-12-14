@@ -22,5 +22,6 @@ export const routes: Routes = [
     {path: 'transaction/step4/:transactionID', component: TransactionParentComponent, canActivate: [AuthGuard]},
     {path: 'transaction/step5/:transactionID', component: TransactionParentComponent, canActivate: [AuthGuard]},
     {path: 'transaction/:transactionID', component: TransactionParentComponent, canActivate: [AuthGuard]},
+    {path: '**', redirectTo:''}
 
 ];
