@@ -3,6 +3,7 @@ package com.escrowforgame.server.configuration;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,13 +22,16 @@ import com.escrowforgame.server.service.CustomUserDetailsService;
 @Configuration
 public class SecurityConfig {
 
+    @Value("${cors.origin}")
+    private String corsOrigin;
+
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private JwtFilter jwtFilter;
 
-      @Bean
+    @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(customUserDetailsService);
@@ -50,7 +54,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:*"));
+        System.out.println("cors origin: %s".formatted( corsOrigin));
+        configuration.setAllowedOriginPatterns(Arrays.asList(corsOrigin));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // Add necessary headers
         configuration.setAllowCredentials(true);
