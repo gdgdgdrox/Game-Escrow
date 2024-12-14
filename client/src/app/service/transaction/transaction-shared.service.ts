@@ -25,8 +25,7 @@ export class TransactionSharedService {
   }
 
   getTransactionByTransactionID(transactionID: string){
-    const httpParams = new HttpParams().set('transactionID', transactionID);
-    return this.http.get<TransactionResponseDTO>(API_URL.GET_TRANSACTION_BY_TRANSACTION_ID, {params:httpParams}); 
+    return this.http.get<TransactionResponseDTO>(`${API_URL.GET_TRANSACTION_BY_TRANSACTION_ID}/${transactionID}`);
   }
 
   getAllGames(): Observable<GameResponseDTO[]> {
