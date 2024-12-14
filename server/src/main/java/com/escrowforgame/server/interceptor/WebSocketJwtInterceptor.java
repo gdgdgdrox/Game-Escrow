@@ -47,7 +47,7 @@ public class WebSocketJwtInterceptor implements HandshakeInterceptor {
                             UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
                         
                             if (jwtService.isTokenValid(token, userDetails)) {
-                                log.debug("jwt is valid. toring authenticated user info in attributes.");
+                                log.debug("jwt is valid. storing authenticated user info in attributes.");
                                 attributes.put("username", username); // Store authenticated user info in attributes
                                 return true; // Allow handshake
                             } else {

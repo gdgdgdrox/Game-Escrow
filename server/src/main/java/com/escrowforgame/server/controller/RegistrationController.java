@@ -27,6 +27,7 @@ public class RegistrationController {
         log.info("in registration controller. to create {}",user.getUsername());
         try{
             userService.createNewUser(user);
+            log.info("{} created",user.getUsername());
         }
         catch (UserAlreadyExistsException e){
             log.info("failed to create new user as {} already exists",user.getUsername());
