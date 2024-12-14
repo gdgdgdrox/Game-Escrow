@@ -7,15 +7,11 @@ import org.springframework.stereotype.Repository;
 import com.escrowforgame.server.entity.TransactionEntity;
 
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
-import software.amazon.awssdk.enhanced.dynamodb.DynamoDbIndex;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Expression;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
-import software.amazon.awssdk.enhanced.dynamodb.model.Page;
 import software.amazon.awssdk.enhanced.dynamodb.model.PageIterable;
-import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
-import software.amazon.awssdk.enhanced.dynamodb.model.QueryEnhancedRequest;
 import software.amazon.awssdk.enhanced.dynamodb.model.ScanEnhancedRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
