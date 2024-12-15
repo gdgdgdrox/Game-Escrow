@@ -10,7 +10,7 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.escrowforgame</groupId>
-	<artifactId>server</artifactId>
+	<artifactId>game-escrow</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>server</name>
 	<description>Demo project for Spring Boot</description>

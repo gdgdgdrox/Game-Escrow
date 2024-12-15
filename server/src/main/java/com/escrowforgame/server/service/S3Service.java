@@ -27,7 +27,7 @@ public class S3Service {
         File tempFile;
         tempFile = File.createTempFile("upload", file.getOriginalFilename());
         file.transferTo(tempFile);
-
+        
         PutObjectRequest putObjectRequest = PutObjectRequest.builder().bucket(bucket).key(s3ObjectKey).build();
         log.debug("uploading file to s3..");
         return this.s3Client.putObject(putObjectRequest, tempFile.toPath());

@@ -4,4 +4,23 @@ remove chatgpt comment
 migrate to AWS RDS, DDB, EC2, Docker
 final: purge commit history of secrets
 
-rename transaction-parent
+rename bucket name because the url looks ugly http://game-escrow-bucket.s3-website-us-east-1.amazonaws.com
+
+on mobile the home page ITEMS is fragmented - to fix
+
+delay in loading game images
+
+https
+
+remove secrets from properties file and store in aws secrets manager?
+
+logging for angular
+
+cicd pipeline
+
+automatically start java program in ec2
+
+loading animation for orders page
+
+investigate why unchecked exception dont get log if we dont catch it. is this logback issue or just the way
+java work?

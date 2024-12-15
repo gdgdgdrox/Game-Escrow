@@ -13,6 +13,7 @@ import com.escrowforgame.server.exception.UserAlreadyExistsException;
 import com.escrowforgame.server.service.RegistrationService;
 
 import lombok.extern.slf4j.Slf4j;
+import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 @Slf4j
 @RestController
@@ -32,6 +33,12 @@ public class RegistrationController {
         catch (UserAlreadyExistsException e){
             log.info("failed to create new user as {} already exists",user.getUsername());
             return ResponseEntity.status(HttpStatus.CONFLICT).body("user already exists");
+        }
+        catch (DynamoDbException ddb){
+            log.error("error with dynamodb",ddb.getMessage(),ddb);
+        }
+        catch (Exception e){
+            log.error("exception", e.getMessage(), e);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body("user created");
     }

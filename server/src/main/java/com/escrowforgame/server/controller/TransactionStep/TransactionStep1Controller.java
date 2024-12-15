@@ -35,6 +35,10 @@ public class TransactionStep1Controller {
             log.error("error creating new transaction. {}",d.getMessage(),d);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
+        catch (Exception e){
+            log.error("error creating new transaction. {}",e.getMessage(),e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
     
 }

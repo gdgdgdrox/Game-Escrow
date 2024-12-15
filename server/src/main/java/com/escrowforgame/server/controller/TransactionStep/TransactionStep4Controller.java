@@ -80,7 +80,8 @@ public class TransactionStep4Controller {
     public ResponseEntity<TransactionEntity> sellerUploadEvidence(@RequestParam("file") MultipartFile file,
     @PathVariable String transactionID){
         log.debug("in step 4 seller upload file for txn {}", transactionID);
-        String s3ObjectKey = String.format("%s_%s",transactionID,file.getOriginalFilename());
+        String s3FolderPath = "transaction-step4-seller-photo-evidence";
+        String s3ObjectKey = String.format("%s/%s_%s",s3FolderPath,transactionID,file.getOriginalFilename());
         log.debug("object key = {}",s3ObjectKey);
         try {
             PutObjectResponse putObjectResponse = s3Service.uploadToS3(file, s3ObjectKey);
@@ -100,7 +101,11 @@ public class TransactionStep4Controller {
                 return ResponseEntity.status(HttpStatus.CREATED).body(transactionEntity);
             }
         } catch (IOException e) {
-            log.debug("error uploading to s3 {}",e.getMessage(),e);
+            log.error("error uploading to s3 {}",e.getMessage(),e);
+            return ResponseEntity.internalServerError().body(null);
+        }
+        catch (Exception e){
+            log.error("error uploading to s3 {}",e.getMessage(),e);
             return ResponseEntity.internalServerError().body(null);
         }
         return ResponseEntity.internalServerError().body(null);

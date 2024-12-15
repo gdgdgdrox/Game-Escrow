@@ -1,6 +1,7 @@
 package com.escrowforgame.server.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -12,6 +13,9 @@ import com.escrowforgame.server.interceptor.WebSocketJwtInterceptor;
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+    @Value("${websocket.origin}")
+    private String websocketOrigin;
 
     @Autowired
     private WebSocketJwtInterceptor webSocketJwtInterceptor;
@@ -27,7 +31,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/websocket")
                 .addInterceptors(webSocketJwtInterceptor) // Add the custom interceptor
-                .setAllowedOriginPatterns("http://localhost:*")
+                .setAllowedOriginPatterns(websocketOrigin)
                 .withSockJS();
 
     }
