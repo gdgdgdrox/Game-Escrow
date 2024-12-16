@@ -1,26 +1,18 @@
-remove unused import
-remove chatgpt comment
+UI
+1.logging for angular
+1.on mobile the home page ITEMS is fragmented - to fix
+2.delay in loading game images
+3.introduce progress spinner when loading orders page
 
-migrate to AWS RDS, DDB, EC2, Docker
-final: purge commit history of secrets
+Server
 
-rename bucket name because the url looks ugly http://game-escrow-bucket.s3-website-us-east-1.amazonaws.com
+Deployment
+1. Use HTTPS (ACM?)
+2. Rename bucket name because the url looks ugly http://game-escrow-bucket.s3-website-us-east-1.amazonaws.com
+2. How to hide secrets in properties file?
+3. Cloudformation
+    -automatically start java program in ec2
+4. CICD pipeline
 
-on mobile the home page ITEMS is fragmented - to fix
-
-delay in loading game images
-
-https
-
-remove secrets from properties file and store in aws secrets manager?
-
-logging for angular
-
-cicd pipeline
-
-automatically start java program in ec2
-
-loading animation for orders page
-
-investigate why unchecked exception dont get log if we dont catch it. is this logback issue or just the way
-java work?
+Misc
+1. Purge commit history of secrets
