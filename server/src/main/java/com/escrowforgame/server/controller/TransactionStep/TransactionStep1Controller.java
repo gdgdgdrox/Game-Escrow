@@ -26,19 +26,19 @@ public class TransactionStep1Controller {
     @PostMapping(value="/createTransaction")
     public ResponseEntity<TransactionEntity> createTransaction(@RequestBody TransactionDTO transactionDTO){
         log.info("in step 1 create transaction");
-        try{
+        // try{
             TransactionEntity createdTransaction = transactionService.createTransaction(transactionDTO);
             log.info("new transaction created with txn id {}",createdTransaction.getTransactionID());
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
-        }
-        catch (DynamoDbException d){
-            log.error("error creating new transaction. {}",d.getMessage(),d);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-        catch (Exception e){
-            log.error("error creating new transaction. {}",e.getMessage(),e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+        // }
+        // catch (DynamoDbException d){
+        //     log.error("error creating new transaction. {}",d.getMessage(),d);
+        //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        // }
+        // catch (Exception e){
+            // log.error("error creating new transaction. {}",e.getMessage(),e);
+            // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        // }
     }
     
 }
