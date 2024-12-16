@@ -38,7 +38,7 @@ insert into
     game_asset(game_id, asset_type, asset_unit)
 values
     (1, 'meso', 'quantity'),
-    (1, 'donor point (private server)', 'quantity'),
+    (1, 'donor point',  'quantity'),
     (1, 'equipment', 'name'),
     (1, 'account', 'name'),
     (2, 'skin', 'name'),
