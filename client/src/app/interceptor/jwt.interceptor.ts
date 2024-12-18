@@ -1,6 +1,5 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { API_URL } from '../constant/api.constant';
-import { environment } from '../../environments/environment';
 
 const endpointsThatRequireAuthentication = [
   // API_URL.GET_ALL_GAMES,
@@ -8,7 +7,6 @@ const endpointsThatRequireAuthentication = [
   API_URL.CHECK_IF_USER_EXISTS,
   API_URL.GET_TRANSACTION_BY_TRANSACTION_ID,
   API_URL.TRANSACTION_STEP1_CREATE_TRANSACTION,
-  `${environment}/websocket`
 ];
 
 const dynamicEndpointPrefixes = [

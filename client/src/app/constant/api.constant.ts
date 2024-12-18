@@ -1,17 +1,16 @@
 import { environment } from "../../environments/environment";
 
-const baseURL = `${environment.apiBaseUrl}/api`;
-
 export const API_URL = {
-  REGISTRATION: `${baseURL}/register`,
-  LOGIN: `${baseURL}/login`,
-  GET_ALL_GAMES: `${baseURL}/games`,
-  CHECK_IF_USER_EXISTS: `${baseURL}/user`,
-  GET_ALL_TRANSACTION_BY_USER: `${baseURL}/transactions`,
-  GET_TRANSACTION_BY_TRANSACTION_ID: `${baseURL}/transaction`,
-  TRANSACTION_STEP1_CREATE_TRANSACTION: `${baseURL}/transaction/step1/createTransaction`,
-  TRANSACTION_STEP2_ACCEPT_TRADE: `${baseURL}/transaction/step2`,
-  TRANSACTION_STEP3_MONEY_TRANSFERRED: `${baseURL}/transaction/step3`,
-  TRANSACTION_STEP4_BUYER_CONFIRM_ITEM_RECEIVED: `${baseURL}/transaction/step4`,
-  TRANSACTION_STEP4_SELLER_UPLOAD_EVIDENCE: `${baseURL}/transaction/step4`
+  REGISTRATION: `${environment.apiBaseUrl}/register`,
+  LOGIN: `${environment.apiBaseUrl}/login`,
+  GET_ALL_GAMES: `${environment.apiBaseUrl}/games`,
+  CHECK_IF_USER_EXISTS: `${environment.apiBaseUrl}/user`,
+  GET_ALL_TRANSACTION_BY_USER: `${environment.apiBaseUrl}/transactions`,
+  GET_TRANSACTION_BY_TRANSACTION_ID: `${environment.apiBaseUrl}/transaction`,
+  TRANSACTION_STEP1_CREATE_TRANSACTION: `${environment.apiBaseUrl}/transaction/step1/createTransaction`,
+  TRANSACTION_STEP2_ACCEPT_TRADE: `${environment.apiBaseUrl}/transaction/step2`,
+  TRANSACTION_STEP3_MONEY_TRANSFERRED: `${environment.apiBaseUrl}/transaction/step3`,
+  TRANSACTION_STEP4_BUYER_CONFIRM_ITEM_RECEIVED: `${environment.apiBaseUrl}/transaction/step4`,
+  TRANSACTION_STEP4_SELLER_UPLOAD_EVIDENCE: `${environment.apiBaseUrl}/transaction/step4`,
+  WEBSOCKET_CONNECT: `${environment.apiBaseUrl}/websocket`
 };

@@ -3,7 +3,7 @@ UI
 1.on mobile the home page ITEMS is fragmented - to fix
 2.delay in loading game images
 3.introduce progress spinner when loading orders page
-
+4.replace favicon.ico
 Server
 
 Deployment
