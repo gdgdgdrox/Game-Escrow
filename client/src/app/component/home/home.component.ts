@@ -30,10 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
 export class HomeComponent implements OnInit{
   games: GameResponseDTO[] = [];
   ngOnInit(): void {
-    console.log('init');
     this.transactionSharedService.getAllGames().subscribe({
       next: (games: GameResponseDTO[]) => {
-        console.log('got back response');
         this.games = games;
       },
       error: (error: HttpErrorResponse) => {

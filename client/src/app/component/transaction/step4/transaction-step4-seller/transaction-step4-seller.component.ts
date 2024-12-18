@@ -36,7 +36,6 @@ export class TransactionStep4SellerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('step 4 seller init');
     this.websocketService.connect();
     const topic = `/topic/transaction/step4/${this.transaction.transactionID}`;
     this.websocketService.subscribeToTopic(

@@ -30,9 +30,7 @@ export class TransactionStep3BuyerComponent {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    console.log('step 3 buyer init');
-  }
+
 
   // OCBC API Sandbox
   // getQR(): void{
@@ -57,7 +55,6 @@ export class TransactionStep3BuyerComponent {
   }
 
   onTransfer(): void {
-    console.log('clicked money transferred');
     this.isVerifyingTransfer = true;
     this.transactionStep3Service
       .moneyTransferred(this.transaction.transactionID)

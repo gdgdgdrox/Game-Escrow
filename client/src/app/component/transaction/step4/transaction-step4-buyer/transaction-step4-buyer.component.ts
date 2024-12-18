@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './transaction-step4-buyer.component.html',
   styleUrl: './transaction-step4-buyer.component.css',
 })
-export class TransactionStep4BuyerComponent implements OnInit {
+export class TransactionStep4BuyerComponent {
   @Input() transaction!: TransactionResponseDTO;
   itemReceived = false;
   itemReceivedStatusMessage = '';
@@ -26,17 +26,11 @@ export class TransactionStep4BuyerComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    console.log('step4-buyer init');
-  }
-
   confirmItemReceived(): void {
-    console.log('buyer confirmed item received');
     this.transactionStep4Service
       .buyerConfirmItemReceived(this.transaction.transactionID)
       .subscribe({
         next: (transaction: TransactionResponseDTO) => {
-          console.log(transaction);
           this.transactionStateService.transaction = transaction;
           console.log('shared service state updated. navigating to parent');
           this.router.navigate([

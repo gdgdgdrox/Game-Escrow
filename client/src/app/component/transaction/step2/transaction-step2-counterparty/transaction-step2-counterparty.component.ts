@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './transaction-step2-counterparty.component.html',
   styleUrl: './transaction-step2-counterparty.component.css',
 })
-export class TransactionStep2CounterpartyComponent implements OnInit {
+export class TransactionStep2CounterpartyComponent {
   @Input() transaction!: TransactionResponseDTO;
   acceptTradeSuccess = false;
   acceptTradeStatusMessage = '';
@@ -26,12 +26,7 @@ export class TransactionStep2CounterpartyComponent implements OnInit {
     private transactionStateService: TransactionStateService
   ) {}
 
-  ngOnInit(): void {
-    console.log('step 2 counterparty init');
-  }
-
   acceptTrade() {
-    console.log('counterparty has accepted trade');
     this.transactionStep2Service
       .acceptTrade(this.transaction.transactionID)
       .subscribe({

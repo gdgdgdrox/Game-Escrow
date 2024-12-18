@@ -70,7 +70,6 @@ export class TransactionStep1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('step 1 init');
     this.transactionSharedService.getAllGames().subscribe({
       next: (games: GameResponseDTO[]) => {
         this.games = games;

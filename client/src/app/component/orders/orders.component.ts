@@ -32,7 +32,6 @@ export class OrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('init');
     this.loggedInUser = this.authService.getLoggedInUsername();
     this.transactionSharedService.getAllTransactionsByUser(this.loggedInUser!)
     .subscribe(
@@ -83,7 +82,6 @@ export class OrdersComponent implements OnInit {
 
   getTransactionDetails(transactionID: string) {
     const transaction = this.transactions.find(transaction => transaction.transactionID === transactionID);
-    console.log(`user is trying to load ${transaction?.transactionID}`);
     if (transaction){
       this.transactionStateService.transaction = transaction;
       console.log('shared service state updated. navigating to parent');

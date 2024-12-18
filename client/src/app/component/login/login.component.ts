@@ -25,7 +25,6 @@ export class LoginComponent {
   loginSuccess = false;
 
   onLogin(form: NgForm) {
-    console.log('logging in user ', form.value);
     this.authService.login(form.value.username, form.value.password).subscribe({
       next: (response: HttpResponse<string>) => {
         this.loginOutcomeMessage = 'Success!';

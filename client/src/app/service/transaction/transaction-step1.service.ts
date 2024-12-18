@@ -16,10 +16,8 @@ export class TransactionStep1Service {
     return this.transactionSharedService.checkIfUserExists(transaction.counterparty).pipe(
       concatMap((userExists) => {
           if (!userExists){
-            console.log('user dont exist');
             return of(null);
           }
-          console.log('user exists');
           return this.http.post<TransactionResponseDTO>(API_URL.TRANSACTION_STEP1_CREATE_TRANSACTION,transaction);
       })
     )

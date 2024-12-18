@@ -71,7 +71,6 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void { 
-    console.log('transaction-parent init');
     const transactionID = this.route.snapshot.paramMap.get('transactionID');
     if (this.transactionStateService.transaction){
       console.log('retrieving transaction object from shared service');
@@ -91,24 +90,23 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
             console.log(transaction);
             this.transaction = transaction;    
             this.currentStep = this.transaction.currentStep;
-            this.loading = false; // Data is ready
+            this.loading = false; 
           },
           error: (error: HttpErrorResponse) => {
             console.error(error);
-            this.loading = false; // Data is ready
+            this.loading = false; 
           },
         });
       }
       else{
         if (!transactionID) console.log('no transaction ID');
         else if (this.transaction) console.log('transaction object already exist',this.transaction.transactionID);
-        this.loading = false; // Data is ready
+        this.loading = false; 
       }
    }
 
 
   goToStep(index: number) {
-    console.log(`currently on ${this.currentStep}, trying to go to ${index}`);
     if (index < this.currentStep) {
       this.currentStep = index;
     }else if (index > this.currentStep){

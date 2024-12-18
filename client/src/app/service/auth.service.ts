@@ -20,7 +20,6 @@ export class AuthService {
     return this.http.post<string>(API_URL.LOGIN, {username,password}, {observe: 'response', responseType:'text' as 'json'})
     .pipe(tap(response => {
       const jwt = response.body;
-      console.log(response.body);
       if (jwt){
         this.saveToken(jwt);
         this.usernameSubject.next(this.getLoggedInUsername());

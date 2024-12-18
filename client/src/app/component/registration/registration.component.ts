@@ -48,12 +48,10 @@ export class RegistrationComponent {
   }
 
   processRegistration(): void{
-    console.log('form submitted');
     console.log(this.registrationForm.value);
     const user = this.registrationForm.value as User;
     this.registrationService.createUser(user).subscribe({
       next: (response: HttpResponse<string>) => {
-        console.log('response from registration endpoint received');
         console.log(response.status);
         if (response.status === 201){
           this.registrationStatusMessage = 'Success!';
@@ -63,7 +61,6 @@ export class RegistrationComponent {
         }
       },
       error: (error: HttpErrorResponse) => {
-        console.log('error with registration');
         console.log(error.message);
         if (error.status === 409){
           this.registrationStatusMessage = 'User already exists';          
