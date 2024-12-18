@@ -10,10 +10,19 @@
   margin-bottom: 10px;
   color: white;
   font-style: italic;
+  word-break: normal; /* Prevent unnecessary word breaks */
+  white-space: normal;
+  
 }
 
-.italic-sword img {
-  display: inline-block;
+.items-text{
+  display: inline-block; /* Keep "I", image, and "EMS" on the same line */
+  white-space: nowrap; 
+}
+
+
+.italic-sword  {
+  // display: inline-block;
   transform: skewX(-15deg);
   vertical-align: -0.5em; /* Adjust the value to raise/lower the image */
   height: 1.5em; /* Slightly larger than text for emphasis */
