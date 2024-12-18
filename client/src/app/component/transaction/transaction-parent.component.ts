@@ -99,8 +99,6 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
         });
       }
       else{
-        if (!transactionID) console.log('no transaction ID');
-        else if (this.transaction) console.log('transaction object already exist',this.transaction.transactionID);
         this.loading = false; 
       }
    }

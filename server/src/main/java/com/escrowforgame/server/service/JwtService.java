@@ -7,26 +7,55 @@ import java.util.concurrent.TimeUnit;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class JwtService {
 
-    @Value("${jwt.secret.key}")
-    private String secretKey;
+    @Autowired
+    private AWSParameterStoreService awsParameterStoreService;
+
+    @Value("${parameter.store.jwt.secret.key.path}")
+    private String parameterStoreJwtSecretKeyPath;
 
     @Value("${jwt.validity}")
     private String validity;
+
+    private String secretKey;
+
+
+    @PostConstruct
+    private void postConstruct() {
+        log.debug("in postconstruct");
+        log.debug("key path = {}, validity = {}",parameterStoreJwtSecretKeyPath,validity);
+        log.debug("is pam store service null? {}", awsParameterStoreService==null);
+        this.secretKey = this.awsParameterStoreService.getParameter(parameterStoreJwtSecretKeyPath, false);
+        log.debug("secret key = {}", secretKey);
+    }
+
+    // public JwtService() {
+    // }
+
+    // public JwtService(AWSParameterStoreService awsParameterStoreService,
+    // @Value("${parameter.store.jwt.secret.key.path}") String path,
+    // @Value("${jwt.validity}") String validity) {
+    // log.debug("jwt service constructor. fetching secret key");
+    // this.awsParameterStoreService = awsParameterStoreService;
+    // this.secretKey = this.awsParameterStoreService.getParameter(path, false);
+    // this.validity = validity;
+    // log.debug("secret key = {}", secretKey);
+    // }
 
     // utility function only used once
     public void generateSecretKey() {
@@ -40,26 +69,27 @@ public class JwtService {
         return Keys.hmacShaKeyFor(decodedKey);
     }
 
-    public String generateJwt(String username){
+    public String generateJwt(String username) {
         return Jwts.builder()
-        .setSubject(username)
-        .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(Integer.valueOf(validity))))
-        .signWith(decodeSecretKey())
-        .compact();
+                .setSubject(username)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(
+                        new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(Integer.valueOf(validity))))
+                .signWith(decodeSecretKey())
+                .compact();
     }
 
-    public Claims extractClaims(String jwt){
+    public Claims extractClaims(String jwt) {
         return Jwts.parserBuilder().setSigningKey(decodeSecretKey()).build().parseClaimsJws(jwt).getBody();
     }
 
-    public String extractUsername(String jwt){
+    public String extractUsername(String jwt) {
         return extractClaims(jwt).getSubject();
     }
 
     public boolean isTokenValid(String jwt, UserDetails userDetails) {
         Claims claims = extractClaims(jwt);
-        return (claims.getSubject().equals(userDetails.getUsername()) && claims.getExpiration().after(Date.from(Instant.now())
-        ));
+        return (claims.getSubject().equals(userDetails.getUsername())
+                && claims.getExpiration().after(Date.from(Instant.now())));
     }
 }

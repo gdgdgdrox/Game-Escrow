@@ -1,13 +1,11 @@
 UI
 1.logging for angular
-1.on mobile the home page ITEMS is fragmented - to fix
 2.delay in loading game images
 3.introduce progress spinner when loading orders page
 4.replace favicon.ico
 Server
 
 Deployment
-1. Use HTTPS (ACM?)
 2. Rename bucket name because the url looks ugly http://game-escrow-bucket.s3-website-us-east-1.amazonaws.com
 2. How to hide secrets in properties file?
 3. Cloudformation
