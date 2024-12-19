@@ -1,4 +1,5 @@
-![Game Escrow Service Logo](../server/src/readme-images/logo_game_escrow.png)
+![Game Escrow Service Logo](./server/src/readme-images/logo_game_escrow.png)
+
 
 ## Description
 The Game Escrow is a web application designed to facilitate secure and transparent transactions involving digital game assets, such as Maplestory equipment or account, or CS:GO cosmetic skins. Acting as a neutral intermediary, the platform ensures the buyer's payment is held securely until the agreed-upon asset is delivered by the seller. Once the buyer confirms receipt, the payment is released to the seller, providing confidence and protection for both parties.
