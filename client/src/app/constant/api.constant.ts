@@ -12,5 +12,4 @@ export const API_URL = {
   TRANSACTION_STEP3_MONEY_TRANSFERRED: `${environment.apiBaseUrl}/transaction/step3`,
   TRANSACTION_STEP4_BUYER_CONFIRM_ITEM_RECEIVED: `${environment.apiBaseUrl}/transaction/step4`,
   TRANSACTION_STEP4_SELLER_UPLOAD_EVIDENCE: `${environment.apiBaseUrl}/transaction/step4`,
-  WEBSOCKET_CONNECT: `${environment.apiBaseUrl}/websocket`
 };

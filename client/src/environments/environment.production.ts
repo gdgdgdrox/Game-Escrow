@@ -2,5 +2,6 @@
 export const environment = {
     production: true,
     apiBaseUrl: 'https://game-escrow.com/api',
+    websocketUrl: 'https://game-escrow.com/websocket'
   };
   

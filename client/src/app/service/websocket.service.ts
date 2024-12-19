@@ -20,12 +20,12 @@ export class WebsocketService {
       console.log('Already connected to WebSocket');
       return;
     }
-
+    console.log('Attempting connection to WebSocket');
     const jwt = localStorage.getItem('jwt');
     this.stompClient = new Client({
       webSocketFactory: () =>
-        new SockJS(`${environment.apiBaseUrl}/websocket?token=${jwt}`), // SockJS connection
-      // debug: (msg: string) => console.log(msg),
+        new SockJS(`${environment.websocketUrl}?token=${jwt}`), // SockJS connection
+        // debug: (msg: string) => console.log(msg),
       reconnectDelay: 0,
     });
 
@@ -38,7 +38,7 @@ export class WebsocketService {
         console.log(`processing pending subscription for ${topic}`);
         this.subscribeToTopic(topic, callback);
       });
-      this.pendingSubscriptions = []; // Clear pending subscriptions
+      this.pendingSubscriptions = [];
     };
 
     this.stompClient.onDisconnect = () => {
