@@ -37,25 +37,9 @@ public class JwtService {
 
     @PostConstruct
     private void postConstruct() {
-        log.debug("in postconstruct");
-        log.debug("key path = {}, validity = {}",parameterStoreJwtSecretKeyPath,validity);
-        log.debug("is pam store service null? {}", awsParameterStoreService==null);
+        log.debug("getting jwt secret key from AWS SSM, for use in decoding jwt");
         this.secretKey = this.awsParameterStoreService.getParameter(parameterStoreJwtSecretKeyPath, false);
-        log.debug("secret key = {}", secretKey);
     }
-
-    // public JwtService() {
-    // }
-
-    // public JwtService(AWSParameterStoreService awsParameterStoreService,
-    // @Value("${parameter.store.jwt.secret.key.path}") String path,
-    // @Value("${jwt.validity}") String validity) {
-    // log.debug("jwt service constructor. fetching secret key");
-    // this.awsParameterStoreService = awsParameterStoreService;
-    // this.secretKey = this.awsParameterStoreService.getParameter(path, false);
-    // this.validity = validity;
-    // log.debug("secret key = {}", secretKey);
-    // }
 
     // utility function only used once
     public void generateSecretKey() {

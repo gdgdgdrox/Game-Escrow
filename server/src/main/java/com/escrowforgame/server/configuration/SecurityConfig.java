@@ -44,7 +44,6 @@ public class SecurityConfig {
                     .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                     .authorizeHttpRequests(http -> {
                         http.requestMatchers("/api/register","/api/login", "/api/games","/websocket/**").permitAll()
-                        
                             .anyRequest().authenticated();
                     })
                     .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -56,7 +55,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(Arrays.asList(corsOrigin));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // Add necessary headers
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

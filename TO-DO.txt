@@ -1,21 +1,13 @@
 UI
-1.logging for angular
-2.delay in loading game images
-3.introduce progress spinner when loading orders page
-4.replace favicon.ico
-Server
 
 Server
-1. Remove logging for SSM, JWT filter
 
 AWS
 1. look into static cache of game images
-
-2. Rename bucket name because the url looks ugly http://game-escrow-bucket.s3-website-us-east-1.amazonaws.com
+2. Reduce aws cost
 3. Cloudformation
     -automatically start java program in ec2
 4. CICD pipeline
 
 Misc
 1. Purge commit history of secrets
-2. Reduce aws cost

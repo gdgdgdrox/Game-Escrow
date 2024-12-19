@@ -12,7 +12,6 @@ public class AWSParameterStoreService{
 
     private final SsmClient ssmClient;
     public AWSParameterStoreService() {
-        // Create an SSM client
         this.ssmClient = SsmClient.create();  // Uses default credentials provider
     }
 
@@ -20,7 +19,7 @@ public class AWSParameterStoreService{
         try {
             GetParameterRequest request = GetParameterRequest.builder()
                     .name(parameterName)
-                    .withDecryption(decrpyt)  // Decrypts the SecureString parameter
+                    .withDecryption(decrpyt)
                     .build();
 
             GetParameterResponse result = ssmClient.getParameter(request);
