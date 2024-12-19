@@ -1,13 +1,4 @@
-UI
-
-Server
-
 AWS
 1. look into static cache of game images
-2. Reduce aws cost
-3. Cloudformation
-    -automatically start java program in ec2
-4. CICD pipeline
-
-Misc
-1. Purge commit history of secrets
+2. Cloudformation -automatically start java program in ec2
+3. CICD pipeline
