@@ -15,7 +15,15 @@
       <em>New user? Register 
         <a [routerLink]="'/register'">here</a>
       </em>
-      <p [ngClass]="{'success' : loginSuccess, 'failure': !loginSuccess}">{{ loginOutcomeMessage }}</p>
+      <p [ngClass]="{'failure': !loginSuccess}">{{ loginOutcomeMessage }}</p>
     </mat-card>
     </form>
+</div>
+<div>
+  @if(isLoggingIn){
+  <div class="spinner-overlay"></div>
+  <div class="spinner-container">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+  }
 </div>

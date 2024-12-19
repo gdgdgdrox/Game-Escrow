@@ -127,7 +127,7 @@
       </mat-list>
     </mat-tab>
   </mat-tab-group>
-  @if(transactions.length === 0){
+  @if(!isRetrievingTransaction && transactions.length === 0){
     <div class="no-trades">
       <h3>You have no trades yet</h3>
       <button mat-stroked-button type="button"
@@ -135,5 +135,13 @@
       >New Trade
     </button>
     </div>
+  }
+</div>
+<div>
+  @if(isRetrievingTransaction){
+  <div class="spinner-overlay"></div>
+  <div class="spinner-container">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
   }
 </div>

@@ -9,11 +9,13 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { finalize } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [MatTabsModule,MatListModule, RouterModule, DatePipe, CommonModule, MatBadgeModule, MatButtonModule],
+  imports: [MatTabsModule,MatListModule, RouterModule, DatePipe, CommonModule, MatBadgeModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
@@ -22,6 +24,7 @@ export class OrdersComponent implements OnInit {
   transactions: TransactionResponseDTO[] = [];
   transactionsPendingUserAction: TransactionResponseDTO[] = [];
   transactionsCompleted: TransactionResponseDTO[] = [];
+  isRetrievingTransaction = false;
 
   constructor(
     private authService: AuthService,
@@ -32,8 +35,10 @@ export class OrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isRetrievingTransaction = true;
     this.loggedInUser = this.authService.getLoggedInUsername();
     this.transactionSharedService.getAllTransactionsByUser(this.loggedInUser!)
+    .pipe(finalize(()=>this.isRetrievingTransaction=false))
     .subscribe(
       {next: (response: TransactionResponseDTO[]) => {
         this.transactions = response.sort((a, b) => {
