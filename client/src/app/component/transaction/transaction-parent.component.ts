@@ -75,7 +75,6 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
     if (this.transactionStateService.transaction){
       console.log('retrieving transaction object from shared service');
       this.transaction = this.transactionStateService.transaction;
-      console.log(this.transaction);
       this.userID = this.authService.getLoggedInUsername()!;
       this.currentStep = this.transaction.currentStep;
       this.loading = false;
@@ -87,7 +86,6 @@ export class TransactionParentComponent implements OnInit, OnDestroy{
         .subscribe({
           next: (transaction: TransactionResponseDTO) => {
             this.userID = this.authService.getLoggedInUsername()!;
-            console.log(transaction);
             this.transaction = transaction;    
             this.currentStep = this.transaction.currentStep;
             this.loading = false; 

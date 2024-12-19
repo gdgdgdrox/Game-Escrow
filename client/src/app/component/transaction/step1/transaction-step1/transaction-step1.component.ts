@@ -110,7 +110,6 @@ export class TransactionStep1Component implements OnInit {
       }
         const transactionRequestDTO = this.createTransactionRequestDTO(this.form.controls, loggedInUser!);
         console.log('creating new transaction');
-        console.log(transactionRequestDTO);
         this.transactionStep1Service
           .createNewTransaction(transactionRequestDTO)
           .subscribe({

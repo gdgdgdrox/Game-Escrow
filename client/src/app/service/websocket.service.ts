@@ -61,7 +61,6 @@ export class WebsocketService {
     console.log(`subscribing to ${topic}`);
     if (this.stompClient && this.isConnected) {
       this.stompClient.subscribe(topic, (message: IMessage) => {
-        console.log(message);
         const body = JSON.parse(message.body);
         onMessageReceived(body as TransactionResponseDTO);
       });

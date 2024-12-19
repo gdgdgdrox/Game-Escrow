@@ -85,10 +85,6 @@ export class TransactionStep4SellerComponent implements OnInit {
           }))
         .subscribe({
           next: (transaction: TransactionResponseDTO) => {
-            console.log(
-              transaction.transactionSteps.transactionStep4
-                .sellerPhotoEvidenceS3Key
-            );
             if (
               transaction.transactionSteps.transactionStep4.sellerPhotoUploaded
             ) {

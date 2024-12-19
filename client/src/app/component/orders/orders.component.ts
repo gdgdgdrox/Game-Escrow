@@ -49,14 +49,6 @@ export class OrdersComponent implements OnInit {
 
   arrangeTransactionsBasedOnStatus(){
     const currentLoggedInUser = this.authService.getLoggedInUsername();
-    this.transactions.forEach(txn => {
-      if (txn.currentStep===2){
-        console.log(`step 2 - ${txn.transactionID}`);
-        if (txn.counterparty === currentLoggedInUser){
-          console.log(`step 2 AND user is counterparty - ${txn.transactionID}`);
-        }
-      }
-    })
     this.transactionsPendingUserAction = this.transactions.filter(transaction => {
       return (
         // pending user to review and accept trade

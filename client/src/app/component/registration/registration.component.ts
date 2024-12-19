@@ -48,11 +48,9 @@ export class RegistrationComponent {
   }
 
   processRegistration(): void{
-    console.log(this.registrationForm.value);
     const user = this.registrationForm.value as User;
     this.registrationService.createUser(user).subscribe({
       next: (response: HttpResponse<string>) => {
-        console.log(response.status);
         if (response.status === 201){
           this.registrationStatusMessage = 'Success!';
           this.registrationSuccess = true;
