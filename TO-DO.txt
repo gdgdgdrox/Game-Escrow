@@ -2,3 +2,7 @@ AWS
 1. look into static cache of game images
 2. Cloudformation -automatically start java program in ec2
 3. CICD pipeline
+
+Client
+Double confirm for buyer item received
+remove donor point from DDL script and update db?

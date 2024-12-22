@@ -1,8 +1,8 @@
 ![Game Escrow Service Logo](./server/src/readme-images/logo_game_escrow.png)
 
 
-The is a financial platform that facilitates secure and transparent transactions involving digital game assets, such as 
-<img src="./server/src/readme-images/pink-bean.png" alt="maplestory-logo" style="vertical-align: middle; height: 20px;"> Maplestory equipment or account, or 
+This is a financial platform that facilitates secure and transparent transactions involving digital game assets, such as 
+<img src="./server/src/readme-images/pink-bean.png" alt="maplestory-logo" style="vertical-align: middle; height: 20px;"> Maplestory equipment or account or 
 <img src="./server/src/readme-images/cs-go.png" alt="csgo-logo" style="vertical-align: middle; height: 20px;"> CS:GO cosmetic skins. Acting as a neutral third-party, the platform ensures the buyer's payment is held securely until the agreed-upon asset is delivered by the seller. Once the buyer confirms receipt, the payment is released to the seller, providing confidence and protection for both parties.
 
 A transaction can be completed in 5 steps:
