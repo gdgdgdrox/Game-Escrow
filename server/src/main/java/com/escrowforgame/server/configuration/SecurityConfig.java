@@ -43,7 +43,7 @@ public class SecurityConfig {
         httpSecurity.csrf(csrf -> csrf.disable())
                     .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                     .authorizeHttpRequests(http -> {
-                        http.requestMatchers("/api/register","/api/login", "/api/games","/websocket/**").permitAll()
+                        http.requestMatchers("/api/register","/api/login", "/api/games", "/api/healthcheck","/websocket/**").permitAll()
                             .anyRequest().authenticated();
                     })
                     .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
