@@ -27,7 +27,7 @@ public class TransactionController {
     public List<TransactionEntity> getAllTransactionsByUser(@RequestParam String username){
         log.info("in get all transactions for user: {}",username);
         List<TransactionEntity> transactions =  this.transactionService.getAllTransactionsByUser(username);
-        log.debug("number of txn by {} = {}",username,transactions);
+        log.debug("number of txn by {} = {}",username,transactions.size());
         return transactions;
     }
 
