@@ -1,8 +1,56 @@
-.cancel-btn{
+/* Dialog Title */
+.dialog-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Dialog Content */
+  .dialog-content {
+    font-size: 1rem;
+    color: #dcdcdc;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  /* Dialog Actions */
+  .dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  /* Cancel Button */
+  .cancel-btn {
     border-color: red;
     color: red;
-}
-
-.proceed-btn{
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
+  .cancel-btn:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-color: darkred;
+    color: darkred;
+  }
+  
+  /* Proceed Button */
+  .proceed-btn {
     border-color: cyan;
-}
+    color: white;
+    background-color: cyan;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
+  .proceed-btn:hover {
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+    color: white;
+  }
+  

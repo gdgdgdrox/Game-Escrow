@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Please Confirm</h2>
-<div mat-dialog-content>
-    We will be releasing the money to the seller after this
+<h2 mat-dialog-title class="dialog-title">Please Confirm</h2>
+<div mat-dialog-content class="dialog-content">
+  We will be releasing the money to the seller after this
 </div>
-<div mat-dialog-actions align="end">
+<div mat-dialog-actions align="center" class="dialog-actions">
   <button class="cancel-btn" mat-stroked-button (click)="onCancel()">Cancel</button>
-  <button class="proceed-btn" mat-stroked-button (click)="onConfirm()">Proceed</button>
+  <button class="proceed-btn" mat-flat-button color="primary" (click)="onConfirm()">Proceed</button>
 </div>
