@@ -1,1 +1,8 @@
-<p>confirm-item-received-dialog works!</p>
+<h2 mat-dialog-title>Please Confirm</h2>
+<div mat-dialog-content>
+    We will be releasing the money to the seller after this
+</div>
+<div mat-dialog-actions align="end">
+  <button class="cancel-btn" mat-stroked-button (click)="onCancel()">Cancel</button>
+  <button class="proceed-btn" mat-stroked-button (click)="onConfirm()">Proceed</button>
+</div>
