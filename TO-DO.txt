@@ -1,13 +1,6 @@
 AWS
 1. look into static cache of game images
-2. Cloudformation -automatically start java program in ec2
 3. CICD pipeline
 
-Client
-Double confirm for buyer item received 
-remove donor point from DDL script and update db?
-
-1. fix local
-2. step 4 buyer confirm UI
 3. lambda email health check fail
 4. find out why tf the java app keep shutting down
