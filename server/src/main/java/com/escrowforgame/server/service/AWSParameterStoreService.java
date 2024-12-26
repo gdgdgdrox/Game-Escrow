@@ -1,5 +1,6 @@
 package com.escrowforgame.server.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import software.amazon.awssdk.services.ssm.SsmClient;
@@ -10,10 +11,8 @@ import software.amazon.awssdk.services.ssm.model.SsmException;
 @Service
 public class AWSParameterStoreService{
 
-    private final SsmClient ssmClient;
-    public AWSParameterStoreService() {
-        this.ssmClient = SsmClient.create();  // Uses default credentials provider
-    }
+    @Autowired
+    private SsmClient ssmClient;
 
     public String getParameter(String parameterName, boolean decrpyt) {
         try {
