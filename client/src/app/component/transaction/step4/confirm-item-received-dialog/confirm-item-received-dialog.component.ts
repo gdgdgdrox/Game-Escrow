@@ -4,7 +4,7 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-item-received-dialog',
-  imports: [],
+  imports: [MatDialogModule,MatButtonModule],
   templateUrl: './confirm-item-received-dialog.component.html',
   styleUrl: './confirm-item-received-dialog.component.css'
 })
