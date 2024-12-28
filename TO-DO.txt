@@ -1,3 +1,0 @@
-AWS
-1. look into static cache of game images
-3. CICD pipeline
