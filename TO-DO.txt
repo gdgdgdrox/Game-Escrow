@@ -1,6 +1,3 @@
 AWS
 1. look into static cache of game images
 3. CICD pipeline
-
-3. lambda email health check fail
-4. find out why tf the java app keep shutting down
