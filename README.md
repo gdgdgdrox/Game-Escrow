@@ -42,4 +42,5 @@ Game Escrow is a financial service that facilitates secure and transparent trans
 1. **Escrow Management**: Securely holds payments until transaction conditions are met.
 2. **User Authentication**: JWT-based authentication and authorization for secure user sessions.
 3. **Real-time Updates**: Utilizes WebSocket for real-time transaction status updates.
+4. **Secure & Convenient Payment**: Supports OCBC PayNow.
 5. **Scalability**: Deployed on a scalable AWS infrastructure for high availability, scalability and performance.
